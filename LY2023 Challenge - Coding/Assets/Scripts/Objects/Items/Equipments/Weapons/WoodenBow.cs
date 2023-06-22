@@ -10,7 +10,7 @@ public class WoodenBow : Weapon
 
     public override Sprite ItemIcon
     {
-        get => Resources.Load<Sprite>("Item Icons/woodenbow");
+        get => Resources.Load<Sprite>("Item Icons/Equipments/Weapons/woodenbow");
     }
 
     public override WeaponType Type 

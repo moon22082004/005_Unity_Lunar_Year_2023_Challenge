@@ -19,7 +19,7 @@ public class PlayerPanelEquipmentsContent : MonoBehaviour
     }
 
     [SerializeField] private int _currentPage;
-    private string _changeItemTypeName;
+    [SerializeField] private string _changeItemTypeName;
 
     [SerializeField] private Transform _mainEquipmentsPageTransform;
     private Transform MainEquipmentsPageTransform
@@ -84,7 +84,10 @@ public class PlayerPanelEquipmentsContent : MonoBehaviour
 
     [SerializeField] private int NumberOfItemPages
     {
-        get => (1 + (int)(this.AvailableItems.Count / 15));
+        get
+        {
+            return (1 + (int)(this.AvailableItems.Count / 15));
+        }
     }
 
     [SerializeField] private int _currentItemPage;
@@ -97,6 +100,8 @@ public class PlayerPanelEquipmentsContent : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(this.NumberOfItemPages);
+
         for (int i = 0; i < this.transform.childCount; i++)
         {
             if (_currentPage != i)
@@ -111,6 +116,13 @@ public class PlayerPanelEquipmentsContent : MonoBehaviour
 
         if (_currentPage == this.transform.childCount - 1)
         {
+            while (this.AvailableItemsPagesTransform.childCount < this.NumberOfItemPages + 1)
+            {
+                GameObject page = Instantiate(this.ItemPage);
+                page.name = $"{this.ItemPage.name} {this.AvailableItemsPagesTransform.childCount}";
+                page.transform.SetParent(this.AvailableItemsPagesTransform, false);
+            }
+
             this.AvailableItemsPagesTransform.GetChild(0).GetChild(0).GetComponent<Button>().interactable = !(_currentItemPage == 0);
             this.AvailableItemsPagesTransform.GetChild(0).GetChild(1).GetComponent<Button>().interactable = !(_currentItemPage == this.NumberOfItemPages - 1);
 
@@ -135,6 +147,16 @@ public class PlayerPanelEquipmentsContent : MonoBehaviour
                 }
 
                 this.AvailableItemsPagesTransform.GetChild(i).GetComponent<ItemsUIManager>().Items = items;
+            }
+        }
+        else
+        {
+            if (this.AvailableItemsPagesTransform.childCount > 1) 
+            {
+                for (int i = 1; i < this.AvailableItemsPagesTransform.childCount; i++)
+                {
+                    Destroy(this.AvailableItemsPagesTransform.GetChild(i).gameObject);
+                }
             }
         }
 

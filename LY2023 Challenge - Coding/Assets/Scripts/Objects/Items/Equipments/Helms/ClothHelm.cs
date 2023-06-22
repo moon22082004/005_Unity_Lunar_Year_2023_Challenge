@@ -10,7 +10,7 @@ public class ClothHelm : Helm
 
     public override Sprite ItemIcon
     {
-        get => Resources.Load<Sprite>("Item Icons/clothhelm");
+        get => Resources.Load<Sprite>("Item Icons/Equipments/Helms/clothhelm");
     }
 
     public override float Weight

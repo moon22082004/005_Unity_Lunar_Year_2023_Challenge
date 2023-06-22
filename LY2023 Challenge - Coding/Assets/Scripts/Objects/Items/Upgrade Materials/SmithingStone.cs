@@ -10,6 +10,6 @@ public class SmithingStone : UpgradeMaterial
 
     public override Sprite ItemIcon
     {
-        get => Resources.Load<Sprite>("Item Icons/smithingstone");
+        get => Resources.Load<Sprite>("Item Icons/Upgrade Materials/smithingstone");
     }
 }

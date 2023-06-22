@@ -10,7 +10,7 @@ public class ClothGarb : ChestArmor
 
     public override Sprite ItemIcon
     {
-        get => Resources.Load<Sprite>("Item Icons/clothgarb");
+        get => Resources.Load<Sprite>("Item Icons/Equipments/Chest Armors/clothgarb");
     }
 
     public override float Weight

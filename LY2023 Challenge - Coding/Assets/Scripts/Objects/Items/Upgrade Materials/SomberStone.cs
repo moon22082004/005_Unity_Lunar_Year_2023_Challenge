@@ -10,6 +10,6 @@ public class SomberStone : UpgradeMaterial
 
     public override Sprite ItemIcon
     {
-        get => Resources.Load<Sprite>("Item Icons/somberstone");
+        get => Resources.Load<Sprite>("Item Icons/Upgrade Materials/somberstone");
     }
 }
