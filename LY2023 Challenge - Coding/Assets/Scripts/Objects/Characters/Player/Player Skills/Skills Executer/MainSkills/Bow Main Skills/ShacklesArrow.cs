@@ -1,0 +1,82 @@
+using System.Collections;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "Shackles Arrow", menuName = "Skills/Active Skills/Main Skills/Shackles Arrow")]
+public class ShacklesArrow : BowSkill
+{
+    public override string Name
+    {
+        get => "Shackles Arrow";
+    }
+
+    private GameObject _effectCircle;
+    private GameObject EffectCircle
+    {
+        get
+        {
+            if (_effectCircle == null)
+            {
+                _effectCircle = GameObject.Find("Player/Other Effects/Shackles Circle");
+            }
+
+            return _effectCircle;
+        }
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override IEnumerator Execute(Vector3 mousePos, PlayerMainSkillsManager playerMainSkillsManager)
+    {
+        playerMainSkillsManager.ResetTimer();
+
+        this.PlayerMovement.IsAttacked = true;
+        this.AttributesManager.BonusMoveSpeed -= 2f;
+        this.PlayerMovement.WoodBow.SetActiveParentAnimation(true);
+
+        yield return new WaitForSeconds(0.25f);
+
+        int index = 0;
+        if ((this.PlayerMovement.Direction == "Down") && (mousePos.y < this.ProjectilesPositions[0].y))
+        {
+            index = 0;
+        }
+        else if ((this.PlayerMovement.Direction == "Up") && (mousePos.y > this.ProjectilesPositions[1].y))
+        {
+            index = 1;
+        }
+        else if (((this.PlayerMovement.Direction == "Left") && (mousePos.x < this.ProjectilesPositions[2].x)) ||
+                 ((this.PlayerMovement.Direction == "Right") && (mousePos.x > this.ProjectilesPositions[2].x)))
+        {
+            index = 2;
+        }
+
+        this.Arrows[this.InactiveArrowIndex].GetComponent<ArrowBehaviour>().SetUpShacklesArrow(this, this.ProjectilesPositions[index], mousePos, this.ProjectileLifeTime, this.ProjectileSpeed, this.AttributesManager.PhysicalDamage * 2.5f, this.AttributesManager.PhysicalPierce);
+
+        yield return new WaitForSeconds(0.05f);
+        this.PlayerMovement.IsAttacked = false;
+        this.AttributesManager.BonusMoveSpeed += 2f;
+        this.PlayerMovement.WoodBow.SetActiveParentAnimation(false);
+    }
+
+    public void SetUpShacklesEffect(Vector3 position)
+    {
+        LunarMonoBehaviour.Instance.StartCoroutine(this.ShacklesEffect(position));
+    }
+
+    public IEnumerator ShacklesEffect(Vector3 position)
+    {
+        this.EffectCircle.SetActive(true);
+        this.EffectCircle.transform.position = position;
+
+        foreach (GameObject lockedEnemy in EnemiesManager.Instance.GetEnemiesInCircle(position, 1.8f))
+        {
+            lockedEnemy.GetComponent<EffectsManager>().LockMovement(2.5f, LockMovementType.Stun);
+        }
+
+        yield return new WaitForSeconds(2.5f);
+
+        this.EffectCircle.SetActive(false);
+    }
+}
