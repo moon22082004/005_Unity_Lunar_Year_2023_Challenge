@@ -23,11 +23,20 @@ public class PlayerPanelInventoryContent : MonoBehaviour
         get
         {
             int value = 1;
-            value += (int)(this.PlayerInventory.Items.Count / 15);
-
+            switch (_itemTypeName)
+            {
+                case "Equipment":
+                    value += (int)(this.PlayerInventory.EquipmentItems(_itemTypeName).Count / 15);
+                    break;
+                case "Upgrade Material":
+                    value += (int)(this.PlayerInventory.UpgradeMaterialItems().Count / 15);
+                    break;
+            }
             return value;
+       
         }
     }
+    private bool _isNotSpawnItemsPages;
 
     private int _currentPage;
 
@@ -44,46 +53,92 @@ public class PlayerPanelInventoryContent : MonoBehaviour
             return _inventoryPage; 
         }
     }
+    [SerializeField] private string _itemTypeName;
+
+    private void OnEnable()
+    {
+        _itemTypeName = "Upgrade Material";
+        _isNotSpawnItemsPages = false;
+    }
 
     private void Update()
     {
-        this.transform.GetChild(0).GetChild(0).GetComponent<Button>().interactable = !(_currentPage == 0);
-        this.transform.GetChild(0).GetChild(1).GetComponent<Button>().interactable = !(_currentPage == this.NumberOfPages - 1);
+        if (!_isNotSpawnItemsPages)
+        {
+            this.transform.GetChild(0).GetChild(0).GetComponent<Button>().interactable = !(_currentPage == 0);
+            this.transform.GetChild(0).GetChild(1).GetComponent<Button>().interactable = !(_currentPage == this.NumberOfPages - 1);
 
-        while (this.transform.childCount < this.NumberOfPages + 2)
-        {
-            GameObject page = Instantiate(this.InventoryPage);
-            page.name = $"{this.InventoryPage.name} {this.transform.childCount - 1}";
-            page.transform.SetParent(this.transform, false);
-        }
-
-        for (int i = 0; i < this.NumberOfPages; i++)
-        {
-            if (i != _currentPage)
+            while (this.transform.childCount < this.NumberOfPages + 2)
             {
-                this.transform.GetChild(i + 2).gameObject.SetActive(false);
-            }
-            else
-            {
-                this.transform.GetChild(i + 2).gameObject.SetActive(true);
-            }
-        }
-        
-        for (int i = 1; i <= this.NumberOfPages; i++)
-        {
-            List<Item> items = new List<Item>();
-            for (int j = ((i - 1) * 15); j < Mathf.Min(i * 15, this.PlayerInventory.Items.Count); j++)
-            {
-                items.Add(this.PlayerInventory.Items[j]);
+                GameObject page = Instantiate(this.InventoryPage);
+                page.name = $"{this.InventoryPage.name} {this.transform.childCount - 1}";
+                page.transform.SetParent(this.transform, false);
             }
 
-            this.transform.GetChild(i + 1).GetComponent<ItemsUIManager>().Items = items;
+            for (int i = 0; i < this.NumberOfPages; i++)
+            {
+                if (i != _currentPage)
+                {
+                    this.transform.GetChild(i + 2).gameObject.SetActive(false);
+                }
+                else
+                {
+                    this.transform.GetChild(i + 2).gameObject.SetActive(true);
+                }
+            }
+
+            switch (_itemTypeName)
+            {
+                case "Equipment":
+                    List<Item> items = this.PlayerInventory.EquipmentItems(_itemTypeName);
+                    for (int i = 1; i <= this.NumberOfPages; i++)
+                    {
+                        List<ItemAndNumber> itemsInAPage = new List<ItemAndNumber>();
+                        for (int j = ((i - 1) * 15); j < Mathf.Min(i * 15, items.Count); j++)
+                        {
+                            itemsInAPage.Add(new ItemAndNumber() { Item = items[j], NumberOfItem = 1 });
+                        }
+
+                        this.transform.GetChild(i + 1).GetComponent<ItemsUIManager>().Items = itemsInAPage;
+                    }
+                    break;
+                case "Upgrade Material":
+                    List<ItemAndNumber> itemsWithNumber = this.PlayerInventory.UpgradeMaterialItems();
+                    for (int i = 1; i <= this.NumberOfPages; i++)
+                    {
+                        List<ItemAndNumber> itemsInAPage = new List<ItemAndNumber>();
+                        for (int j = ((i - 1) * 15); j < Mathf.Min(i * 15, itemsWithNumber.Count); j++)
+                        {
+                            itemsInAPage.Add(itemsWithNumber[j]);
+                        }
+
+                        this.transform.GetChild(i + 1).GetComponent<ItemsUIManager>().Items = itemsInAPage;
+                    }
+                    break;
+            }
         }
     }
 
-    // Buttons
+    // Change Page Buttons
     public void CallOtherInventoryPage(int offsetValue)
     {
         _currentPage = (int)Mathf.Clamp(_currentPage + offsetValue, 0, this.NumberOfPages - 1);
+    }
+    // Sort Buttons
+    public void SortItemsType(string itemTypeName)
+    {
+        _isNotSpawnItemsPages = true;
+        _itemTypeName = itemTypeName;
+
+        if (this.transform.childCount > 2)
+        {
+            int numOfPreviousItemsPage = this.transform.childCount - 2;
+            for (int i = numOfPreviousItemsPage + 1; i > 1; i--)
+            {
+                Destroy(this.transform.GetChild(i).gameObject);
+            }
+        }
+
+        _isNotSpawnItemsPages = false;
     }
 }

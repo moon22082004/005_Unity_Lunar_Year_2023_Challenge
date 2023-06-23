@@ -32,19 +32,19 @@ public class MainButtonsFunctionManager : MonoBehaviour
     }
 
     // PLAYER PANEL
-    public void OpenPlayerPanel()
+    public void SetActivePlayerPanel(bool value)
     {
-        this.PlayerPanel.SetActive(true);
-        this.PlayerPanelButton.GetComponent<Button>().interactable = false;
-    }
-    public void ClosePlayerPanel()
-    {
-        this.PlayerPanel.SetActive(false);
-        this.PlayerPanelButton.GetComponent<Button>().interactable = true;
-    }
-    public void OpenPageOfPlayerPanel(int playerPanelPage)
-    {
-        this.PlayerPanel.GetComponent<PlayerPanelManager>().PanelPage = (PlayerPanelContent)playerPanelPage;
+        this.PlayerPanel.SetActive(value);
+        this.PlayerPanelButton.GetComponent<Button>().interactable = !value;
+
+        if (value) 
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }    
     }
 
     // SAVE AND EXIT
@@ -58,11 +58,11 @@ public class MainButtonsFunctionManager : MonoBehaviour
         {
             if (this.PlayerPanel.activeInHierarchy)
             {
-                this.ClosePlayerPanel();
+                this.SetActivePlayerPanel(false);
             }
             else
             {
-                this.OpenPlayerPanel();
+                this.SetActivePlayerPanel(true);
             }
         }
     }

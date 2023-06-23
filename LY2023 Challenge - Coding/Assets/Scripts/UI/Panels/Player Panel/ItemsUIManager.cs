@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 public class ItemsUIManager : MonoBehaviour
 {
-    [SerializeField] private List<Item> _items;
-    public List<Item> Items
+    [SerializeField] private List<ItemAndNumber> _items;
+    public List<ItemAndNumber> Items
     {
         get
         {
             if (_items == null)
             {
-                _items = new List<Item>();
+                _items = new List<ItemAndNumber>();
             }
 
             return _items;
@@ -42,7 +42,8 @@ public class ItemsUIManager : MonoBehaviour
     {
         for (int i = 0; i < Mathf.Min(15, this.Items.Count); i++) 
         {
-            this.transform.GetChild(i).GetComponent<ItemUIManager>().Item = this.Items[i];
+            this.transform.GetChild(i).GetComponent<ItemUIManager>().Item = this.Items[i].Item;
+            this.transform.GetChild(i).GetComponent<ItemUIManager>().Number = this.Items[i].NumberOfItem;
         }
     }
 }

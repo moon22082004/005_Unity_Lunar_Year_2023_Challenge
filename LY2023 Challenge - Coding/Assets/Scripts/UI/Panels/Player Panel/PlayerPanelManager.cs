@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerPanelManager : MonoBehaviour
 {
     [SerializeField] private PlayerPanelContent _panelPage;
-    public PlayerPanelContent PanelPage
+    private PlayerPanelContent PanelPage
     {
         get => _panelPage;
         set
@@ -23,6 +23,12 @@ public class PlayerPanelManager : MonoBehaviour
 
     private void Awake()
     {
-        this.PanelPage = PlayerPanelContent.Equipments;
+        this.PanelPage = PlayerPanelContent.Inventory;
+    }
+
+    // Buttons
+    public void OpenPageOfPlayerPanel(int playerPanelPage)
+    {
+        this.PanelPage = (PlayerPanelContent)playerPanelPage;
     }
 }

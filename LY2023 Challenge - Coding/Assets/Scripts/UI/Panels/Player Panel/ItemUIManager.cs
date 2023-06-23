@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,22 @@ public class ItemUIManager : MonoBehaviour
         set => _item = value;
     }
 
-    private Image _image;
+    [SerializeField] private int _number;
+    public int Number
+    {
+        get
+        {
+            if (_number <= 0)
+            {
+                _number = 1;
+            }
+
+            return _number;
+        }
+        set => _number = value;
+    }
+
+    [SerializeField] private Image _image;
     private Image Image
     {
         get 
@@ -22,6 +38,20 @@ public class ItemUIManager : MonoBehaviour
             }
 
             return _image; 
+        }
+    }
+
+    [SerializeField] private TextMeshProUGUI _text;
+    private TextMeshProUGUI Text
+    {
+        get
+        {
+            if (_text == null)
+            {
+                _text = this.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            }
+
+            return _text;
         }
     }
 
@@ -45,6 +75,12 @@ public class ItemUIManager : MonoBehaviour
         if (this.Item != null) 
         {
             this.Image.sprite = this.Item.ItemIcon;
+            this.Text.enabled = true;
+            this.Text.text = this.Number.ToString();
+        }
+        else
+        {
+            this.Text.enabled = false;
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -84,7 +85,7 @@ public class InventoryManager : MonoBehaviour
         this.Items.Add(exchangeItem);
     }
 
-    public List<Item> ItemsByType(string itemTypeName) 
+    public List<Item> EquipmentItems(string itemTypeName) 
     {
         Type desireItemType;
 
@@ -106,11 +107,11 @@ public class InventoryManager : MonoBehaviour
             case "Side Weapon":
                 desireItemType = typeof(Weapon);
                 break;
-            case "Upgrade Material":
-                desireItemType = typeof(UpgradeMaterial);
+            case "Equipment":
+                desireItemType = typeof(Equipment);
                 break;
             default:
-                desireItemType = typeof(Item);
+                desireItemType = typeof(Equipment);
                 break;
         }
 
@@ -127,6 +128,45 @@ public class InventoryManager : MonoBehaviour
             {
                 result.Add(item);
             }
+        }
+
+        return result;
+    }
+
+    public List<ItemAndNumber> UpgradeMaterialItems()
+    {
+        List<ItemAndNumber> result = new List<ItemAndNumber>();
+
+        // Find all equipment items
+        List<Item> upgradeMaterialItems = new List<Item>();
+        foreach (Item item in _items)
+        {
+            Type itemType = item.GetType();
+            while ((itemType != typeof(Item)) && (itemType != typeof(UpgradeMaterial)))
+            {
+                itemType = itemType.BaseType;
+            }
+
+            if (itemType == typeof(UpgradeMaterial))
+            {
+                upgradeMaterialItems.Add(item);
+            }
+        }
+
+        List<Item> distinctItems = upgradeMaterialItems.GroupBy(item => new { item.Name, item.Level }).Select(group => group.First()).ToList();
+
+        foreach (Item item in distinctItems)
+        {
+            int number = 0;
+            foreach (Item item2 in upgradeMaterialItems) 
+            {
+                if ((item.Name == item2.Name) && (item.Level == item2.Level))
+                {
+                    number++;
+                }
+            }
+
+            result.Add(new ItemAndNumber() { Item = item, NumberOfItem = number});
         }
 
         return result;

@@ -79,7 +79,7 @@ public class PlayerPanelEquipmentsContent : MonoBehaviour
 
     [SerializeField] private List<Item> AvailableItems
     {
-        get => LunarMonoBehaviour.Instance.Player.GetComponent<InventoryManager>().ItemsByType(_changeItemTypeName);
+        get => LunarMonoBehaviour.Instance.Player.GetComponent<InventoryManager>().EquipmentItems(_changeItemTypeName);
     }
 
     [SerializeField] private int NumberOfItemPages
@@ -100,8 +100,6 @@ public class PlayerPanelEquipmentsContent : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(this.NumberOfItemPages);
-
         for (int i = 0; i < this.transform.childCount; i++)
         {
             if (_currentPage != i)
@@ -140,10 +138,10 @@ public class PlayerPanelEquipmentsContent : MonoBehaviour
 
             for (int i = 1; i <= this.NumberOfItemPages; i++)
             {
-                List<Item> items = new List<Item>();
+                List<ItemAndNumber> items = new List<ItemAndNumber>();
                 for (int j = ((i - 1) * 15); j < Mathf.Min(i * 15, this.AvailableItems.Count); j++)
                 {
-                    items.Add(this.AvailableItems[j]);
+                    items.Add(new ItemAndNumber() { Item = this.AvailableItems[j], NumberOfItem = 1 });
                 }
 
                 this.AvailableItemsPagesTransform.GetChild(i).GetComponent<ItemsUIManager>().Items = items;
@@ -153,7 +151,8 @@ public class PlayerPanelEquipmentsContent : MonoBehaviour
         {
             if (this.AvailableItemsPagesTransform.childCount > 1) 
             {
-                for (int i = 1; i < this.AvailableItemsPagesTransform.childCount; i++)
+                int numOfPreviousItemsPage = this.AvailableItemsPagesTransform.childCount - 1;
+                for (int i = numOfPreviousItemsPage; i >= 1; i--)
                 {
                     Destroy(this.AvailableItemsPagesTransform.GetChild(i).gameObject);
                 }
