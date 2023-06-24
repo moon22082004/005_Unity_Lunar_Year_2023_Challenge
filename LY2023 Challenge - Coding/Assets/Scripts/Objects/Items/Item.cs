@@ -6,6 +6,10 @@ public abstract class Item : ScriptableObject
     {
         get;
     }
+    public virtual string ShortDescription 
+    {
+        get => this.Name + " " + this.Level.ToString(); 
+    }
     public abstract Sprite ItemIcon 
     { 
         get; 
@@ -20,19 +24,19 @@ public abstract class Item : ScriptableObject
             {
                 _level = 1;
             }
+            else if (_level > this.MaxLevel) 
+            {
+                _level = this.MaxLevel;
+            }
 
             return _level;
         }
-        set
-        {
-            if (value <= 0)
-            {
-                _level = 1;
-            }
-            else
-            {
-                _level = value;
-            }
-        }
+        set => _level = value;
+
     }
+
+    public virtual int MaxLevel
+    {
+        get => 12;
+    }    
 }

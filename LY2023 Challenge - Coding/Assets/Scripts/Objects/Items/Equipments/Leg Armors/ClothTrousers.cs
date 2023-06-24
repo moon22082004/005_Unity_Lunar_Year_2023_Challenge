@@ -8,6 +8,11 @@ public class ClothTrousers : LegArmor
         get => "Cloth Trousers";
     }
 
+    public override int MaxLevel
+    {
+        get => 5;
+    }
+
     public override Sprite ItemIcon
     {
         get => Resources.Load<Sprite>("Item Icons/Equipments/Leg Armors/clothtrousers");

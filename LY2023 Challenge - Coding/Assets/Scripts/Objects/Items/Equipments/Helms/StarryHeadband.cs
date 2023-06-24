@@ -8,6 +8,10 @@ public class StarryHeadband : Helm
         get => "Starry Headband";
     }
 
+    public override int MaxLevel
+    {
+        get => 5;
+    }
 
     public override Sprite ItemIcon
     {

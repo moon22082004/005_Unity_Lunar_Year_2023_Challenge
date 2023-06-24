@@ -3,12 +3,12 @@ using UnityEngine;
 public class PlayerPanelManager : MonoBehaviour
 {
     [SerializeField] private PlayerPanelContent _panelPage;
-    private PlayerPanelContent PanelPage
+    public PlayerPanelContent PanelPage
     {
         get => _panelPage;
         set
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i <= 4; i++)
             {
                 this.transform.GetChild(0).GetChild(i).gameObject.SetActive(false);
                 this.transform.GetChild(3).GetChild(i).gameObject.SetActive(false);
@@ -23,7 +23,7 @@ public class PlayerPanelManager : MonoBehaviour
 
     private void Awake()
     {
-        this.PanelPage = PlayerPanelContent.Inventory;
+        //this.PanelPage = PlayerPanelContent.Inventory;
     }
 
     // Buttons

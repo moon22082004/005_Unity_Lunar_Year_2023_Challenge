@@ -187,7 +187,7 @@ public class PlayerPanelEquipmentsContent : MonoBehaviour
             foreach (Button button in this.AvailableItemsPagesTransform.GetChild(i).GetComponent<ItemsUIManager>().Buttons)
             {
                 button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(() => this.ChangeEquipment(itemTypeName, button.GetComponent<ItemUIManager>().Item));
+                button.onClick.AddListener(() => this.ChangeEquipment(itemTypeName, button.GetComponent<ItemUISlotManager>().Item));
             }
         }
     }

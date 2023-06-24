@@ -28,7 +28,7 @@ public class ItemsUIManager : MonoBehaviour
             {
                 _buttons = new List<Button>();
                 
-                for (int i = 0; i < this.transform.childCount; i++)
+                for (int i = 0; i < (this.transform.childCount / 2); i++)
                 {
                     _buttons.Add(this.transform.GetChild(i).GetComponent<Button>());
                 }   
@@ -42,8 +42,8 @@ public class ItemsUIManager : MonoBehaviour
     {
         for (int i = 0; i < Mathf.Min(15, this.Items.Count); i++) 
         {
-            this.transform.GetChild(i).GetComponent<ItemUIManager>().Item = this.Items[i].Item;
-            this.transform.GetChild(i).GetComponent<ItemUIManager>().Number = this.Items[i].NumberOfItem;
+            this.transform.GetChild(i).GetComponent<ItemUISlotManager>().Item = this.Items[i].Item;
+            this.transform.GetChild(i).GetComponent<ItemUISlotManager>().Number = this.Items[i].NumberOfItem;
         }
     }
 }

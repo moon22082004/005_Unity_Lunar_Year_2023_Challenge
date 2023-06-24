@@ -8,6 +8,11 @@ public class ClothBracer : Gauntlets
         get => "Cloth Bracer";
     }
 
+    public override int MaxLevel
+    {
+        get => 5;
+    }
+
     public override Sprite ItemIcon
     {
         get => Resources.Load<Sprite>("Item Icons/Equipments/Gauntlets/clothbracer");

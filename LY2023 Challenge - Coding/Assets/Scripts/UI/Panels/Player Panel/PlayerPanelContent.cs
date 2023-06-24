@@ -1,7 +1,8 @@
 public enum PlayerPanelContent
 {
-    Inventory = 0,
-    Equipments = 1,
-    Skills = 2,
-    Settings = 3,
+    Attributes = 0,
+    Inventory = 1,
+    Equipments = 2,
+    Skills = 3,
+    Settings = 4,
 }

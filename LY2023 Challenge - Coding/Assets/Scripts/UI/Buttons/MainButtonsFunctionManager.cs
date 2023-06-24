@@ -54,15 +54,19 @@ public class MainButtonsFunctionManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (!this.PlayerPanel.activeInHierarchy)
+            {
+                this.SetActivePlayerPanel(true);
+                this.PlayerPanel.GetComponent<PlayerPanelManager>().PanelPage = PlayerPanelContent.Inventory;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (this.PlayerPanel.activeInHierarchy)
             {
                 this.SetActivePlayerPanel(false);
-            }
-            else
-            {
-                this.SetActivePlayerPanel(true);
             }
         }
     }

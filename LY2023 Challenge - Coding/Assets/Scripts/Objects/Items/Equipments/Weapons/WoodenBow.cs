@@ -8,6 +8,11 @@ public class WoodenBow : Weapon
         get => "Wooden Bow";
     }
 
+    public override int MaxLevel
+    {
+        get => 12;
+    }
+
     public override Sprite ItemIcon
     {
         get => Resources.Load<Sprite>("Item Icons/Equipments/Weapons/woodenbow");

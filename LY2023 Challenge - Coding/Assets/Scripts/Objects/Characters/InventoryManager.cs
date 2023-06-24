@@ -15,6 +15,8 @@ public class InventoryManager : MonoBehaviour
                 _items = new List<Item>();
             }
 
+            _items = _items.OrderBy(item => item.ShortDescription).ToList();
+
             return _items; 
         }
     }
@@ -116,7 +118,7 @@ public class InventoryManager : MonoBehaviour
         }
 
         List<Item> result = new List<Item>();
-        foreach(Item item in _items) 
+        foreach(Item item in this.Items) 
         {
             Type itemType = item.GetType();
             while ((itemType != typeof(Item)) && (itemType != desireItemType)) 
@@ -139,7 +141,7 @@ public class InventoryManager : MonoBehaviour
 
         // Find all equipment items
         List<Item> upgradeMaterialItems = new List<Item>();
-        foreach (Item item in _items)
+        foreach (Item item in this.Items)
         {
             Type itemType = item.GetType();
             while ((itemType != typeof(Item)) && (itemType != typeof(UpgradeMaterial)))
@@ -153,7 +155,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        List<Item> distinctItems = upgradeMaterialItems.GroupBy(item => new { item.Name, item.Level }).Select(group => group.First()).ToList();
+        List<Item> distinctItems = upgradeMaterialItems.GroupBy(item => item.ShortDescription).Select(group => group.First()).ToList();
 
         foreach (Item item in distinctItems)
         {

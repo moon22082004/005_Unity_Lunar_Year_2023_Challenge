@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemUIManager : MonoBehaviour
+public class ItemUISlotManager : MonoBehaviour
 {
 
     [SerializeField] private Item _item;
@@ -69,6 +69,8 @@ public class ItemUIManager : MonoBehaviour
         }
     }
 
+    [SerializeField] private GameObject _hoverItemDescriptionPanel;
+
 
     private void Update()
     {
@@ -83,4 +85,23 @@ public class ItemUIManager : MonoBehaviour
             this.Text.enabled = false;
         }
     }
+
+    public void HoverButton(bool value)
+    {
+        if (this.Item != null) 
+        {
+            _hoverItemDescriptionPanel.SetActive(value);
+
+            if (value)
+            {
+                _hoverItemDescriptionPanel.transform.position = Input.mousePosition;
+                _hoverItemDescriptionPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = this.Item.ShortDescription;
+
+                if (_hoverItemDescriptionPanel.transform.position.x + 500 >= 1920)
+                {
+                    _hoverItemDescriptionPanel.GetComponent<RectTransform>().pivot = new Vector2(1, 1);
+                }    
+            }
+        }
+    }    
 }
