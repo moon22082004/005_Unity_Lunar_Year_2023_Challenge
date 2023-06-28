@@ -21,6 +21,13 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    [SerializeField] private int _souls;
+    public int Souls
+    {
+        get => _souls;
+        set => _souls = value;
+    }
+
     public void AddItem(Item item)
     {
         _items.Add(item);

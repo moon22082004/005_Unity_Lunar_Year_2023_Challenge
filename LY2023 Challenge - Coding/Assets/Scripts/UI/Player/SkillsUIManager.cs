@@ -1,20 +1,16 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SkillsUIManager : MonoBehaviour
 {
-    private PlayerSideSkillsManager _pSideSkillsManager;
-    private PlayerFirstMainSkillsManager _pFirstMainSkillsManager;
-    private PlayerSecondMainSkillsManager _pSecondMainSkillsManager;
-    private PlayerThirdMainSkillsManager _pThirdMainSkillsManager;
+    private SkillsManager _playerSkills;
 
     [Header ("Skills Display")]
-    [SerializeField] private GameObject _sideSkillDisplays;
+    [SerializeField] private Image _sideSkillDisplay;
 
-    [SerializeField] private GameObject _firstMainSkillDisplays;
-    [SerializeField] private GameObject _secondMainSkillDisplays;
-    [SerializeField] private GameObject _thirdMainSkillDisplays;
+    [SerializeField] private Image _firstMainSkillDisplay;
+    [SerializeField] private Image _secondMainSkillDisplay;
+    [SerializeField] private Image _thirdMainSkillDisplay;
 
     [Header ("Skills Cooldown Display")]
     [SerializeField] private Image _sideSkillsCooldownDisplay;
@@ -25,62 +21,37 @@ public class SkillsUIManager : MonoBehaviour
 
     private void Awake() 
     {
-        _sideSkillDisplays = GameObject.Find("Skills/Side Skills");
+        _sideSkillDisplay = GameObject.Find("Skills/Side Skills").GetComponent<Image>();
 
-        _firstMainSkillDisplays = GameObject.Find("Skills/Main Skills 1");
-        _secondMainSkillDisplays = GameObject.Find("Skills/Main Skills 2");
-        _thirdMainSkillDisplays = GameObject.Find("Skills/Main Skills 3");
+        _firstMainSkillDisplay = GameObject.Find("Skills/Main Skills 1").GetComponent<Image>();
+        _secondMainSkillDisplay = GameObject.Find("Skills/Main Skills 2").GetComponent<Image>();
+        _thirdMainSkillDisplay = GameObject.Find("Skills/Main Skills 3").GetComponent<Image>();
 
-        _sideSkillsCooldownDisplay = this.GetSkillsCooldownDisplay(_sideSkillDisplays);
-        _firstMainSkillsCooldownDisplay = this.GetSkillsCooldownDisplay(_firstMainSkillDisplays);
-        _secondMainSkillsCooldownDisplay = this.GetSkillsCooldownDisplay(_secondMainSkillDisplays);
-        _thirdMainSkillsCooldownDisplay = this.GetSkillsCooldownDisplay(_thirdMainSkillDisplays);
+        _sideSkillsCooldownDisplay = this.GetSkillsCooldownDisplay(_sideSkillDisplay.gameObject);
+        _firstMainSkillsCooldownDisplay = this.GetSkillsCooldownDisplay(_firstMainSkillDisplay.gameObject);
+        _secondMainSkillsCooldownDisplay = this.GetSkillsCooldownDisplay(_secondMainSkillDisplay.gameObject);
+        _thirdMainSkillsCooldownDisplay = this.GetSkillsCooldownDisplay(_thirdMainSkillDisplay.gameObject);
             
         GameObject pCharacter = GameObject.Find("Player/Character");
 
-        _pSideSkillsManager = pCharacter.GetComponent<PlayerSideSkillsManager>();
-
-        _pFirstMainSkillsManager = pCharacter.GetComponent<PlayerFirstMainSkillsManager>();
-        _pSecondMainSkillsManager = pCharacter.GetComponent<PlayerSecondMainSkillsManager>();
-        _pThirdMainSkillsManager = pCharacter.GetComponent<PlayerThirdMainSkillsManager>();
-    }
-
-    private void Start() 
-    {
+        _playerSkills = pCharacter.GetComponent<SkillsManager>();
     }
 
     private void Update() 
     {
-        this.DisableOtherSkillDisplays(_sideSkillDisplays, _pSideSkillsManager.SkillName);
+        _sideSkillDisplay.sprite = Resources.Load<Sprite>("Skill Icons/Side Skills/" + _playerSkills.SideSkillName);
+        _firstMainSkillDisplay.sprite = Resources.Load<Sprite>("Skill Icons/Main Skills/" + _playerSkills.MainSkillNames[1]);
+        _secondMainSkillDisplay.sprite = Resources.Load<Sprite>("Skill Icons/Main Skills/" + _playerSkills.MainSkillNames[2]);
+        _thirdMainSkillDisplay.sprite = Resources.Load<Sprite>("Skill Icons/Main Skills/" + _playerSkills.MainSkillNames[3]);
 
-        this.DisableOtherSkillDisplays(_firstMainSkillDisplays, _pFirstMainSkillsManager.SkillName);
-        this.DisableOtherSkillDisplays(_secondMainSkillDisplays, _pSecondMainSkillsManager.SkillName);
-        this.DisableOtherSkillDisplays(_thirdMainSkillDisplays, _pThirdMainSkillsManager.SkillName);
-
-        _sideSkillsCooldownDisplay.fillAmount = _pSideSkillsManager.SkillCooldownFillAmount();
-        _firstMainSkillsCooldownDisplay.fillAmount = _pFirstMainSkillsManager.SkillCooldownFillAmount();
-        _secondMainSkillsCooldownDisplay.fillAmount = _pSecondMainSkillsManager.SkillCooldownFillAmount();
-        _thirdMainSkillsCooldownDisplay.fillAmount = _pThirdMainSkillsManager.SkillCooldownFillAmount();
+        _sideSkillsCooldownDisplay.fillAmount = _playerSkills.SkillCooldownFillAmounts[_playerSkills.SkillCooldownFillAmounts.Count - 1];
+        _firstMainSkillsCooldownDisplay.fillAmount = _playerSkills.SkillCooldownFillAmounts[1];
+        _secondMainSkillsCooldownDisplay.fillAmount = _playerSkills.SkillCooldownFillAmounts[2];
+        _thirdMainSkillsCooldownDisplay.fillAmount = _playerSkills.SkillCooldownFillAmounts[3];
     }
 
     private Image GetSkillsCooldownDisplay(GameObject skillsDisplay)
     {
-        return skillsDisplay.transform.GetChild(skillsDisplay.transform.childCount - 1).gameObject.GetComponent<Image>();
-    }
-
-    private void DisableOtherSkillDisplays(GameObject skillDisplays, string activeSkill)
-    {
-        for (int i = 0; i < (skillDisplays.transform.childCount - 1); i++)
-        {
-            if (skillDisplays.transform.GetChild(i).gameObject.name != activeSkill)
-            {
-                skillDisplays.transform.GetChild(i).gameObject.SetActive(false);
-            }
-            else
-            {
-                skillDisplays.transform.GetChild(i).gameObject.SetActive(true);
-            }
-        }
-        skillDisplays.transform.GetChild(skillDisplays.transform.childCount - 1).gameObject.SetActive(true);
+        return skillsDisplay.transform.GetChild(0).gameObject.GetComponent<Image>();
     }
 }

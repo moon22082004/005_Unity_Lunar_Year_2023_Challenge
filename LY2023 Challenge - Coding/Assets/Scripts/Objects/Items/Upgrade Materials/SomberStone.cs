@@ -8,11 +8,6 @@ public class SomberStone : UpgradeMaterial
         get => "Somber Stone";
     }
 
-    public override Sprite ItemIcon
-    {
-        get => Resources.Load<Sprite>("Item Icons/Upgrade Materials/somberstone" + this.Level.ToString());
-    }
-
     public override int MaxLevel
     {
         get => 5;

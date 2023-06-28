@@ -8,11 +8,6 @@ public class SmithingStone : UpgradeMaterial
         get => "Smithing Stone";
     }
 
-    public override Sprite ItemIcon
-    {
-        get => Resources.Load<Sprite>("Item Icons/Upgrade Materials/smithingstone" + this.Level.ToString());
-    }
-
     public override int MaxLevel
     {
         get => 5;

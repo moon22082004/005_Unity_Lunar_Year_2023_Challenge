@@ -13,11 +13,6 @@ public class StarryGauntlets : Gauntlets
         get => 5;
     }
 
-    public override Sprite ItemIcon
-    {
-        get => Resources.Load<Sprite>("Item Icons/Equipments/Gauntlets/starrygauntlets");
-    }
-
     public override float Weight
     {
         get => 0.3f;

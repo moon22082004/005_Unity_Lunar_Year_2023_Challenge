@@ -13,11 +13,6 @@ public class ClothBracer : Gauntlets
         get => 5;
     }
 
-    public override Sprite ItemIcon
-    {
-        get => Resources.Load<Sprite>("Item Icons/Equipments/Gauntlets/clothbracer");
-    }
-
     public override float Weight
     {
         get => 0.25f;

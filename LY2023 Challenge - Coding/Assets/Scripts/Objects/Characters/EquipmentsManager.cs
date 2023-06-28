@@ -81,12 +81,12 @@ public class EquipmentsManager : MonoBehaviour
 
     public float EquippedPhysicalDefense
     {
-        get => (Helm.PhysicalDefense + ChestArmor.PhysicalDefense + LegArmor.PhysicalDefense);
+        get => (Helm.PhysicalDefense + ChestArmor.PhysicalDefense + Gauntlets.PhysicalDefense + LegArmor.PhysicalDefense);
     }
 
     public float EquippedMagicDefense
     {
-        get => (Helm.MagicDefense + ChestArmor.MagicDefense + LegArmor.MagicDefense);
+        get => (Helm.MagicDefense + ChestArmor.MagicDefense + Gauntlets.MagicDefense + LegArmor.MagicDefense);
     }
 
     public float EquippedMoveSpeed

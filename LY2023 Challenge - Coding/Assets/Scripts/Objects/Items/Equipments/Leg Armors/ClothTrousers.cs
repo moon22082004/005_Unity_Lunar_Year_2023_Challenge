@@ -11,12 +11,7 @@ public class ClothTrousers : LegArmor
     public override int MaxLevel
     {
         get => 5;
-    }
-
-    public override Sprite ItemIcon
-    {
-        get => Resources.Load<Sprite>("Item Icons/Equipments/Leg Armors/clothtrousers");
-    }    
+    }   
 
     public override float Weight
     {

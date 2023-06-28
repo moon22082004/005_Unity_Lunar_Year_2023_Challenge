@@ -13,11 +13,6 @@ public class StarryHeadband : Helm
         get => 5;
     }
 
-    public override Sprite ItemIcon
-    {
-        get => Resources.Load<Sprite>("Item Icons/Equipments/Helms/starryheadband");
-    }
-
     public override float Weight
     {
         get => 0.6f;

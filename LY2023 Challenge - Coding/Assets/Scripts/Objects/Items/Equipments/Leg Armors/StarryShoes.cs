@@ -13,11 +13,6 @@ public class StarryShoes : LegArmor
         get => 5;
     }
 
-    public override Sprite ItemIcon
-    {
-        get => Resources.Load<Sprite>("Item Icons/Equipments/Leg Armors/starryshoes");
-    }
-
     public override float Weight
     {
         get => 1.75f;
