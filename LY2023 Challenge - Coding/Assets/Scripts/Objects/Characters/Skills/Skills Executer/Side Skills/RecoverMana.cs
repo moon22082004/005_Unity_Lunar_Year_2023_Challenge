@@ -10,6 +10,19 @@ public class RecoverMana : SideSkill
         get => "Recover Mana";
     }
 
+    public override float CooldownTimer
+    {
+        get
+        {
+            // Level 1
+            float value = 40f;
+            // Level 2-4
+            value -= 2f * Mathf.Max(0, Mathf.Min(3, this.Level - 1));
+
+            return value;
+        }
+    }
+
     protected override List<float> Values
     {
         get
@@ -35,8 +48,10 @@ public class RecoverMana : SideSkill
         this.PlayerEffect = GameObject.Find("Player/Character/Effects/Side Skills/Recovering Mana");
     }
 
-    public override IEnumerator Execute()
+    public override IEnumerator Execute(SkillsManager skillsManager, int skillIndex)
     {
+        skillsManager.ResetTimer(skillIndex);
+
         this.PlayerEffect.SetActive(true);
 
         this.AttributesManager.ChangeFP(this.Values[0] * this.AttributesManager.MaxFP);

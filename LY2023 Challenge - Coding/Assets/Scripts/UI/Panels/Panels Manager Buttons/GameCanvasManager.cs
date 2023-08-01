@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainButtonsFunctionManager : MonoBehaviour
+public class GameCanvasManager : MonoBehaviour
 {
     [SerializeField] private GameObject _playerPanel;
     private GameObject PlayerPanel

@@ -10,6 +10,19 @@ public class Heal : SideSkill
         get => "Heal";
     }
 
+    public override float CooldownTimer
+    {
+        get
+        {
+            // Level 1
+            float value = 40f;
+            // Level 2-4
+            value -= 2f * Mathf.Max(0, Mathf.Min(3, this.Level - 1));
+
+            return value;
+        }
+    }
+
     protected override List<float> Values
     {
         get
@@ -34,8 +47,10 @@ public class Heal : SideSkill
         // _healingEffect = Resources.Load("Prefabs/Player/SkillsEffect/SideSkillsEffect/Healing") as GameObject;
     }
 
-    public override IEnumerator Execute()
+    public override IEnumerator Execute(SkillsManager skillsManager, int skillIndex)
     {
+        skillsManager.ResetTimer(skillIndex);
+
         this.PlayerEffect.SetActive(true);
 
         this.AttributesManager.IncreaseHealth(this.Values[0] * this.AttributesManager.MaxHP);

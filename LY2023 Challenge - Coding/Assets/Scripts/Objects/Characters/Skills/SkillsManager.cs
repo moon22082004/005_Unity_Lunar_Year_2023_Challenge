@@ -3,51 +3,38 @@ using UnityEngine;
 
 public class SkillsManager : MonoBehaviour
 {
-    private PlayerMovement _pMovement;
-    private PlayerMovement PlayerMovement
-    {
-        get
-        {
-            if (_pMovement == null)
-            {
-                _pMovement = GetComponent<PlayerMovement>();
-            }
-            return _pMovement;
-        }
-    }
-
-    private Vector3 _mousePos;
-    protected virtual void GetMousePos()
-    {
-        _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 attackVector3 = new Vector3(_mousePos.x - this.ProjectilesPositions[3].x, _mousePos.y - this.ProjectilesPositions[3].y, _mousePos.z - this.ProjectilesPositions[3].z);
-        if (attackVector3.x >= attackVector3.y)
-        {
-            if (attackVector3.x + attackVector3.y >= 0)
-            {
-                this.PlayerMovement.SetSideDirection(1f);
-            }
-            else
-            {
-                this.PlayerMovement.SetDownDirection();
-            }
-        }
-        else
-        {
-            if (attackVector3.x + attackVector3.y <= 0)
-            {
-                this.PlayerMovement.SetSideDirection(-1f);
-            }
-            else
-            {
-                this.PlayerMovement.SetUpDirection();
-            }
-        }
-    }
-
     [SerializeField] private List<KeyCode> _skillKeys;
+    public List<KeyCode> SkillKeys => _skillKeys;
 
     [SerializeField] private List<float> _cooldownTimers;
+    private List<float> CooldownTimers
+    {
+        get 
+        {
+            if (_cooldownTimers.Count > 0)
+            {
+                _cooldownTimers[0] = GetComponent<AttributesManager>().AttackSpeed;
+            }
+            if (_cooldownTimers.Count > 1)
+            {
+                _cooldownTimers[1] = this.MainSkills[1].CooldownTimer;
+            }
+            if (_cooldownTimers.Count > 2)
+            {
+                _cooldownTimers[2] = this.MainSkills[2].CooldownTimer;
+            }
+            if (_cooldownTimers.Count > 3)
+            {
+                _cooldownTimers[3] = this.MainSkills[3].CooldownTimer;
+            }
+            if (_cooldownTimers.Count > 4)
+            {
+                _cooldownTimers[4] = this.SideSkill.CooldownTimer;
+            }
+
+            return _cooldownTimers;
+        }
+    }    
     [SerializeField] private List<float> _timers;
     public void ResetTimer(int skillIndex)
     {
@@ -56,54 +43,17 @@ public class SkillsManager : MonoBehaviour
     }
 
     [SerializeField] private SideSkill _sideSkill;
-    public string SideSkillName
+    public SideSkill SideSkill
     {
-        get => _sideSkill.Name;
-    }    
+        get => _sideSkill;
+        set => _sideSkill = value;
+    }
 
     [SerializeField] private List<MainSkill> _mainSkills;
-    public List<string> MainSkillNames
+    public List<MainSkill> MainSkills
     {
-        get
-        {
-            List<string> result = new List<string>();
-            for (int i = 0; i < _mainSkills.Count; i++)
-            {
-                result.Add(_mainSkills[i].Name);
-            }
-
-            return result;
-        }
+        get => _mainSkills;
     }    
-
-    private Transform _projectilesDownPointTransform;
-    private Transform _projectilesHorizontalPointTransform;
-    private Transform _projectilesUpPointTransform;
-    private Transform _projectilesAlternativePointTransform;
-    protected Vector3[] ProjectilesPositions
-    {
-        get
-        {
-            if (_projectilesDownPointTransform == null)
-            {
-                _projectilesDownPointTransform = GameObject.Find("Player/Character/Projectiles Points/Projectiles Down Point").transform;
-            }
-            if (_projectilesHorizontalPointTransform == null)
-            {
-                _projectilesHorizontalPointTransform = GameObject.Find("Player/Character/Projectiles Points/Projectiles Horizontal Point").transform;
-            }
-            if (_projectilesUpPointTransform == null)
-            {
-                _projectilesUpPointTransform = GameObject.Find("Player/Character/Projectiles Points/Projectiles Up Point").transform;
-            }
-            if (_projectilesAlternativePointTransform == null)
-            {
-                _projectilesAlternativePointTransform = GameObject.Find("Player/Character/Projectiles Points/Projectiles Alternative Point").transform;
-            }
-
-            return new Vector3[] { _projectilesDownPointTransform.position, _projectilesUpPointTransform.position, _projectilesHorizontalPointTransform.position, _projectilesAlternativePointTransform.position };
-        }
-    }
 
     public List<float> SkillCooldownFillAmounts
     {
@@ -121,14 +71,9 @@ public class SkillsManager : MonoBehaviour
 
     private void Awake()
     {
-        if (_cooldownTimers.Count > 0)
+        for (int i = 0; i < Mathf.Min(_timers.Count, this.CooldownTimers.Count); i++)
         {
-            _cooldownTimers[0] = GetComponent<AttributesManager>().AttackSpeed;
-        }
-
-        for (int i = 0; i < Mathf.Min(_timers.Count, _cooldownTimers.Count); i++)
-        {
-            _timers[i] = _cooldownTimers[i];
+            _timers[i] = this.CooldownTimers[i];
         }
     }
 
@@ -141,27 +86,24 @@ public class SkillsManager : MonoBehaviour
 
         for (int i = 0; i < _mainSkills.Count; i++)
         {
-            if ((_timers[i] >= _cooldownTimers[i]) && (_timers[0] >= _cooldownTimers[0]))
+            if ((_timers[i] >= this.CooldownTimers[i]) && (_timers[0] >= this.CooldownTimers[0]))
             {
-                if (Input.GetKeyDown(_skillKeys[i]))
+                if ((Input.GetKeyDown(_skillKeys[i])) && (!LunarMonoBehaviour.Instance.IsPausedGame))
                 {
-                    this.GetMousePos();
-
-                    StartCoroutine(_mainSkills[i].Execute(_mousePos, this, i));
+                    StartCoroutine(_mainSkills[i].Execute(this, i));
                 }
             }
-            else if (_timers[i] < _cooldownTimers[i])
+            else if (_timers[i] < this.CooldownTimers[i])
             {
                 _timers[i] += Time.deltaTime;
             }
         }
 
-        if (_timers[_timers.Count - 1] >= _cooldownTimers[_cooldownTimers.Count - 1])
+        if (_timers[_timers.Count - 1] >= this.CooldownTimers[this.CooldownTimers.Count - 1])
         {
-            if (Input.GetKeyDown(_skillKeys[_skillKeys.Count - 1]))
+            if ((Input.GetKeyDown(_skillKeys[_skillKeys.Count - 1])) && (!LunarMonoBehaviour.Instance.IsPausedGame))
             {
-                StartCoroutine(_sideSkill.Execute());
-                _timers[_timers.Count - 1] = 0;
+                StartCoroutine(_sideSkill.Execute(this, _timers.Count - 1));
             }
         }
         else

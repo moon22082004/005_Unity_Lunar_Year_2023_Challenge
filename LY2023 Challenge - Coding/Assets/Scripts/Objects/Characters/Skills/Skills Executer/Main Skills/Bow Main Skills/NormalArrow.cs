@@ -9,40 +9,47 @@ public class NormalArrow : BowSkill
         get => "Normal Arrow";
     }
 
+    public override float CooldownTimer => LunarMonoBehaviour.Instance.Player.GetComponent<AttributesManager>().AttackSpeed;
+
     public override void Update()
     {
     }
 
-    public override IEnumerator Execute(Vector3 mousePos, SkillsManager skillsManager, int skillIndex)
+    public override IEnumerator Execute(SkillsManager skillsManager, int skillIndex)
     {
-        skillsManager.ResetTimer(skillIndex);
-
-        this.PlayerMovement.IsAttacked = true;
-        this.AttributesManager.BonusMoveSpeed -= 2f;
-        this.PlayerMovement.WoodBow.SetActiveParentAnimation(true);
-
-        yield return new WaitForSeconds(0.25f);
-
-        int index = 0;
-        if ((this.PlayerMovement.Direction == "Down") && (mousePos.y < this.ProjectilesPositions[0].y))
+        if (this.Arrows.Count > 0)
         {
-            index = 0;
-        }
-        else if ((this.PlayerMovement.Direction == "Up") && (mousePos.y > this.ProjectilesPositions[1].y))
-        {
-            index = 1;
-        }
-        else if (((this.PlayerMovement.Direction == "Left") && (mousePos.x < this.ProjectilesPositions[2].x)) ||
-                 ((this.PlayerMovement.Direction == "Right") && (mousePos.x > this.ProjectilesPositions[2].x)))
-        {
-            index = 2;
-        }
+            Vector3 mousePos = LunarMonoBehaviour.Instance.GetMousePos();
 
-        this.Arrows[this.InactiveArrowIndex].GetComponent<ArrowBehaviour>().SetUpCommonArrow(this.ProjectilesPositions[index], mousePos, this.ProjectileLifeTime, this.ProjectileSpeed, ArrowType.NormalArrow, this.AttributesManager.PhysicalDamage, this.AttributesManager.PhysicalPierce);
+            skillsManager.ResetTimer(skillIndex);
 
-        yield return new WaitForSeconds(0.05f);
-        this.PlayerMovement.IsAttacked = false;
-        this.AttributesManager.BonusMoveSpeed += 2f;
-        this.PlayerMovement.WoodBow.SetActiveParentAnimation(false);
+            this.PlayerMovement.IsAttacked = true;
+            this.AttributesManager.BonusMoveSpeed -= 2f;
+            this.PlayerMovement.WoodBow.SetActiveParentAnimation(true);
+
+            yield return new WaitForSeconds(0.25f);
+
+            int index = 0;
+            if ((this.PlayerMovement.Direction == "Down") && (mousePos.y < this.ProjectilesPositions[0].y))
+            {
+                index = 0;
+            }
+            else if ((this.PlayerMovement.Direction == "Up") && (mousePos.y > this.ProjectilesPositions[1].y))
+            {
+                index = 1;
+            }
+            else if (((this.PlayerMovement.Direction == "Left") && (mousePos.x < this.ProjectilesPositions[2].x)) ||
+                     ((this.PlayerMovement.Direction == "Right") && (mousePos.x > this.ProjectilesPositions[2].x)))
+            {
+                index = 2;
+            }
+
+            this.Arrows[this.InactiveArrowIndex].GetComponent<ArrowBehaviour>().SetUpCommonArrow(this.ProjectilesPositions[index], mousePos, 0, this.ProjectileLifeTime, this.ProjectileSpeed, ArrowType.NormalArrow, this.AttributesManager.PhysicalDamage, this.AttributesManager.PhysicalPierce);
+
+            yield return new WaitForSeconds(0.05f);
+            this.PlayerMovement.IsAttacked = false;
+            this.AttributesManager.BonusMoveSpeed += 2f;
+            this.PlayerMovement.WoodBow.SetActiveParentAnimation(false);
+        }
     }
 }

@@ -9,6 +9,19 @@ public class ShacklesArrow : BowSkill
         get => "Shackles Arrow";
     }
 
+    public override float CooldownTimer
+    {
+        get
+        {
+            // Level 1
+            float value = 25f;
+            // Level 2-4
+            value -= 1.5f * Mathf.Max(0, Mathf.Min(3, this.Level - 1));
+
+            return value;
+        }
+    }
+
     private GameObject _effectCircle;
     private GameObject EffectCircle
     {
@@ -27,37 +40,42 @@ public class ShacklesArrow : BowSkill
     {
     }
 
-    public override IEnumerator Execute(Vector3 mousePos, SkillsManager skillsManager, int skillIndex)
+    public override IEnumerator Execute(SkillsManager skillsManager, int skillIndex)
     {
-        skillsManager.ResetTimer(skillIndex);
-
-        this.PlayerMovement.IsAttacked = true;
-        this.AttributesManager.BonusMoveSpeed -= 2f;
-        this.PlayerMovement.WoodBow.SetActiveParentAnimation(true);
-
-        yield return new WaitForSeconds(0.25f);
-
-        int index = 0;
-        if ((this.PlayerMovement.Direction == "Down") && (mousePos.y < this.ProjectilesPositions[0].y))
+        if (this.Arrows.Count > 0)
         {
-            index = 0;
-        }
-        else if ((this.PlayerMovement.Direction == "Up") && (mousePos.y > this.ProjectilesPositions[1].y))
-        {
-            index = 1;
-        }
-        else if (((this.PlayerMovement.Direction == "Left") && (mousePos.x < this.ProjectilesPositions[2].x)) ||
-                 ((this.PlayerMovement.Direction == "Right") && (mousePos.x > this.ProjectilesPositions[2].x)))
-        {
-            index = 2;
-        }
+            Vector3 mousePos = LunarMonoBehaviour.Instance.GetMousePos();
 
-        this.Arrows[this.InactiveArrowIndex].GetComponent<ArrowBehaviour>().SetUpShacklesArrow(this, this.ProjectilesPositions[index], mousePos, this.ProjectileLifeTime, this.ProjectileSpeed, this.AttributesManager.PhysicalDamage * 2.5f, this.AttributesManager.PhysicalPierce);
+            skillsManager.ResetTimer(skillIndex);
 
-        yield return new WaitForSeconds(0.05f);
-        this.PlayerMovement.IsAttacked = false;
-        this.AttributesManager.BonusMoveSpeed += 2f;
-        this.PlayerMovement.WoodBow.SetActiveParentAnimation(false);
+            this.PlayerMovement.IsAttacked = true;
+            this.AttributesManager.BonusMoveSpeed -= 2f;
+            this.PlayerMovement.WoodBow.SetActiveParentAnimation(true);
+
+            yield return new WaitForSeconds(0.25f);
+
+            int index = 0;
+            if ((this.PlayerMovement.Direction == "Down") && (mousePos.y < this.ProjectilesPositions[0].y))
+            {
+                index = 0;
+            }
+            else if ((this.PlayerMovement.Direction == "Up") && (mousePos.y > this.ProjectilesPositions[1].y))
+            {
+                index = 1;
+            }
+            else if (((this.PlayerMovement.Direction == "Left") && (mousePos.x < this.ProjectilesPositions[2].x)) ||
+                     ((this.PlayerMovement.Direction == "Right") && (mousePos.x > this.ProjectilesPositions[2].x)))
+            {
+                index = 2;
+            }
+
+            this.Arrows[this.InactiveArrowIndex].GetComponent<ArrowBehaviour>().SetUpShacklesArrow(this, this.ProjectilesPositions[index], mousePos, this.ProjectileLifeTime, this.ProjectileSpeed, this.AttributesManager.PhysicalDamage * 2.5f, this.AttributesManager.PhysicalPierce);
+
+            yield return new WaitForSeconds(0.05f);
+            this.PlayerMovement.IsAttacked = false;
+            this.AttributesManager.BonusMoveSpeed += 2f;
+            this.PlayerMovement.WoodBow.SetActiveParentAnimation(false);
+        }
     }
 
     public void SetUpShacklesEffect(Vector3 position)

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemsUIManager : MonoBehaviour
+public class ItemIconsUIManager : MonoBehaviour
 {
     [SerializeField] private List<ItemAndNumber> _items;
     public List<ItemAndNumber> Items
@@ -42,8 +42,8 @@ public class ItemsUIManager : MonoBehaviour
     {
         for (int i = 0; i < Mathf.Min(15, this.Items.Count); i++) 
         {
-            this.transform.GetChild(i).GetComponent<ItemUISlotManager>().Item = this.Items[i].Item;
-            this.transform.GetChild(i).GetComponent<ItemUISlotManager>().Number = this.Items[i].NumberOfItem;
+            this.transform.GetChild(i).GetComponent<ItemIconUISlotManager>().Item = this.Items[i].Item;
+            this.transform.GetChild(i).GetComponent<ItemIconUISlotManager>().Number = this.Items[i].NumberOfItem;
         }
     }
 }

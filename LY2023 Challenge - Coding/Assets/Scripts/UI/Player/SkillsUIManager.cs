@@ -39,10 +39,10 @@ public class SkillsUIManager : MonoBehaviour
 
     private void Update() 
     {
-        _sideSkillDisplay.sprite = Resources.Load<Sprite>("Skill Icons/Side Skills/" + _playerSkills.SideSkillName);
-        _firstMainSkillDisplay.sprite = Resources.Load<Sprite>("Skill Icons/Main Skills/" + _playerSkills.MainSkillNames[1]);
-        _secondMainSkillDisplay.sprite = Resources.Load<Sprite>("Skill Icons/Main Skills/" + _playerSkills.MainSkillNames[2]);
-        _thirdMainSkillDisplay.sprite = Resources.Load<Sprite>("Skill Icons/Main Skills/" + _playerSkills.MainSkillNames[3]);
+        _sideSkillDisplay.sprite = _playerSkills.SideSkill.SkillIcon;
+        _firstMainSkillDisplay.sprite = _playerSkills.MainSkills[1].SkillIcon;
+        _secondMainSkillDisplay.sprite = _playerSkills.MainSkills[2].SkillIcon;
+        _thirdMainSkillDisplay.sprite = _playerSkills.MainSkills[3].SkillIcon;
 
         _sideSkillsCooldownDisplay.fillAmount = _playerSkills.SkillCooldownFillAmounts[_playerSkills.SkillCooldownFillAmounts.Count - 1];
         _firstMainSkillsCooldownDisplay.fillAmount = _playerSkills.SkillCooldownFillAmounts[1];

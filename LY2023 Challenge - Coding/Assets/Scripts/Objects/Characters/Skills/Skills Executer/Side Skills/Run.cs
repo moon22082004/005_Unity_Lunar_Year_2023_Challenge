@@ -24,6 +24,21 @@ public class Run : SideSkill
         get => "Run";
     }
 
+    public override float CooldownTimer
+    {
+        get
+        {
+            // Level 1
+            float value = 35f;
+            // Level 2-3
+            value -= 1.5f * Mathf.Max(0, Mathf.Min(2, this.Level - 1));
+            // Level 4
+            value -= 2f * Mathf.Max(0, Mathf.Min(1, this.Level - 3));
+
+            return value;
+        }
+    }
+
     protected override List<float> Values
     {
         get
@@ -49,8 +64,10 @@ public class Run : SideSkill
         this.PlayerEffect = GameObject.Find("Player/Character/Effects/Side Skills/Running");
     }
 
-    public override IEnumerator Execute()
+    public override IEnumerator Execute(SkillsManager skillsManager, int skillIndex)
     {
+        skillsManager.ResetTimer(skillIndex);
+
         this.PlayerEffect.SetActive(true);
 
         this.PlayerMovement.IsRun = true;

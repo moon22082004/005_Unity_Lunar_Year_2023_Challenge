@@ -101,20 +101,21 @@ public class ArrowBehaviour : MonoBehaviour
         this.transform.localScale = new Vector3(1f, 1f, 1f);
     }
 
-    public void SetUpCommonArrow(Vector3 projectilesPointPos, Vector3 mousePos, float lifeTime, float speed, ArrowType typeOfArcher, float damage, float pierce)
+    public void SetUpCommonArrow(Vector3 projectilesPointPos, Vector3 destinationPos, float angleOffset, float lifeTime, float speed, ArrowType typeOfArcher, float damage, float pierce)
     {
         this.SetUp(typeOfArcher, damage, pierce);
         _lifeTime = lifeTime;
 
-        Vector3 attackVector3 = new Vector3(mousePos.x - projectilesPointPos.x, mousePos.y - projectilesPointPos.y, mousePos.z - projectilesPointPos.z);
+        Vector3 attackVector3 = new Vector3(destinationPos.x - projectilesPointPos.x, destinationPos.y - projectilesPointPos.y, destinationPos.z - projectilesPointPos.z);
+        attackVector3 = Quaternion.AngleAxis(angleOffset, Vector3.forward) * attackVector3;
 
         Vector2 movement = new Vector2(attackVector3.x, attackVector3.y);
         movement = new Vector2(movement.x / movement.magnitude * speed, movement.y / movement.magnitude * speed);
         _body.velocity = movement;
 
         this.transform.position = projectilesPointPos;
-        float angle = Vector2.Angle(new Vector2(-1f, 0f), new Vector2(attackVector3.x, attackVector3.y));
-        if (attackVector3.y >= 0f)
+        float angle = Vector2.Angle(new Vector2(-1f, 0f), movement);
+        if (movement.y >= 0f)
         {
             angle = -1 * angle;
         }
@@ -133,10 +134,10 @@ public class ArrowBehaviour : MonoBehaviour
         }
     }
 
-    public void SetUpBreakthroughArrow(float knockBackDistance, Vector3 projectilesPointPos, Vector3 mousePos, float lifeTime, float speed, string typeOfArcher, float damage, float pierce)
+    public void SetUpBreakthroughArrow(float knockBackDistance, Vector3 projectilesPointPos, Vector3 destinationPos, float lifeTime, float speed, float damage, float pierce)
     {
         _knockbackDistance = knockBackDistance;
-        this.SetUpCommonArrow(projectilesPointPos, mousePos, lifeTime, speed, ArrowType.BreakthroughArrow, damage, pierce);
+        this.SetUpCommonArrow(projectilesPointPos, destinationPos, 0, lifeTime, speed, ArrowType.BreakthroughArrow, damage, pierce);
 
         this.BoxCollider2D.isTrigger = true;
 
@@ -145,10 +146,10 @@ public class ArrowBehaviour : MonoBehaviour
         _arrowOfShacklesEffect.SetActive(false);
     }
 
-    public void SetUpShacklesArrow(ShacklesArrow shacklesArrowSkill, Vector3 projectilesPointPos, Vector3 mousePos, float lifeTime, float speed, float damage, float pierce)
+    public void SetUpShacklesArrow(ShacklesArrow shacklesArrowSkill, Vector3 projectilesPointPos, Vector3 destinationPos, float lifeTime, float speed, float damage, float pierce)
     {
         _shacklesArrowSkill = shacklesArrowSkill;
-        this.SetUpCommonArrow(projectilesPointPos, mousePos, lifeTime, speed, ArrowType.ShacklesArrow, damage, pierce);
+        this.SetUpCommonArrow(projectilesPointPos, destinationPos, 0, lifeTime, speed, ArrowType.ShacklesArrow, damage, pierce);
 
         this.BoxCollider2D.isTrigger = false;
 

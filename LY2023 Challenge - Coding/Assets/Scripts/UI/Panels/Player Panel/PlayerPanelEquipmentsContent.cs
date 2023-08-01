@@ -77,12 +77,12 @@ public class PlayerPanelEquipmentsContent : MonoBehaviour
         }
     }
 
-    [SerializeField] private List<Item> AvailableItems
+    private List<Item> AvailableItems
     {
         get => LunarMonoBehaviour.Instance.Player.GetComponent<InventoryManager>().EquipmentItems(_changeItemTypeName);
     }
 
-    [SerializeField] private int NumberOfItemPages
+    private int NumberOfItemPages
     {
         get
         {
@@ -144,7 +144,7 @@ public class PlayerPanelEquipmentsContent : MonoBehaviour
                     items.Add(new ItemAndNumber() { Item = this.AvailableItems[j], NumberOfItem = 1 });
                 }
 
-                this.AvailableItemsPagesTransform.GetChild(i).GetComponent<ItemsUIManager>().Items = items;
+                this.AvailableItemsPagesTransform.GetChild(i).GetComponent<ItemIconsUIManager>().Items = items;
             }
         }
         else
@@ -184,10 +184,10 @@ public class PlayerPanelEquipmentsContent : MonoBehaviour
 
         for (int i = 1; i <= this.NumberOfItemPages; i++)
         {
-            foreach (Button button in this.AvailableItemsPagesTransform.GetChild(i).GetComponent<ItemsUIManager>().Buttons)
+            foreach (Button button in this.AvailableItemsPagesTransform.GetChild(i).GetComponent<ItemIconsUIManager>().Buttons)
             {
                 button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(() => this.ChangeEquipment(itemTypeName, button.GetComponent<ItemUISlotManager>().Item));
+                button.onClick.AddListener(() => this.ChangeEquipment(itemTypeName, button.GetComponent<ItemIconUISlotManager>().Item));
             }
         }
     }

@@ -9,6 +9,11 @@ public abstract class Skill : ScriptableObject
         get;
     }
 
+    public abstract Sprite SkillIcon
+    { 
+        get; 
+    }
+
     private int _level;
     public int Level
     {
@@ -16,9 +21,28 @@ public abstract class Skill : ScriptableObject
         set => _level = value;
     }
 
+    public abstract float CooldownTimer
+    {
+        get;
+    }
+
     protected virtual List<float> Values
     {
         get;
+    }
+
+    [SerializeField] private GameObject _attackDistanceCircle;
+    protected GameObject AttackDistanceCircle
+    {
+        get
+        {
+            if (_attackDistanceCircle == null)
+            {
+                _attackDistanceCircle = GameObject.Find("Player/Character/Effects/Attack Distance Circle");
+            }
+
+            return _attackDistanceCircle;
+        }
     }
 
     private AttributesManager _attributesManager;
@@ -35,5 +59,5 @@ public abstract class Skill : ScriptableObject
         }
     }
 
-    public abstract IEnumerator Execute();
+    public abstract IEnumerator Execute(SkillsManager skillsManager, int skillIndex);
 }

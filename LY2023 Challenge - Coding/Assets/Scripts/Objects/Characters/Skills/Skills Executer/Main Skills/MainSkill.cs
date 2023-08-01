@@ -3,6 +3,11 @@ using UnityEngine;
 
 public abstract class MainSkill : Skill
 {
+    public override Sprite SkillIcon
+    {
+        get => Resources.Load<Sprite>("Skill Icons/Main Skills/" + this.Name);
+    }
+
     private PlayerMovement _playerMovement;
     protected PlayerMovement PlayerMovement
     {
@@ -18,27 +23,9 @@ public abstract class MainSkill : Skill
         set => _playerMovement = value;
     }
 
-    [SerializeField] private GameObject _attackDistanceCircle;
-    protected GameObject AttackDistanceCircle
-    {
-        get
-        {
-            if (_attackDistanceCircle == null)
-            {
-                _attackDistanceCircle = GameObject.Find("Player/Character/Effects/Attack Distance Circle");
-            }
-
-            return _attackDistanceCircle;
-        }
-    }
-
     public abstract void Update();
 
-    public override IEnumerator Execute()
-    {
-        throw new System.NotImplementedException();
-    }
-    public virtual IEnumerator Execute(Vector3 mousePos, SkillsManager skillsManager, int skillIndex)
+    public override IEnumerator Execute(SkillsManager skillsManager, int skillIndex)
     {
         throw new System.NotImplementedException();
     }

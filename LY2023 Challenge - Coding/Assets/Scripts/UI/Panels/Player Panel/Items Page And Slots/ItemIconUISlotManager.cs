@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemUISlotManager : MonoBehaviour
+public class ItemIconUISlotManager : MonoBehaviour
 {
 
     [SerializeField] private Item _item;
@@ -52,20 +52,6 @@ public class ItemUISlotManager : MonoBehaviour
             }
 
             return _text;
-        }
-    }
-
-    private Button _button;
-    public Button Button
-    {
-        get
-        {
-            if (_button == null)
-            {
-                _button = this.transform.GetChild(0).GetComponent<Button>();
-            }
-
-            return _button;
         }
     }
 

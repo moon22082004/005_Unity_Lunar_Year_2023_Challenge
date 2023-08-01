@@ -99,7 +99,7 @@ public class PlayerPanelInventoryContent : MonoBehaviour
                             itemsInAPage.Add(new ItemAndNumber() { Item = items[j], NumberOfItem = 1 });
                         }
 
-                        this.transform.GetChild(i + 1).GetComponent<ItemsUIManager>().Items = itemsInAPage;
+                        this.transform.GetChild(i + 1).GetComponent<ItemIconsUIManager>().Items = itemsInAPage;
                     }
                     break;
                 case "Upgrade Material":
@@ -112,7 +112,7 @@ public class PlayerPanelInventoryContent : MonoBehaviour
                             itemsInAPage.Add(itemsWithNumber[j]);
                         }
 
-                        this.transform.GetChild(i + 1).GetComponent<ItemsUIManager>().Items = itemsInAPage;
+                        this.transform.GetChild(i + 1).GetComponent<ItemIconsUIManager>().Items = itemsInAPage;
                     }
                     break;
             }

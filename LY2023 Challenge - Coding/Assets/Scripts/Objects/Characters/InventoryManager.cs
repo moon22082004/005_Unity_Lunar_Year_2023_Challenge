@@ -180,4 +180,77 @@ public class InventoryManager : MonoBehaviour
 
         return result;
     }
+
+    [SerializeField] private List<Skill> _skills;
+    public List<Skill> Skills
+    {
+        get
+        {
+            if (_skills == null)
+            {
+                _skills = new List<Skill>();
+            }
+
+            _skills = _skills.OrderBy(skill => skill.Name).ToList();
+
+            return _skills;
+        }
+    }
+
+    public List<Skill> SkillsByType(string skillTypeName)
+    {
+        Type desireSkillType;
+
+        switch (skillTypeName)
+        {
+            case "MainSkill":
+                desireSkillType = typeof(MainSkill);
+                break;
+            case "SideSkill":
+                desireSkillType = typeof(SideSkill);
+                break;
+            default:
+                desireSkillType = typeof(SideSkill);
+                break;
+        }
+
+        List<Skill> result = new List<Skill>();
+        foreach (var skill in this.Skills)
+        {
+            Type skillType = skill.GetType();
+            while ((skillType != typeof(Skill)) && (skillType != desireSkillType))
+            {
+                skillType = skillType.BaseType;
+            }
+
+            if (skillType == desireSkillType)
+            {
+                result.Add(skill);
+            }
+        }
+
+        return result;
+    }
+
+    public void SwapSkillFromCharacter(string skillTypeName, int index, Skill initialSkill, SkillsManager playerSkills)
+    {
+        Skill exchangeSkill;
+        switch (skillTypeName)
+        {
+            case "SideSkill":
+                exchangeSkill = playerSkills.SideSkill;
+                playerSkills.SideSkill = (SideSkill)initialSkill;
+                break;
+            case "MainSkill":
+                exchangeSkill = playerSkills.MainSkills[index];
+                playerSkills.MainSkills[index] = (MainSkill)initialSkill;
+                break;
+            default:
+                exchangeSkill = playerSkills.SideSkill;
+                playerSkills.SideSkill = (SideSkill)initialSkill;
+                break;
+        }
+        this.Skills.Remove(initialSkill);
+        this.Skills.Add(exchangeSkill);
+    }
 }

@@ -10,6 +10,21 @@ public class ArrowsRain : BowSkill
         get => "Arrows Rain";
     }
 
+    public override float CooldownTimer
+    {
+        get
+        {
+            // Level 1
+            float value = 12f;
+            // Level 2-3
+            value -= 1f * Mathf.Max(0, Mathf.Min(2, this.Level - 1));
+            // Level 4
+            value -= 2f * Mathf.Max(0, Mathf.Min(1, this.Level - 3));
+
+            return value;
+        }
+    }
+
     protected override List<float> Values
     {
         get
@@ -57,13 +72,13 @@ public class ArrowsRain : BowSkill
     public override void Update()
     {
         if (this.EffectCircle.activeInHierarchy)
-        {
-            if (((Random.Range(0, 1000) <= 100) && (this.NumsOfRainedArchers() <= 2)) ||
-                 ((Random.Range(0, 1000) <= 16) && (this.NumsOfRainedArchers() <= 4) && (this.NumsOfRainedArchers() > 2)) ||
-                 ((Random.Range(0, 1000) <= 8) && (this.NumsOfRainedArchers() <= 6) && (this.NumsOfRainedArchers() > 4)) ||
-                 ((Random.Range(0, 1000) <= 4) && (this.NumsOfRainedArchers() <= 8) && (this.NumsOfRainedArchers() > 6)))
-            {
-                if (_isSpawnedRainedArrows)
+        {   
+            if ((_isSpawnedRainedArrows) && (this.Arrows.Count > 0))
+            {     
+                if (((Random.Range(0, 1000) <= 100) && (this.NumsOfRainedArchers() <= 2)) ||
+                    ((Random.Range(0, 1000) <= 16) && (this.NumsOfRainedArchers() <= 4) && (this.NumsOfRainedArchers() > 2)) ||
+                    ((Random.Range(0, 1000) <= 8) && (this.NumsOfRainedArchers() <= 6) && (this.NumsOfRainedArchers() > 4)) ||
+                    ((Random.Range(0, 1000) <= 4) && (this.NumsOfRainedArchers() <= 8) && (this.NumsOfRainedArchers() > 6)))
                 {
                     this.Arrows[this.InactiveArrowIndex].GetComponent<ArrowBehaviour>().SetUpRainedArrow(_rSkillAreaPos, 1f, this.AttributesManager.PhysicalDamage * this.Values[0], this.AttributesManager.PhysicalPierce);
                 }
@@ -71,9 +86,11 @@ public class ArrowsRain : BowSkill
         }
     }
 
-    public override IEnumerator Execute(Vector3 mousePos, SkillsManager skillsManager, int skillIndex)
+    public override IEnumerator Execute(SkillsManager skillsManager, int skillIndex)
     {
-        if ((mousePos - LunarMonoBehaviour.Instance.Player.transform.position).magnitude > (this.ProjectileLifeTime * this.ProjectileSpeed))
+        Vector3 mousePos = LunarMonoBehaviour.Instance.GetMousePos();
+
+        if (((Vector2)(mousePos - LunarMonoBehaviour.Instance.Player.transform.position)).magnitude > (this.ProjectileLifeTime * this.ProjectileSpeed))
         {
             this.AttackDistanceCircle.GetComponent<AttackDistanceCircle>().Distance = this.ProjectileLifeTime * this.ProjectileSpeed;
 
