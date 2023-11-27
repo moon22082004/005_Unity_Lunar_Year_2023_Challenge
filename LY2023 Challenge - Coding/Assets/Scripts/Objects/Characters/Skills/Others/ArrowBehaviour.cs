@@ -180,7 +180,7 @@ public class ArrowBehaviour : MonoBehaviour
     {
         if (collision.gameObject.tag != "Player")
         {
-            if ((collision.gameObject.tag == "Enemy") && (!this._boxCollider2D.isTrigger))
+            if ((collision.gameObject.tag == "Enemy") && (!this.BoxCollider2D.isTrigger))
             {
                 collision.gameObject.GetComponent<AttributesManager>().TakeDamage(LunarMonoBehaviour.Instance.Player.GetComponent<AttributesManager>(), _physicalDamage, _physicalPierce, false);
             }
@@ -189,6 +189,9 @@ public class ArrowBehaviour : MonoBehaviour
             {
                 case ArrowType.ShacklesArrow:
                     _shacklesArrowSkill.SetUpShacklesEffect(this.transform.position);
+                    break;
+                case ArrowType.TeleportArrow:
+                    LunarMonoBehaviour.Instance.Player.transform.position = this.transform.position;
                     break;
             }
 

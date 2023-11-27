@@ -3,5 +3,6 @@ public enum ArrowType
     NormalArrow,
     RainedArrow,
     BreakthroughArrow,
-    ShacklesArrow
+    ShacklesArrow,
+    TeleportArrow,
 }

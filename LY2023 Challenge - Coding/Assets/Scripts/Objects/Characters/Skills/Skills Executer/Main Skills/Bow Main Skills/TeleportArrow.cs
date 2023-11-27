@@ -31,20 +31,13 @@ public class TeleportArrow : BowSkill
 
             // FIRST VALUE: ARROW DAMAGE RATE
             // Level 1
-            float firstValue = 0.25f;
+            float firstValue = 0.15f;
             // Level 2-3
             firstValue += 0.05f * Mathf.Max(0, Mathf.Min(2, this.Level - 1));
             // Level 4-5
-            firstValue += 0.1f * Mathf.Max(0, Mathf.Min(2, this.Level - 3));
+            firstValue += 0.075f * Mathf.Max(0, Mathf.Min(2, this.Level - 3));
 
             values.Add(firstValue);
-
-            // SECOND VALUE: KNOCK BACK POWER
-            float secondValue = 2.5f;
-            // Level 2-5
-            secondValue += 0.25f * Mathf.Max(0, Mathf.Min(4, this.Level - 1));
-
-            values.Add(secondValue);
 
             return values;
         }
@@ -83,7 +76,7 @@ public class TeleportArrow : BowSkill
                 index = 2;
             }
 
-            this.Arrows[this.InactiveArrowIndex].GetComponent<ArrowBehaviour>().SetUpBreakthroughArrow(this.Values[1], this.ProjectilesPositions[index], mousePos, this.ProjectileLifeTime, this.ProjectileSpeed, this.AttributesManager.PhysicalDamage * this.Values[0], this.AttributesManager.PhysicalPierce);
+            this.Arrows[this.InactiveArrowIndex].GetComponent<ArrowBehaviour>().SetUpCommonArrow(this.ProjectilesPositions[index], mousePos, 0, this.ProjectileLifeTime, this.ProjectileSpeed, ArrowType.TeleportArrow, this.AttributesManager.PhysicalDamage * this.Values[0], this.AttributesManager.PhysicalPierce);
 
             yield return new WaitForSeconds(0.05f);
             this.PlayerMovement.IsAttacked = false;
