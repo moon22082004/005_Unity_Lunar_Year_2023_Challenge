@@ -110,7 +110,6 @@ public class ArrowsRain : BowSkill
             this.EffectCircle.transform.position = _rSkillAreaPos;
 
             this.PlayerMovement.IsAttacked = true;
-            this.PlayerMovement.WoodBow.SetActiveParentAnimation(true);
 
             this.AttributesManager.BonusMoveSpeed -= 2f;
 
@@ -118,7 +117,6 @@ public class ArrowsRain : BowSkill
 
             this.AttributesManager.BonusMoveSpeed += 2f;
 
-            this.PlayerMovement.WoodBow.SetActiveParentAnimation(false);
             this.PlayerMovement.IsAttacked = false;
 
             _isSpawnedRainedArrows = true;

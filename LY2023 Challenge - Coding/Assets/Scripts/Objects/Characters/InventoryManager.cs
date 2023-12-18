@@ -66,16 +66,8 @@ public class InventoryManager : MonoBehaviour
                 equipmentsManager.Helm = (Helm)initialItem;
                 break;
             case "ChestArmor":
-                exchangeItem = equipmentsManager.ChestArmor;
-                equipmentsManager.ChestArmor = (ChestArmor)initialItem;
-                break;
-            case "Gauntlets":
-                exchangeItem = equipmentsManager.Gauntlets;
-                equipmentsManager.Gauntlets = (Gauntlets)initialItem;
-                break;
-            case "LegArmor":
-                exchangeItem = equipmentsManager.LegArmor;
-                equipmentsManager.LegArmor = (LegArmor)initialItem;
+                exchangeItem = equipmentsManager.Armor;
+                equipmentsManager.Armor = (Armor)initialItem;
                 break;
             case "Main Weapon":
                 exchangeItem = equipmentsManager.MainWeapon;
@@ -104,13 +96,7 @@ public class InventoryManager : MonoBehaviour
                 desireItemType = typeof(Helm);
                 break;
             case "ChestArmor":
-                desireItemType = typeof(ChestArmor);
-                break;
-            case "Gauntlets":
-                desireItemType = typeof(Gauntlets);
-                break;
-            case "LegArmor":
-                desireItemType = typeof(LegArmor);
+                desireItemType = typeof(Armor);
                 break;
             case "Main Weapon":
             case "Side Weapon":

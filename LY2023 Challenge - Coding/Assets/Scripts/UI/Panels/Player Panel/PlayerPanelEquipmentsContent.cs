@@ -160,11 +160,9 @@ public class PlayerPanelEquipmentsContent : MonoBehaviour
         }
 
         this.MainEquipmentsPageTransform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = this.PlayerEquipments.Helm.ItemIcon;
-        this.MainEquipmentsPageTransform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = this.PlayerEquipments.ChestArmor.ItemIcon;
-        this.MainEquipmentsPageTransform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = this.PlayerEquipments.Gauntlets.ItemIcon;
-        this.MainEquipmentsPageTransform.GetChild(3).GetChild(0).GetComponent<Image>().sprite = this.PlayerEquipments.LegArmor.ItemIcon;
-        this.MainEquipmentsPageTransform.GetChild(4).GetChild(0).GetComponent<Image>().sprite = this.PlayerEquipments.MainWeapon.ItemIcon;
-        this.MainEquipmentsPageTransform.GetChild(5).GetChild(0).GetComponent<Image>().sprite = this.PlayerEquipments.SideWeapon.ItemIcon;
+        this.MainEquipmentsPageTransform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = this.PlayerEquipments.Armor.ItemIcon;
+        this.MainEquipmentsPageTransform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = this.PlayerEquipments.MainWeapon.ItemIcon;
+        this.MainEquipmentsPageTransform.GetChild(3).GetChild(0).GetComponent<Image>().sprite = this.PlayerEquipments.SideWeapon.ItemIcon;
     }
 
     // Buttons

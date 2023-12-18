@@ -50,19 +50,16 @@ public class SkillsManager : MonoBehaviour
     }
 
     [SerializeField] private List<MainSkill> _mainSkills;
-    public List<MainSkill> MainSkills
-    {
-        get => _mainSkills;
-    }    
+    public List<MainSkill> MainSkills => _mainSkills;
 
     public List<float> SkillCooldownFillAmounts
     {
         get 
         {
             List<float> result = new List<float>();
-            for (int i = 0; i < _skillKeys.Count; i++) 
+            for (int i = 0; i < this.SkillKeys.Count; i++) 
             {
-                result.Add(Mathf.Clamp((_cooldownTimers[i] - _timers[i]) / _cooldownTimers[i], 0, 1));
+                result.Add(Mathf.Clamp((this.CooldownTimers[i] - _timers[i]) / this.CooldownTimers[i], 0, 1));
             }
 
             return result;
@@ -79,18 +76,18 @@ public class SkillsManager : MonoBehaviour
 
     private void Update()
     {
-        foreach (MainSkill mainskill in _mainSkills)
+        foreach (MainSkill mainSkill in this.MainSkills)
         {
-            mainskill.Update();
+            mainSkill.Update();
         }
 
-        for (int i = 0; i < _mainSkills.Count; i++)
+        for (int i = 0; i < this.MainSkills.Count; i++)
         {
             if ((_timers[i] >= this.CooldownTimers[i]) && (_timers[0] >= this.CooldownTimers[0]))
             {
-                if ((Input.GetKeyDown(_skillKeys[i])) && (!LunarMonoBehaviour.Instance.IsPausedGame))
+                if ((Input.GetKeyDown(this.SkillKeys[i])) && (!LunarMonoBehaviour.Instance.IsPausedGame))
                 {
-                    StartCoroutine(_mainSkills[i].Execute(this, i));
+                    StartCoroutine(this.MainSkills[i].Execute(this, i));
                 }
             }
             else if (_timers[i] < this.CooldownTimers[i])
@@ -101,9 +98,9 @@ public class SkillsManager : MonoBehaviour
 
         if (_timers[_timers.Count - 1] >= this.CooldownTimers[this.CooldownTimers.Count - 1])
         {
-            if ((Input.GetKeyDown(_skillKeys[_skillKeys.Count - 1])) && (!LunarMonoBehaviour.Instance.IsPausedGame))
+            if ((Input.GetKeyDown(this.SkillKeys[this.SkillKeys.Count - 1])) && (!LunarMonoBehaviour.Instance.IsPausedGame))
             {
-                StartCoroutine(_sideSkill.Execute(this, _timers.Count - 1));
+                StartCoroutine(this.SideSkill.Execute(this, _timers.Count - 1));
             }
         }
         else

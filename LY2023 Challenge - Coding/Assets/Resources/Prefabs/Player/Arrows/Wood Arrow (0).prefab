@@ -288,7 +288,7 @@ SpriteRenderer:
   m_SortingLayerID: -105541197
   m_SortingLayer: 3
   m_SortingOrder: 15
-  m_Sprite: {fileID: 21300000, guid: 32fc46fa3f0e8b349b777fc008066ece, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f5366589b6b580d4abeb10fce4215d92, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -316,7 +316,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2615385, y: 0.2769231}
+    oldSize: {x: 1.64, y: 0.36}
     newSize: {x: 1.2615385, y: 0.2769231}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -358,5 +358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f131c04146bd55b439f1c58edca90076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eArcherEffect: {fileID: 0}
-  _spaceArcherEffect: {fileID: 0}
+  _breakthroughEffect: {fileID: 0}
+  _arrowOfShacklesEffect: {fileID: 0}
+  _shacklesArrowSkill: {fileID: 0}

@@ -64,7 +64,6 @@ public class FiveArrows : BowSkill
 
             this.PlayerMovement.IsAttacked = true;
             this.AttributesManager.BonusMoveSpeed -= 2f;
-            this.PlayerMovement.WoodBow.SetActiveParentAnimation(true);
 
             yield return new WaitForSeconds(0.25f);
 
@@ -92,7 +91,6 @@ public class FiveArrows : BowSkill
             yield return new WaitForSeconds(0.05f);
             this.PlayerMovement.IsAttacked = false;
             this.AttributesManager.BonusMoveSpeed += 2f;
-            this.PlayerMovement.WoodBow.SetActiveParentAnimation(false);
         }
     }
 }

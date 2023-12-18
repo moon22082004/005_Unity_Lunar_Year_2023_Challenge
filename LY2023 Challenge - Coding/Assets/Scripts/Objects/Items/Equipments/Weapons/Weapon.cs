@@ -22,6 +22,10 @@ public abstract class Weapon : Equipment
     {
         get;
     }
+    public abstract float PhysicalLifeSteal
+    {
+        get;
+    }
     #endregion
 
     #region Magic Damage
@@ -30,6 +34,10 @@ public abstract class Weapon : Equipment
         get;
     }
     public virtual float MagicPierce
+    {
+        get;
+    }
+    public abstract float MagicLifeSteal
     {
         get;
     }

@@ -31,4 +31,31 @@ public class DefaultWeapon : Weapon
     {
         get => 0f;
     }
+    public override float PhysicalLifeSteal
+    {
+        get
+        {
+            float value = 0f;
+
+            return value;
+        }
+    }
+
+    public override float MagicDamage
+    {
+        get => 0f;
+    }
+    public override float MagicPierce
+    {
+        get => 0f;
+    }
+    public override float MagicLifeSteal
+    {
+        get
+        {
+            float value = 0f;
+
+            return value;
+        }
+    }
 }

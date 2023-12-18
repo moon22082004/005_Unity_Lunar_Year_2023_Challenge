@@ -63,4 +63,38 @@ public class WoodenBow : Weapon
             return value;
         }
     }
+
+    public override float PhysicalLifeSteal
+    {
+        get
+        {
+            float value = 0f;
+
+            // Level 1
+            value += 0.01f;
+            // Level 2-3
+            value += 0.004f * Mathf.Max(0, Mathf.Min(2, this.Level - 1));
+            // Level 4-5
+            value += 0.001f * Mathf.Max(0, Mathf.Min(2, this.Level - 3));
+
+            return value;
+        }
+    }
+
+    public override float MagicLifeSteal
+    {
+        get
+        {
+            float value = 0f;
+
+            // Level 1
+            value += 0.001f;
+            // Level 2-3
+            value += 0.0004f * Mathf.Max(0, Mathf.Min(2, this.Level - 1));
+            // Level 4-5
+            value += 0.00035f * Mathf.Max(0, Mathf.Min(2, this.Level - 3));
+
+            return value;
+        }
+    }
 }

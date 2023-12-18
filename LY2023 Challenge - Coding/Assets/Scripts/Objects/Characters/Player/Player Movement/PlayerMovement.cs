@@ -4,16 +4,41 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Player's Attributes")]
     private AttributesManager _playerAttributes;
-    [SerializeField] private GameObject _playerAnimation;
-    private string _direction = "Down";
+    public AttributesManager PlayerAttributes
+    {
+        get
+        {
+            if (_playerAttributes == null)
+            {
+                _playerAttributes = GetComponent<AttributesManager>();
+            }
+
+            return _playerAttributes; 
+        }
+    }
+
     private bool _isRun = false;
     private bool _isAttacked = false;
     private bool _canMoveNormally = true;
 
+    private string _direction = "Down";
     public string Direction
     {
         get => _direction;
     }
+    public string AnimationDirection
+    {
+        get
+        {
+            if ((this.Direction == "Down") || (this.Direction == "Up"))
+            {
+                return this.Direction;
+            }
+
+            return "Side";
+        }
+    }
+
     public bool IsRun 
     {
         get => _isRun;
@@ -30,47 +55,23 @@ public class PlayerMovement : MonoBehaviour
         set => _canMoveNormally = value;
     }
 
-    private AnimationHolder _idle;
-    private AnimationHolder _walk;
-    private AnimationHolder _run;
-    private AnimationHolder _woodBow;
-    private AnimationHolder _shortSword;
-    private AnimationHolder _shortGun;
-    private AnimationHolder _rifle;
-    private AnimationHolder _sycthe;
-    private AnimationHolder _beastHammer;
-
-    public AnimationHolder WoodBow
-    {
-        get => _woodBow;
-    }
-    public AnimationHolder ShortSword
-    {
-        get => _shortSword;
-    }
-    public AnimationHolder ShortGun
-    {
-        get => _shortGun;
-    }
-    public AnimationHolder Rifle
-    {
-        get => _rifle;
-    }
-    public AnimationHolder BeastHammer
-    {
-        get => _beastHammer;
-    }
-
     private Rigidbody2D _body;
+    public Rigidbody2D Body
+    {
+        get 
+        { 
+            if (_body == null) 
+            {
+                _body = GetComponent<Rigidbody2D>();
+            }
+
+            return _body; 
+        }
+    }
     private Vector2 _movement;
 
     private void Awake() 
     {
-        _body = GetComponent<Rigidbody2D>();
-        _playerAttributes = GetComponent<AttributesManager>();
-
-        _playerAnimation.SetActive(true);
-        this.GetAnimationsOfPlayer();
     }
 
     private void Update() 
@@ -95,31 +96,27 @@ public class PlayerMovement : MonoBehaviour
 
             if (_movement == Vector2.zero)
             {
-                _idle.ParentAnimation.SetActive(true);
-                _walk.ParentAnimation.SetActive(false);
-                _run.ParentAnimation.SetActive(false);
+                this.HelmAnimator.Play($"{this.AnimationDirection}_Idle");
+                this.ArmorAnimator.Play($"{this.AnimationDirection}_Idle");
             }
             else
             {
                 if (!this.IsRun)
                 {
-                    _idle.ParentAnimation.SetActive(false);
-                    _walk.ParentAnimation.SetActive(true);
-                    _run.ParentAnimation.SetActive(false);
+                    this.HelmAnimator.Play($"{this.AnimationDirection}_Walk");
+                    this.ArmorAnimator.Play($"{this.AnimationDirection}_Walk");
                 }
                 else
                 {
-                    _idle.ParentAnimation.SetActive(false);
-                    _walk.ParentAnimation.SetActive(false);
-                    _run.ParentAnimation.SetActive(true);                
+                    this.HelmAnimator.Play($"{this.AnimationDirection}_Run");
+                    this.ArmorAnimator.Play($"{this.AnimationDirection}_Run");
                 }
             }
         }
         else
         {
-            _idle.ParentAnimation.SetActive(false);
-            _walk.ParentAnimation.SetActive(false);
-            _run.ParentAnimation.SetActive(false);
+            this.HelmAnimator.Play($"{this.AnimationDirection}_Bow");
+            this.ArmorAnimator.Play($"{this.AnimationDirection}_Bow");
         }
     }
 
@@ -127,38 +124,16 @@ public class PlayerMovement : MonoBehaviour
     {   
         if (this.CanMoveNormally)
         {
-            _body.MovePosition(_body.position + _movement * _playerAttributes.MoveSpeed * Time.fixedDeltaTime);
+            this.Body.MovePosition(this.Body.position + _movement * this.PlayerAttributes.MoveSpeed * Time.fixedDeltaTime);
         }
-    }
-
-    private void GetAnimationsOfPlayer()
-    {
-        _idle = new AnimationHolder(_playerAnimation.transform.GetChild(0).gameObject);
-        _walk = new AnimationHolder(_playerAnimation.transform.GetChild(1).gameObject);
-        _run = new AnimationHolder(_playerAnimation.transform.GetChild(2).gameObject);
-        _woodBow = new AnimationHolder(_playerAnimation.transform.GetChild(3).gameObject);
-        _shortSword = new AnimationHolder(_playerAnimation.transform.GetChild(4).gameObject);
-        _shortGun = new AnimationHolder(_playerAnimation.transform.GetChild(5).gameObject);
-        _rifle = new AnimationHolder(_playerAnimation.transform.GetChild(6).gameObject);
-        _sycthe = new AnimationHolder(_playerAnimation.transform.GetChild(7).gameObject);
-        _beastHammer = new AnimationHolder(_playerAnimation.transform.GetChild(8).gameObject);
-
-        _idle.ParentAnimation.SetActive(true);
     }
 
     public void SetSideDirection(float horizontalValue)
     {
         this.transform.localScale = new Vector3(Mathf.Sign(horizontalValue) * -1 * Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
 
-        _idle.SetSideDirection();
-        _walk.SetSideDirection();
-        _run.SetSideDirection();
-        _woodBow.SetSideDirection();
-        _shortSword.SetSideDirection();
-        _shortGun.SetSideDirection();
-        _rifle.SetSideDirection();
-        _sycthe.SetSideDirection();
-        _beastHammer.SetSideDirection();
+        this.HelmAnimator.SetInteger("Direction", 1);
+        this.ArmorAnimator.SetInteger("Direction", 1);
 
         if (horizontalValue > 0)
         {
@@ -174,15 +149,8 @@ public class PlayerMovement : MonoBehaviour
     {
         this.transform.localScale = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
 
-        _idle.SetDownDirection();
-        _walk.SetDownDirection();
-        _run.SetDownDirection();
-        _woodBow.SetDownDirection();
-        _shortSword.SetDownDirection();
-        _shortGun.SetDownDirection();
-        _rifle.SetDownDirection();
-        _sycthe.SetDownDirection();
-        _beastHammer.SetDownDirection();
+        this.HelmAnimator.SetInteger("Direction", 0);
+        this.ArmorAnimator.SetInteger("Direction", 0);
 
         _direction = "Down";
     }
@@ -191,16 +159,67 @@ public class PlayerMovement : MonoBehaviour
     {
         this.transform.localScale = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
 
-        _idle.SetUpDirection();
-        _walk.SetUpDirection();
-        _run.SetUpDirection();
-        _woodBow.SetUpDirection();
-        _shortSword.SetUpDirection();
-        _shortGun.SetUpDirection();
-        _rifle.SetUpDirection();
-        _sycthe.SetUpDirection();
-        _beastHammer.SetUpDirection();
+        this.HelmAnimator.SetInteger("Direction", 2);
+        this.ArmorAnimator.SetInteger("Direction", 2);
 
-        _direction = "Up";    
+        _direction = "Up";
+    }
+
+    [SerializeField] private RuntimeAnimatorController _helmAnimationController;
+    public RuntimeAnimatorController HelmAnimationController
+    {
+        get
+        { 
+            _helmAnimationController = this.AnimationsMap(this.GetComponent<EquipmentsManager>().Helm.Name);
+
+            return _helmAnimationController; 
+        }
+    }
+
+    [SerializeField] private Animator _helmAnimator;
+    public Animator HelmAnimator
+    {
+        get
+        {
+            if (_helmAnimator == null)
+            {
+                _helmAnimator = this.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+            }
+
+            _helmAnimator.runtimeAnimatorController = this.HelmAnimationController;
+
+            return _helmAnimator;
+        }
+    }
+
+    [SerializeField] private RuntimeAnimatorController _armorAnimationController;
+    public RuntimeAnimatorController ArmorAnimationController
+    {
+        get
+        {
+            _armorAnimationController = this.AnimationsMap(this.GetComponent<EquipmentsManager>().Armor.Name);
+
+            return _armorAnimationController;
+        }
+    }
+    public RuntimeAnimatorController AnimationsMap(string skinName)
+    {
+        return Resources.Load<RuntimeAnimatorController>($"Animations/Characters/{skinName}/{skinName}");
+    }
+
+    [SerializeField] private Animator _armorAnimator;
+    public Animator ArmorAnimator
+    {
+        get
+        {
+            if (_armorAnimator == null)
+            {
+                _armorAnimator = this.transform.GetChild(0).GetChild(1).GetComponent<Animator>();
+            }
+
+            _armorAnimator.runtimeAnimatorController = this.ArmorAnimationController;
+
+            return _armorAnimator;
+        }
     }
 }

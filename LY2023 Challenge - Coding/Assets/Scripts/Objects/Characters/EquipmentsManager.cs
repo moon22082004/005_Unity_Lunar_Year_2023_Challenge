@@ -23,34 +23,22 @@ public class EquipmentsManager : MonoBehaviour
 
     [Header("Armor")]
     [SerializeField] private Helm _helm;
-    [SerializeField] private ChestArmor _chestArmor;
-    [SerializeField] private Gauntlets _gauntlets;
-    [SerializeField] private LegArmor _legArmor;
+    [SerializeField] private Armor _armor;
 
     public Helm Helm
     {
         get => _helm; 
         set => _helm = value;
     }
-    public ChestArmor ChestArmor
+    public Armor Armor
     {
-        get => _chestArmor;
-        set => _chestArmor = value;
-    }
-    public Gauntlets Gauntlets
-    {
-        get => _gauntlets;
-        set => _gauntlets = value;
-    }
-    public LegArmor LegArmor
-    {
-        get => _legArmor; 
-        set => _legArmor = value;
+        get => _armor;
+        set => _armor = value;
     }
 
     public float EquipLoad
     {
-        get => (MainWeapon.Weight + SideWeapon.Weight + Helm.Weight + ChestArmor.Weight + Gauntlets.Weight + LegArmor.Weight);
+        get => (MainWeapon.Weight + SideWeapon.Weight + Helm.Weight + Armor.Weight);
     }
 
     public float EquippedPhysicalDamage
@@ -63,7 +51,7 @@ public class EquipmentsManager : MonoBehaviour
     }
     public float EquippedPhysicalLifeSteal
     {
-        get => (Gauntlets.PhysicalLifeSteal);
+        get => (MainWeapon.PhysicalLifeSteal);
     }
 
     public float EquippedMagicDamage
@@ -76,21 +64,21 @@ public class EquipmentsManager : MonoBehaviour
     }
     public float EquippedMagicLifeSteal
     {
-        get => (Gauntlets.MagicLifeSteal);
+        get => (MainWeapon.MagicLifeSteal);
     }
 
     public float EquippedPhysicalDefense
     {
-        get => (Helm.PhysicalDefense + ChestArmor.PhysicalDefense + Gauntlets.PhysicalDefense + LegArmor.PhysicalDefense);
+        get => (Helm.PhysicalDefense + Armor.PhysicalDefense);
     }
 
     public float EquippedMagicDefense
     {
-        get => (Helm.MagicDefense + ChestArmor.MagicDefense + Gauntlets.MagicDefense + LegArmor.MagicDefense);
+        get => (Helm.MagicDefense + Armor.MagicDefense);
     }
 
     public float EquippedMoveSpeed
     {
-        get => (LegArmor.MoveSpeed);
+        get => (Armor.MoveSpeed);
     }
 }
