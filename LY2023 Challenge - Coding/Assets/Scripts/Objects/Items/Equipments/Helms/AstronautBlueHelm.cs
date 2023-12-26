@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AstronautBlueHelm", menuName = "Items/Equipments/Helms/Astronaut Blue Helm")]
+[CreateAssetMenu(fileName = "AstronautBlueHelm", menuName = "Items/Equipments/Helms/AstronautBlueHelm")]
 public class AstronautBlueHelm : Helm
 {
     public override string Name
