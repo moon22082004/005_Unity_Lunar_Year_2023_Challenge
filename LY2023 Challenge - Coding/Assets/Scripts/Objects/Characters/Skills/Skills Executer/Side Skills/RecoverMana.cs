@@ -45,7 +45,7 @@ public class RecoverMana : SideSkill
 
     protected override void SetUpEffect()
     {
-        this.PlayerEffect = GameObject.Find("Player/Character/Effects/Side Skills/Recovering Mana");
+        this.PlayerEffect = GameObject.Find("Player/Character/Effects/Side Skills/Recover Mana");
     }
 
     public override IEnumerator Execute(SkillsManager skillsManager, int skillIndex)

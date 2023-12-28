@@ -61,7 +61,7 @@ public class Run : SideSkill
 
     protected override void SetUpEffect()
     {
-        this.PlayerEffect = GameObject.Find("Player/Character/Effects/Side Skills/Running");
+        this.PlayerEffect = GameObject.Find("Player/Character/Effects/Side Skills/Run");
     }
 
     public override IEnumerator Execute(SkillsManager skillsManager, int skillIndex)

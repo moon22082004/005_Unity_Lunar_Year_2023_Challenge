@@ -47,7 +47,7 @@ public class Flicker : SideSkill
 
     protected override void SetUpEffect()
     {
-        this.PlayerEffect = GameObject.Find("Player/Character/Effects/Side Skills/Flicker");
+        this.PlayerEffect = GameObject.Find("Player/Character/Effects/Side Skills/Dust");
     }
 
     public override IEnumerator Execute(SkillsManager skillsManager, int skillIndex)
@@ -69,12 +69,12 @@ public class Flicker : SideSkill
         {
             skillsManager.ResetTimer(skillIndex);
 
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.15f);
 
             this.PlayerEffect.SetActive(true);
 
             LunarMonoBehaviour.Instance.Player.transform.position = mousePos;
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.35f);
 
             this.PlayerEffect.SetActive(false);
         }

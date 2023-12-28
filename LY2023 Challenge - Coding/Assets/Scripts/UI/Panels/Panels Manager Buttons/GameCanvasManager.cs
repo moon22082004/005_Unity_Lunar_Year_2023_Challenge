@@ -3,6 +3,12 @@ using UnityEngine.UI;
 
 public class GameCanvasManager : MonoBehaviour
 {
+    private static GameCanvasManager _instance;
+    public static GameCanvasManager Instance
+    {
+        get => _instance;
+    }
+
     [SerializeField] private GameObject _playerPanel;
     private GameObject PlayerPanel
     {
@@ -50,6 +56,18 @@ public class GameCanvasManager : MonoBehaviour
     // SAVE AND EXIT
     public void SaveAndExit()
     {
+    }
+
+    private void Awake()
+    {
+        if (_instance != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        _instance = this;
+        GameObject.DontDestroyOnLoad(this.gameObject);
     }
 
     private void Update()

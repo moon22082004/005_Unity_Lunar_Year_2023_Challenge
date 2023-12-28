@@ -43,8 +43,8 @@ public class Heal : SideSkill
 
     protected override void SetUpEffect()
     {
-        this.PlayerEffect = GameObject.Find("Player/Character/Effects/Side Skills/Healing");
-        // _healingEffect = Resources.Load("Prefabs/Player/SkillsEffect/SideSkillsEffect/Healing") as GameObject;
+        this.PlayerEffect = GameObject.Find("Player/Character/Effects/Side Skills/Heal");
+        // _healingEffect = Resources.Load("Prefabs/Player/SkillsEffect/SideSkillsEffect/Heal") as GameObject;
     }
 
     public override IEnumerator Execute(SkillsManager skillsManager, int skillIndex)

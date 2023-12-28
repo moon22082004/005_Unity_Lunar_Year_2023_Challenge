@@ -112,6 +112,13 @@ public class LunarMonoBehaviour : MonoBehaviour
 
     private void Awake()
     {
+        if (_instance != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
         _instance = this;
+        GameObject.DontDestroyOnLoad(this.gameObject);
     }
 }

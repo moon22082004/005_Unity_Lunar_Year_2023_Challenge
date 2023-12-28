@@ -19,17 +19,17 @@ public class EffectsManager : MonoBehaviour
 
     // ---------------------------------------------------------------------------------------------------------------
     [Header("Decrease Move Speed")]
-    [SerializeField] private GameObject _weakenEffect;
-    private GameObject WeakenEffect
+    [SerializeField] private GameObject _slowEffect;
+    private GameObject SlowEffect
     {
         get
         {
-            if (_weakenEffect == null)
+            if (_slowEffect == null)
             {
-                _weakenEffect = this.transform.Find("Effects").Find("Weaken").gameObject;
+                _slowEffect = this.transform.Find("Effects").Find("Slow").gameObject;
             }
 
-            return _weakenEffect;
+            return _slowEffect;
         }
     }
 
@@ -41,7 +41,7 @@ public class EffectsManager : MonoBehaviour
     }
     private IEnumerator DecreaseMoveSpeedCoroutine(float value, float time)
     {
-        this.WeakenEffect.SetActive(true);
+        this.SlowEffect.SetActive(true);
         _isDecresedMoveSpeed = true;
 
         float initialValue = this.AttributesManager.BonusMoveSpeed;
@@ -51,7 +51,7 @@ public class EffectsManager : MonoBehaviour
 
         this.AttributesManager.BonusMoveSpeed = initialValue;
         _isDecresedMoveSpeed = false;
-        this.WeakenEffect.SetActive(false);
+        this.SlowEffect.SetActive(false);
     }
 
     // ---------------------------------------------------------------------------------------------------------------
