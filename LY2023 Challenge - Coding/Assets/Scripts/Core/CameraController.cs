@@ -12,7 +12,9 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
-        _targetTransform = GameObject.Find("Player/Character").transform;
+        _targetTransform = (GameObject.Find("Player/Character") != null) ? GameObject.Find("Player/Character").transform : this.transform;
+
+        this.transform.position = _targetTransform.position;
     }
 
     private void Update()

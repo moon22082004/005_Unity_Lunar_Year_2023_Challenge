@@ -132,7 +132,7 @@ public class AttributesManager : MonoBehaviour
         {
             if (!_isLockedMovement)
             {
-                _moveSpeed = 3f;
+                _moveSpeed = 5f;
 
                 // MoveSpeed from equipments (Leg Armor)
                 _moveSpeed += _equipmentsManager.EquippedMoveSpeed;
@@ -144,7 +144,7 @@ public class AttributesManager : MonoBehaviour
                 float equipLoadRate = this.CurrentEquipLoad / this.MaxEquipLoad;
                 if (equipLoadRate > 0.5f)
                 {
-                    _moveSpeed -= Mathf.Min(_moveSpeed / 2, _moveSpeed * equipLoadRate / 2);
+                    _moveSpeed -= Mathf.Min(_moveSpeed / 1.75f, _moveSpeed * equipLoadRate / 1.75f);
                 }
 
                 return _moveSpeed;
