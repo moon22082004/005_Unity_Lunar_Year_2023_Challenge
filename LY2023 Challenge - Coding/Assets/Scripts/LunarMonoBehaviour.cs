@@ -38,16 +38,16 @@ public class LunarMonoBehaviour : MonoBehaviour
         }
     }
 
-    private PlayerMovement _pMovement;
-    private PlayerMovement PlayerMovement
+    private PlayerController _playerController;
+    private PlayerController PlayerController
     {
         get
         {
-            if (_pMovement == null)
+            if (_playerController == null)
             {
-                _pMovement = this.Player.GetComponent<PlayerMovement>();
+                _playerController = this.Player.GetComponent<PlayerController>();
             }
-            return _pMovement;
+            return _playerController;
         }
     }
 
@@ -88,22 +88,22 @@ public class LunarMonoBehaviour : MonoBehaviour
         {
             if (attackVector3.x + attackVector3.y >= 0)
             {
-                this.PlayerMovement.SetSideDirection(1f);
+                this.PlayerController.SetSideDirection(1f);
             }
             else
             {
-                this.PlayerMovement.SetDownDirection();
+                this.PlayerController.SetDownDirection();
             }
         }
         else
         {
             if (attackVector3.x + attackVector3.y <= 0)
             {
-                this.PlayerMovement.SetSideDirection(-1f);
+                this.PlayerController.SetSideDirection(-1f);
             }
             else
             {
-                this.PlayerMovement.SetUpDirection();
+                this.PlayerController.SetUpDirection();
             }
         }
 

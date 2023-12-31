@@ -8,19 +8,19 @@ public abstract class MainSkill : Skill
         get => Resources.Load<Sprite>("Skill Icons/Main Skills/" + this.Name);
     }
 
-    private PlayerMovement _playerMovement;
-    protected PlayerMovement PlayerMovement
+    private PlayerController _playerController;
+    protected PlayerController PlayerController
     {
         get
         {
-            if (_playerMovement == null)
+            if (_playerController == null)
             {
-                _playerMovement = GameObject.Find("Player/Character").GetComponent<PlayerMovement>();
+                _playerController = GameObject.Find("Player/Character").GetComponent<PlayerController>();
             }
 
-            return _playerMovement;
+            return _playerController;
         }
-        set => _playerMovement = value;
+        set => _playerController = value;
     }
 
     public abstract void Update();

@@ -5,17 +5,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Run", menuName = "Skills/Active Skills/Side Skills/Run")]
 public class Run : SideSkill
 {
-    private PlayerMovement _playerMovement;
-    private PlayerMovement PlayerMovement
+    private PlayerController _playerController;
+    private PlayerController PlayerController
     {
         get
         {
-            if (_playerMovement == null)
+            if (_playerController == null)
             {
-                _playerMovement = GameObject.Find("Player/Character").GetComponent < PlayerMovement>();
+                _playerController = GameObject.Find("Player/Character").GetComponent < PlayerController>();
             }
 
-            return _playerMovement;
+            return _playerController;
         }
     }
 
@@ -70,7 +70,7 @@ public class Run : SideSkill
 
         this.PlayerEffect.SetActive(true);
 
-        this.PlayerMovement.IsRun = true;
+        this.PlayerController.IsRun = true;
 
         float bonusValue = this.Values[0];
 
@@ -78,7 +78,7 @@ public class Run : SideSkill
         yield return new WaitForSeconds(8f);
         this.AttributesManager.BonusMoveSpeed -= bonusValue;
 
-        this.PlayerMovement.IsRun = false;
+        this.PlayerController.IsRun = false;
 
         this.PlayerEffect.SetActive(false);
     }

@@ -55,22 +55,22 @@ public class TeleportArrow : BowSkill
 
             skillsManager.ResetTimer(skillIndex);
 
-            this.PlayerMovement.IsAttacked = true;
+            this.PlayerController.IsAttacked = true;
             this.AttributesManager.BonusMoveSpeed -= 2f;
 
             yield return new WaitForSeconds(0.25f);
 
             int index = 0;
-            if ((this.PlayerMovement.Direction == "Down") && (mousePos.y < this.ProjectilesPositions[0].y))
+            if ((this.PlayerController.Direction == "Down") && (mousePos.y < this.ProjectilesPositions[0].y))
             {
                 index = 0;
             }
-            else if ((this.PlayerMovement.Direction == "Up") && (mousePos.y > this.ProjectilesPositions[1].y))
+            else if ((this.PlayerController.Direction == "Up") && (mousePos.y > this.ProjectilesPositions[1].y))
             {
                 index = 1;
             }
-            else if (((this.PlayerMovement.Direction == "Left") && (mousePos.x < this.ProjectilesPositions[2].x)) ||
-                     ((this.PlayerMovement.Direction == "Right") && (mousePos.x > this.ProjectilesPositions[2].x)))
+            else if (((this.PlayerController.Direction == "Left") && (mousePos.x < this.ProjectilesPositions[2].x)) ||
+                     ((this.PlayerController.Direction == "Right") && (mousePos.x > this.ProjectilesPositions[2].x)))
             {
                 index = 2;
             }
@@ -78,7 +78,7 @@ public class TeleportArrow : BowSkill
             this.Arrows[this.InactiveArrowIndex].GetComponent<ArrowBehaviour>().SetUpCommonArrow(this.ProjectilesPositions[index], mousePos, 0, this.ProjectileLifeTime, this.ProjectileSpeed, ArrowType.TeleportArrow, this.AttributesManager.PhysicalDamage * this.Values[0], this.AttributesManager.PhysicalPierce);
 
             yield return new WaitForSeconds(0.05f);
-            this.PlayerMovement.IsAttacked = false;
+            this.PlayerController.IsAttacked = false;
             this.AttributesManager.BonusMoveSpeed += 2f;
         }
     }

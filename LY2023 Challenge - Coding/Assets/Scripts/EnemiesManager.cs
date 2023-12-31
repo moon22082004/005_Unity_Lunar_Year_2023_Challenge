@@ -15,11 +15,6 @@ public class EnemiesManager : MonoBehaviour
         get => _enemies;
     }
 
-    private void Awake()
-    {
-        _instance = this;
-    }
-
     public GameObject GetClosestEnemy(Vector3 targetPos, float maxDistance)
     {
         Transform transformMin = null;
@@ -53,5 +48,17 @@ public class EnemiesManager : MonoBehaviour
         }
 
         return result;
+    }
+
+    private void Awake()
+    {
+        if (_instance != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        _instance = this;
+        GameObject.DontDestroyOnLoad(this.gameObject);
     }
 }

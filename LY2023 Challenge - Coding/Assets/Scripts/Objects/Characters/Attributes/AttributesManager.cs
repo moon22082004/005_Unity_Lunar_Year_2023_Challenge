@@ -144,7 +144,7 @@ public class AttributesManager : MonoBehaviour
                 float equipLoadRate = this.CurrentEquipLoad / this.MaxEquipLoad;
                 if (equipLoadRate > 0.5f)
                 {
-                    _moveSpeed -= Mathf.Min(_moveSpeed / 1.75f, _moveSpeed * equipLoadRate / 1.75f);
+                    _moveSpeed -= Mathf.Min(_moveSpeed / 5f, _moveSpeed * equipLoadRate / 5f);
                 }
 
                 return _moveSpeed;

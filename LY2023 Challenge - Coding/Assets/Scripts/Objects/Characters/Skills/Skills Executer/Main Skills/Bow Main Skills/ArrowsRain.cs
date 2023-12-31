@@ -109,7 +109,7 @@ public class ArrowsRain : BowSkill
             this.EffectCircle.SetActive(true);
             this.EffectCircle.transform.position = _rSkillAreaPos;
 
-            this.PlayerMovement.IsAttacked = true;
+            this.PlayerController.IsAttacked = true;
 
             this.AttributesManager.BonusMoveSpeed -= 2f;
 
@@ -117,7 +117,7 @@ public class ArrowsRain : BowSkill
 
             this.AttributesManager.BonusMoveSpeed += 2f;
 
-            this.PlayerMovement.IsAttacked = false;
+            this.PlayerController.IsAttacked = false;
 
             _isSpawnedRainedArrows = true;
             yield return new WaitForSeconds(this.Values[1]);
