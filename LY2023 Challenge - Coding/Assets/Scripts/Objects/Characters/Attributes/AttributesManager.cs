@@ -3,7 +3,15 @@ using UnityEngine;
 public class AttributesManager : MonoBehaviour
 {
     private EquipmentsManager _equipmentsManager;
+    [Header("Elixir")]
+    [SerializeField] private int _elixir = 0;
+    public int Elixir
+    {
+        get => _elixir;
+        set => _elixir = value;
+    }
 
+    [Header("Attributes")]
     [SerializeField, Range(1, 99)] private int _vigorLevel = 1;
     [SerializeField, Range(1, 99)] private int _mindLevel = 1;
     [SerializeField, Range(1, 99)] private int _enduranceLevel = 1;

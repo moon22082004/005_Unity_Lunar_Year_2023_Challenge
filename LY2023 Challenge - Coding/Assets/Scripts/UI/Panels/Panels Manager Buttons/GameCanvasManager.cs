@@ -9,6 +9,7 @@ public class GameCanvasManager : MonoBehaviour
         get => _instance;
     }
 
+    // PLAYER PANEL
     [SerializeField] private GameObject _playerPanel;
     private GameObject PlayerPanel
     {
@@ -37,7 +38,6 @@ public class GameCanvasManager : MonoBehaviour
         }
     }
 
-    // PLAYER PANEL
     public void SetActivePlayerPanel(bool value)
     {
         this.PlayerPanel.SetActive(value);
@@ -51,6 +51,21 @@ public class GameCanvasManager : MonoBehaviour
         {
             Time.timeScale = 1;
         }    
+    }
+
+    // GENERAL PANEL
+    [SerializeField] private GameObject _generalPanel;
+    public GameObject GeneralPanel
+    {
+        get
+        {
+            if (_generalPanel == null)
+            {
+                _generalPanel = GameObject.Find("Game Canvas/Panels/General Panel");
+            }
+
+            return _generalPanel;
+        }
     }
 
     // SAVE AND EXIT

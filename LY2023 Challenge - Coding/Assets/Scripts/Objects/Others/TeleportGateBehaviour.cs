@@ -48,6 +48,8 @@ public class TeleportGateBehaviour : MonoBehaviour
         }
     }
 
+    [SerializeField] private SceneEnumerator _teleportingScene;
+
     private void Awake()
     {
         _isReadyToTeleport = false;
@@ -64,7 +66,7 @@ public class TeleportGateBehaviour : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                this.ScenesController.LoadFirstRoom();
+                this.ScenesController.LoadOptionalScene((int)_teleportingScene);
             }
         }
     }
