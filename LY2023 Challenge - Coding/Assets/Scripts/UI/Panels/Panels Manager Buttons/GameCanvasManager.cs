@@ -68,6 +68,20 @@ public class GameCanvasManager : MonoBehaviour
         }
     }
 
+    public void SetActiveGeneralPanel(bool value)
+    {
+        this.GeneralPanel.SetActive(value);
+
+        if (value)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
+
     // SAVE AND EXIT
     public void SaveAndExit()
     {
@@ -97,9 +111,13 @@ public class GameCanvasManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (this.PlayerPanel.activeInHierarchy)
+            if (!this.GeneralPanel.activeInHierarchy)
             {
-                this.SetActivePlayerPanel(false);
+                this.SetActiveGeneralPanel(true);
+            }
+            else 
+            { 
+                this.SetActiveGeneralPanel(false);
             }
         }
     }
