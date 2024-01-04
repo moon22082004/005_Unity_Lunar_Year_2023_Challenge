@@ -1,71 +1,87 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DetailedAttributesPanel : MonoBehaviour
 {
-    private AttributesManager PlayerAttributes => LunarMonoBehaviour.Instance.Player.GetComponent<AttributesManager>();
-
-    [SerializeField] private List<TextMeshProUGUI> _hPValues;
-    private List<TextMeshProUGUI> HPValues
+    [SerializeField] private GameObject _firstPageUIGameObject;
+    private GameObject FirstPageUIGameObject
     {
         get
         {
-            if (_hPValues.Count < 2)
+            if (_firstPageUIGameObject == null)
             {
-                _hPValues = new List<TextMeshProUGUI>();
-
-                _hPValues.Add(this.transform.GetChild(0).GetChild(0).GetChild(3).GetComponent<TextMeshProUGUI>());
-                _hPValues.Add(this.transform.GetChild(0).GetChild(0).GetChild(4).GetComponent<TextMeshProUGUI>());
+                _firstPageUIGameObject = this.transform.GetChild(0).gameObject;
             }
 
-            return _hPValues;
+            return _firstPageUIGameObject;
         }
     }
 
-    [SerializeField] private List<TextMeshProUGUI> _fPValues;
-    private List<TextMeshProUGUI> FPValues
+    [SerializeField] private GameObject _secondPageUIGameObject;
+    private GameObject SecondPageUIGameObject
     {
         get
         {
-            if (_fPValues.Count < 2)
+            if (_secondPageUIGameObject == null)
             {
-                _fPValues = new List<TextMeshProUGUI>();
-
-                _fPValues.Add(this.transform.GetChild(0).GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>());
-                _fPValues.Add(this.transform.GetChild(0).GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>());
+                _secondPageUIGameObject = this.transform.GetChild(1).gameObject;
             }
 
-            return _fPValues;
+            return _secondPageUIGameObject;
         }
     }
 
-    [SerializeField] private List<TextMeshProUGUI> _equipedLoadValues;
-    private List<TextMeshProUGUI> EquipedLoadValues
+    [SerializeField] private GameObject _previousPageButtonUIGameObject;
+    private GameObject PreviousPageButtonUIGameObject
     {
         get
         {
-            if (_equipedLoadValues.Count < 2)
+            if (_previousPageButtonUIGameObject == null)
             {
-                _equipedLoadValues = new List<TextMeshProUGUI>();
-
-                _equipedLoadValues.Add(this.transform.GetChild(0).GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>());
-                _equipedLoadValues.Add(this.transform.GetChild(0).GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>());
+                _previousPageButtonUIGameObject = this.transform.GetChild(2).gameObject;
             }
 
-            return _equipedLoadValues;
+            return _previousPageButtonUIGameObject;
         }
     }
 
-    private void Update()
+    public void ChangeToNextPage()
     {
-        this.HPValues[0].text = this.PlayerAttributes.CurrentHP.ToString();
-        this.HPValues[1].text = this.PlayerAttributes.MaxHP.ToString();
+        this.NextPageButtonUIGameObject.GetComponent<Button>().interactable = false;
+        this.PreviousPageButtonUIGameObject.GetComponent<Button>().interactable = true;
 
-        this.FPValues[0].text = this.PlayerAttributes.CurrentFP.ToString();
-        this.FPValues[1].text = this.PlayerAttributes.MaxFP.ToString();
+        this.FirstPageUIGameObject.SetActive(false);
+        this.SecondPageUIGameObject.SetActive(true);
+    }
 
-        this.EquipedLoadValues[0].text = this.PlayerAttributes.CurrentEquipLoad.ToString();
-        this.EquipedLoadValues[1].text = this.PlayerAttributes.MaxEquipLoad.ToString();
+    public void ChangeToPreviousPage()
+    {
+        this.NextPageButtonUIGameObject.GetComponent<Button>().interactable = true;
+        this.PreviousPageButtonUIGameObject.GetComponent<Button>().interactable = false;
+
+        this.FirstPageUIGameObject.SetActive(true);
+        this.SecondPageUIGameObject.SetActive(false);
+    }
+
+    [SerializeField] private GameObject _nextPageButtonUIGameObject;
+    private GameObject NextPageButtonUIGameObject
+    {
+        get
+        {
+            if (_nextPageButtonUIGameObject == null)
+            {
+                _nextPageButtonUIGameObject = this.transform.GetChild(3).gameObject;
+            }
+
+            return _nextPageButtonUIGameObject;
+        }
+    }
+
+    private void Awake()
+    {
+        // Set up Pages
+        this.ChangeToPreviousPage();
     }
 }
