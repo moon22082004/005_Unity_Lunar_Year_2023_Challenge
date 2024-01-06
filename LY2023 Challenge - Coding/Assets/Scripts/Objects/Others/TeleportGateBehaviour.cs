@@ -1,38 +1,7 @@
 using UnityEngine;
 
-public class TeleportGateBehaviour : MonoBehaviour
+public class TeleportGateBehaviour : InteractableObjectBehaviour
 {
-    [SerializeField] private PolygonCollider2D _polygonCollider;
-    private PolygonCollider2D PolygonCollider2D
-    { 
-        get 
-        { 
-            if (_polygonCollider == null)
-            {
-                _polygonCollider = GetComponent<PolygonCollider2D>();
-            }
-
-            return _polygonCollider; 
-        }
-    }
-
-    [SerializeField] private GameObject _teleportInstruction;
-    private GameObject TeleportInstruction
-    {
-        get 
-        { 
-            if (_teleportInstruction == null)
-            {
-                _teleportInstruction = this.gameObject.transform.GetChild(0).GetChild(0).gameObject;
-            }
-
-            return _teleportInstruction;
-        }
-    }
-
-    [SerializeField] private bool _isReadyToTeleport;
-    [SerializeField] private Vector3 _teleportInstructionOffset;
-
     [Header("Scenes Controller")]
     [SerializeField] private ScenesController _scenesController;
     public ScenesController ScenesController
@@ -52,38 +21,22 @@ public class TeleportGateBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        _isReadyToTeleport = false;
+        this.IsReadyToInteract = false;
 
-        this.TeleportInstruction.transform.position = Camera.main.WorldToScreenPoint(this.transform.position + _teleportInstructionOffset);
+        this.Instruction.transform.position = Camera.main.WorldToScreenPoint(this.transform.position + this.InstructionOffset);
     }
 
     private void Update() 
     {
-        this.TeleportInstruction.SetActive(_isReadyToTeleport);
-        this.TeleportInstruction.transform.position = Camera.main.WorldToScreenPoint(this.transform.position + _teleportInstructionOffset);
+        this.Instruction.SetActive(this.IsReadyToInteract);
+        this.Instruction.transform.position = Camera.main.WorldToScreenPoint(this.transform.position + this.InstructionOffset);
 
-        if (_isReadyToTeleport)
+        if (this.IsReadyToInteract)
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 this.ScenesController.LoadOptionalScene((int)_teleportingScene);
             }
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            _isReadyToTeleport = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            _isReadyToTeleport = false;
         }
     }
 }
