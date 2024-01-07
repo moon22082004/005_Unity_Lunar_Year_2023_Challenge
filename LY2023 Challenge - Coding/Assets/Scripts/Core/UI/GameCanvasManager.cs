@@ -61,7 +61,7 @@ public class GameCanvasManager : MonoBehaviour
         {
             if (_generalPanel == null)
             {
-                _generalPanel = GameObject.Find("Game Canvas/Panels/General Panel");
+                _generalPanel = GameObject.Find("Game Canvas/Panels/Inspection Panel");
             }
 
             return _generalPanel;

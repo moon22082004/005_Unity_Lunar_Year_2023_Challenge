@@ -9,7 +9,7 @@ public class MagicFormationBehaviour : InteractableObjectBehaviour
         {
             if (_mainPanel == null)
             {
-                _mainPanel = GameObject.Find("Game Canvas/Panels/Main Panel");
+                _mainPanel = GameObject.Find("Game Canvas/Panels/Magic Formation Panel");
             }
 
             return _mainPanel;
