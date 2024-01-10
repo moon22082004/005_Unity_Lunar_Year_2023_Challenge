@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AttributesPanel : MonoBehaviour
+public class InspectionPanelAttributesPage : MonoBehaviour
 {
     [SerializeField] private bool _isShowedGeneralAttributes;
 

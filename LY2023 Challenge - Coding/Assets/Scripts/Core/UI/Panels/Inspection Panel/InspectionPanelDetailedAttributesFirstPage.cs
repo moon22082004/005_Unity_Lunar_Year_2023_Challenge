@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DetailedAttributesFirstPage : MonoBehaviour
+public class InspectionPanelDetailedAttributesFirstPage : MonoBehaviour
 {
     private AttributesManager PlayerAttributes => LunarMonoBehaviour.Instance.Player.GetComponent<AttributesManager>();
 

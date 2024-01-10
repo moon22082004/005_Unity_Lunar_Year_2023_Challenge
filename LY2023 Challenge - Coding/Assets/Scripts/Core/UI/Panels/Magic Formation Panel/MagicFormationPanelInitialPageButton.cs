@@ -1,8 +1,7 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MagicFormationInitialPageButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class MagicFormationPanelInitialPageButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject _hoverEffect;
     private GameObject HoverEffect

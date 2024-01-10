@@ -1,9 +1,7 @@
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DetailedAttributesPanel : MonoBehaviour
+public class InspectionPanelDetailedAttributesPages : MonoBehaviour
 {
     [SerializeField] private GameObject _firstPageUIGameObject;
     private GameObject FirstPageUIGameObject
