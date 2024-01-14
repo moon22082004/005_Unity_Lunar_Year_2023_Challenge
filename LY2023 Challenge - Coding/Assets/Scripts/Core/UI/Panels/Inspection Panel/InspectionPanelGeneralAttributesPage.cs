@@ -118,7 +118,7 @@ public class InspectionPanelGeneralAttributesPage : MonoBehaviour
         {
             if (_elixirUIGameObject == null)
             {
-                _elixirUIGameObject = this.transform.GetChild(1).GetChild(7).gameObject;
+                _elixirUIGameObject = this.transform.GetChild(1).gameObject;
             }
             return _elixirUIGameObject;
         }
@@ -162,68 +162,14 @@ public class InspectionPanelGeneralAttributesPage : MonoBehaviour
         this.GetElixirValue();
     }
 
-    public void UpdateTemporaryVigorAttributes(int levelValue)
+    public void UpdateTemporaryGeneralAttribute(GameObject attributeUIGameObject, int levelValue)
     {
-        this.GetGeneralAttribute(this.VigorUIGameObject, levelValue);
+        this.GetGeneralAttribute(attributeUIGameObject, levelValue);
 
-        TextMeshProUGUI vigorAttributeLevelText = this.VigorUIGameObject.transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
-        vigorAttributeLevelText.color = Color.green;
-        vigorAttributeLevelText.fontSize = 16;
-    }
-
-    public void UpdateTemporaryMindAttributes(int levelValue)
-    {
-        this.GetGeneralAttribute(this.MindUIGameObject, levelValue);
-
-        TextMeshProUGUI mindAttributeLevelText = this.MindUIGameObject.transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
-        mindAttributeLevelText.color = Color.blue;
-        mindAttributeLevelText.fontSize = 16;
-    }
-
-    public void UpdateTemporaryEnduranceAttributes(int levelValue)
-    {
-        this.GetGeneralAttribute(this.EnduranceUIGameObject, levelValue);
-
-        TextMeshProUGUI enduranceAttributeLevelText = this.EnduranceUIGameObject.transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
-        enduranceAttributeLevelText.color = Color.red;
-        enduranceAttributeLevelText.fontSize = 16;
-    }
-
-    public void UpdateTemporaryStrengthAttributes(int levelValue)
-    {
-        this.GetGeneralAttribute(this.StrengthUIGameObject, levelValue);
-
-        TextMeshProUGUI strengthAttributeLevelText = this.StrengthUIGameObject.transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
-        strengthAttributeLevelText.color = new Color(1f, 0.749f, 0f, 1f);
-        strengthAttributeLevelText.fontSize = 16;
-    }
-
-    public void UpdateTemporaryDexterityAttributes(int levelValue)
-    {
-        this.GetGeneralAttribute(this.DexterityUIGameObject, levelValue);
-
-        TextMeshProUGUI dexterityAttributeLevelText = this.DexterityUIGameObject.transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
-        dexterityAttributeLevelText.color = Color.yellow;
-        dexterityAttributeLevelText.fontSize = 16;
-    }
-
-    public void UpdateTemporaryIntelligenceAttributes(int levelValue)
-    {
-        this.GetGeneralAttribute(this.IntelligenceUIGameObject, levelValue);
-
-        TextMeshProUGUI intelligenceAttributeLevelText = this.IntelligenceUIGameObject.transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
-        intelligenceAttributeLevelText.color = new Color(1f, 0.647f, 0f, 1f);
-        intelligenceAttributeLevelText.fontSize = 16;
-    }
-
-    public void UpdateTemporaryFaithAttributes(int levelValue)
-    {
-        this.GetGeneralAttribute(this.FaithUIGameObject, levelValue);
-
-        TextMeshProUGUI faithAttributeLevelText = this.FaithUIGameObject.transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
-        faithAttributeLevelText.color = new Color(1f, 0.24f, 0.79f, 1f);
-        faithAttributeLevelText.fontSize = 16;
-    }
+        TextMeshProUGUI attributeLevelText = attributeUIGameObject.transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
+        attributeLevelText.color = Color.green;
+        attributeLevelText.fontSize = 16;
+    }    
 
     public void UpdateTemporaryElixirValue(int temporaryElixirValue)
     {

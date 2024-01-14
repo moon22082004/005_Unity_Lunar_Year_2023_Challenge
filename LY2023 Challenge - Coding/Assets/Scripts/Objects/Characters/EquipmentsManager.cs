@@ -41,43 +41,43 @@ public class EquipmentsManager : MonoBehaviour
         get => (MainWeapon.Weight + SideWeapon.Weight + Helm.Weight + Armor.Weight);
     }
 
-    public float EquippedPhysicalDamage
+    public float EquipPhysicalDamage
     {
         get => (MainWeapon.PhysicalDamage);
     }
-    public float EquippedPhysicalPierce
+    public float EquipPhysicalPierce
     {
         get => (MainWeapon.PhysicalPierce);
     }
-    public float EquippedPhysicalLifeSteal
+    public float EquipPhysicalLifeSteal
     {
         get => (MainWeapon.PhysicalLifeSteal);
     }
 
-    public float EquippedMagicDamage
+    public float EquipMagicDamage
     {
         get => (MainWeapon.MagicDamage);
     }
-    public float EquippedMagicPierce
+    public float EquipMagicPierce
     {
         get => (MainWeapon.MagicPierce);
     }
-    public float EquippedMagicLifeSteal
+    public float EquipMagicLifeSteal
     {
         get => (MainWeapon.MagicLifeSteal);
     }
 
-    public float EquippedPhysicalDefense
+    public float EquipPhysicalDefense
     {
         get => (Helm.PhysicalDefense + Armor.PhysicalDefense);
     }
 
-    public float EquippedMagicDefense
+    public float EquipMagicDefense
     {
         get => (Helm.MagicDefense + Armor.MagicDefense);
     }
 
-    public float EquippedMoveSpeed
+    public float EquipMoveSpeed
     {
         get => (Armor.MoveSpeed);
     }

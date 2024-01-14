@@ -3,6 +3,19 @@ using UnityEngine;
 public class AttributesManager : MonoBehaviour
 {
     private EquipmentsManager _equipmentsManager;
+    private EquipmentsManager EquipmentsManager
+    {
+        get 
+        { 
+            if (_equipmentsManager == null)
+            {
+                _equipmentsManager = GetComponent<EquipmentsManager>();
+            }
+
+            return _equipmentsManager;
+        }
+    }
+
     [Header("Elixir")]
     [SerializeField] private int _elixir = 0;
     public int Elixir
@@ -140,22 +153,7 @@ public class AttributesManager : MonoBehaviour
         {
             if (!_isLockedMovement)
             {
-                _moveSpeed = 5f;
-
-                // MoveSpeed from equipments (Leg Armor)
-                _moveSpeed += _equipmentsManager.EquippedMoveSpeed;
-
-                // Other Bonus MoveSpeed
-                _moveSpeed = Mathf.Max(0.001f, _moveSpeed + this.BonusMoveSpeed);
-
-                // Final MoveSpeed after equip load considering
-                float equipLoadRate = this.CurrentEquipLoad / this.MaxEquipLoad;
-                if (equipLoadRate > 0.5f)
-                {
-                    _moveSpeed -= Mathf.Min(_moveSpeed / 5f, _moveSpeed * equipLoadRate / 5f);
-                }
-
-                return _moveSpeed;
+                return AttributesCalculator.BaseMoveSpeed(this.EquipmentsManager.EquipMoveSpeed, this.BonusMoveSpeed, (this.CurrentEquipLoad / this.MaxEquipLoad));
             }
             else
             {
@@ -186,30 +184,30 @@ public class AttributesManager : MonoBehaviour
             return _maxEquipLoad;
         }
     }
-    public float CurrentEquipLoad => _equipmentsManager.EquipLoad;
+    public float CurrentEquipLoad => this.EquipmentsManager.EquipLoad;
 
     // ---------------------------------------------------------------------------------------------------------------
     [Header("Defense")]
     [SerializeField] private float _physicalDefense;
     [SerializeField] private float _magicDefense;
     public float BasePhysicalDefense => AttributesCalculator.BasePhysicalDefense(this.Endurance, this.Strength);
-    public float EquippedPhysicalDefense => _equipmentsManager.EquippedPhysicalDefense;
+    public float EquipPhysicalDefense => this.EquipmentsManager.EquipPhysicalDefense;
     public float PhysicalDefense
     {
         get
         {
-            _physicalDefense = this.BasePhysicalDefense + this.EquippedPhysicalDefense;
+            _physicalDefense = this.BasePhysicalDefense + this.EquipPhysicalDefense;
 
             return _physicalDefense;
         }
     }
     public float BaseMagicDefense => AttributesCalculator.BaseMagicDefense(this.Endurance, this.Intelligence);
-    public float EquippedMagicDefense => _equipmentsManager.EquippedMagicDefense;
+    public float EquipMagicDefense => this.EquipmentsManager.EquipMagicDefense;
     public float MagicDefense
     {
         get
         {
-            _magicDefense = this.BaseMagicDefense + this.EquippedMagicDefense;
+            _magicDefense = this.BaseMagicDefense + this.EquipMagicDefense;
 
             return _magicDefense;
         }
@@ -234,34 +232,34 @@ public class AttributesManager : MonoBehaviour
     [SerializeField] private float _physicalPierce;
     [SerializeField] private float _physicalLifeSteal;
     public float BasePhysicalDamage => AttributesCalculator.BasePhysicalDamage(this.Strength);
-    public float EquippedPhysicalDamage => _equipmentsManager.EquippedPhysicalDamage;
+    public float EquipPhysicalDamage => this.EquipmentsManager.EquipPhysicalDamage;
     public float PhysicalDamage
     {
         get
         {
-            _physicalDamage = this.BasePhysicalDamage + this.EquippedPhysicalDamage;
+            _physicalDamage = this.BasePhysicalDamage + this.EquipPhysicalDamage;
 
             return _physicalDamage;
         }
     }
     public float BasePhysicalPierce => AttributesCalculator.BasePhysicalPierce(this.Dexterity);
-    public float EquippedPhysicalPierce => _equipmentsManager.EquippedPhysicalPierce;
+    public float EquipPhysicalPierce => this.EquipmentsManager.EquipPhysicalPierce;
     public float PhysicalPierce
     {
         get
         {
-            _physicalPierce = this.BasePhysicalPierce + this.EquippedPhysicalPierce;
+            _physicalPierce = this.BasePhysicalPierce + this.EquipPhysicalPierce;
 
             return _physicalPierce;
         }
     }
     public float BasePhysicalLifeSteal => AttributesCalculator.BasePhysicalLifeSteal(this.Arcane, this.Dexterity);
-    public float EquippedPhysicalLifeSteal => _equipmentsManager.EquippedPhysicalLifeSteal;
+    public float EquipPhysicalLifeSteal => this.EquipmentsManager.EquipPhysicalLifeSteal;
     public float PhysicalLifeSteal
     {
         get
         {
-            _physicalLifeSteal = this.BasePhysicalLifeSteal + this.EquippedPhysicalLifeSteal;
+            _physicalLifeSteal = this.BasePhysicalLifeSteal + this.EquipPhysicalLifeSteal;
 
             return _physicalLifeSteal;
         }
@@ -273,34 +271,34 @@ public class AttributesManager : MonoBehaviour
     [SerializeField] private float _magicPierce;
     [SerializeField] private float _magicLifeSteal;
     public float BaseMagicDamage => AttributesCalculator.BaseMagicDamage(this.Intelligence);
-    public float EquippedMagicDamage => _equipmentsManager.EquippedMagicDamage;
+    public float EquipMagicDamage => this.EquipmentsManager.EquipMagicDamage;
     public float MagicDamage
     {
         get
         {
-            _magicDamage = this.BaseMagicDamage + this.EquippedMagicDamage;
+            _magicDamage = this.BaseMagicDamage + this.EquipMagicDamage;
 
             return _magicDamage;
         }
     }
     public float BaseMagicPierce => AttributesCalculator.BaseMagicPierce(this.Faith);
-    public float EquippedMagicPierce => _equipmentsManager.EquippedMagicPierce;
+    public float EquipMagicPierce => this.EquipmentsManager.EquipMagicPierce;
     public float MagicPierce
     {
         get
         {
-            _magicPierce = this.BaseMagicPierce + this.EquippedMagicPierce;
+            _magicPierce = this.BaseMagicPierce + this.EquipMagicPierce;
 
             return _magicPierce;
         }
     }
     public float BaseMagicLifeSteal => AttributesCalculator.BaseMagicLifeSteal(this.Arcane, this.Faith);
-    public float EquippedMagicLifeSteal => _equipmentsManager.EquippedMagicLifeSteal;
+    public float EquipMagicLifeSteal => this.EquipmentsManager.EquipMagicLifeSteal;
     public float MagicLifeSteal
     {
         get
         {
-            _magicLifeSteal = this.BaseMagicLifeSteal + this.EquippedMagicLifeSteal; 
+            _magicLifeSteal = this.BaseMagicLifeSteal + this.EquipMagicLifeSteal; 
             
             return _magicLifeSteal;
         }
@@ -308,8 +306,6 @@ public class AttributesManager : MonoBehaviour
 
     private void Start()
     {
-        _equipmentsManager = GetComponent<EquipmentsManager>();
-
         this.Respawn();
     }
 

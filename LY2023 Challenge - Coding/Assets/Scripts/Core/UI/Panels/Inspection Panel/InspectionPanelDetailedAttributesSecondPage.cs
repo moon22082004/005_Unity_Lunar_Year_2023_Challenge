@@ -145,27 +145,27 @@ public class InspectionPanelDetailedAttributesSecondPage : MonoBehaviour
     private void OnEnable()
     {
         this.PhysicalDefenseValues[0].text = this.PlayerAttributes.BasePhysicalDefense.ToString();
-        this.PhysicalDefenseValues[1].text = this.PlayerAttributes.EquippedPhysicalDefense.ToString();
+        this.PhysicalDefenseValues[1].text = this.PlayerAttributes.EquipPhysicalDefense.ToString();
 
         this.MagicDefenseValues[0].text = this.PlayerAttributes.BaseMagicDefense.ToString();
-        this.MagicDefenseValues[1].text = this.PlayerAttributes.EquippedMagicDefense.ToString();
+        this.MagicDefenseValues[1].text = this.PlayerAttributes.EquipMagicDefense.ToString();
 
         this.PhysicalDamageValues[0].text = this.PlayerAttributes.BasePhysicalDamage.ToString();
-        this.PhysicalDamageValues[1].text = this.PlayerAttributes.EquippedPhysicalDamage.ToString();
+        this.PhysicalDamageValues[1].text = this.PlayerAttributes.EquipPhysicalDamage.ToString();
 
         this.PhysicalPierceValues[0].text = this.PlayerAttributes.BasePhysicalPierce.ToString();
-        this.PhysicalPierceValues[1].text = this.PlayerAttributes.EquippedPhysicalPierce.ToString();
+        this.PhysicalPierceValues[1].text = this.PlayerAttributes.EquipPhysicalPierce.ToString();
 
         this.PhysicalLifeStealValues[0].text = this.PlayerAttributes.BasePhysicalLifeSteal.ToString();
-        this.PhysicalLifeStealValues[1].text = this.PlayerAttributes.EquippedPhysicalLifeSteal.ToString();
+        this.PhysicalLifeStealValues[1].text = this.PlayerAttributes.EquipPhysicalLifeSteal.ToString();
 
         this.MagicDamageValues[0].text = this.PlayerAttributes.BaseMagicDamage.ToString();
-        this.MagicDamageValues[1].text = this.PlayerAttributes.EquippedMagicDamage.ToString();
+        this.MagicDamageValues[1].text = this.PlayerAttributes.EquipMagicDamage.ToString();
 
         this.MagicPierceValues[0].text = this.PlayerAttributes.BaseMagicPierce.ToString();
-        this.MagicPierceValues[1].text = this.PlayerAttributes.EquippedMagicPierce.ToString();
+        this.MagicPierceValues[1].text = this.PlayerAttributes.EquipMagicPierce.ToString();
 
         this.MagicLifeStealValues[0].text = this.PlayerAttributes.BaseMagicLifeSteal.ToString();
-        this.MagicLifeStealValues[1].text = this.PlayerAttributes.EquippedMagicLifeSteal.ToString();
+        this.MagicLifeStealValues[1].text = this.PlayerAttributes.EquipMagicLifeSteal.ToString();
     }
 }

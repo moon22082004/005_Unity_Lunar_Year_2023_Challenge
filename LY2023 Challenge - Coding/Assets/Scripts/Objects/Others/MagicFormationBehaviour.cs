@@ -44,7 +44,7 @@ public class MagicFormationBehaviour : InteractableObjectBehaviour
 
         if (this.IsReadyToInteract)
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if ((Input.GetKeyDown(KeyCode.Return)) && (!GameCanvasManager.Instance.InspectionPanel.activeInHierarchy))
             {
                 if (!this.MainPanel.activeInHierarchy)
                 {

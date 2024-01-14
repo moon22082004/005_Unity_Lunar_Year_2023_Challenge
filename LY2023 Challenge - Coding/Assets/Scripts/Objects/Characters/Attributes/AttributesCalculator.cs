@@ -154,6 +154,25 @@ public static class AttributesCalculator
 
         return value;
     }
+
+    public static float BaseMoveSpeed(float equipMoveSpeed, float bonusMoveSpeed, float equipLoadRate)
+    {
+        float value = 5f;
+
+        // MoveSpeed from equipments (Leg Armor)
+        value += equipMoveSpeed;
+
+        // Other Bonus MoveSpeed
+        value = Mathf.Max(0.001f, value + bonusMoveSpeed);
+
+        // Final MoveSpeed after equip load considering
+        if (equipLoadRate > 0.5f)
+        {
+                value -= Mathf.Min(value / 5f, value * equipLoadRate / 5f);
+        }
+
+        return value;
+    }
     public static float BaseAttackSpeed(float arcaneLevel)
     {
         float value = 0;

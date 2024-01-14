@@ -53,24 +53,24 @@ public class GameCanvasManager : MonoBehaviour
         }    
     }
 
-    // GENERAL PANEL
-    [SerializeField] private GameObject _generalPanel;
-    public GameObject GeneralPanel
+    // INSPECTION PANEL
+    [SerializeField] private GameObject _inspectionPanel;
+    public GameObject InspectionPanel
     {
         get
         {
-            if (_generalPanel == null)
+            if (_inspectionPanel == null)
             {
-                _generalPanel = GameObject.Find("Game Canvas/Panels/Inspection Panel");
+                _inspectionPanel = GameObject.Find("Game Canvas/Panels/Inspection Panel");
             }
 
-            return _generalPanel;
+            return _inspectionPanel;
         }
     }
 
-    public void SetActiveGeneralPanel(bool value)
+    public void SetActiveInspectionPanel(bool value)
     {
-        this.GeneralPanel.SetActive(value);
+        this.InspectionPanel.SetActive(value);
 
         if (value)
         {
@@ -79,6 +79,21 @@ public class GameCanvasManager : MonoBehaviour
         else
         {
             Time.timeScale = 1;
+        }
+    }
+
+    // MAGIC FORMATION
+    [SerializeField] private GameObject _magicFormationPanel;
+    public GameObject MagicFormationPanel
+    {
+        get
+        {
+            if (_magicFormationPanel == null)
+            {
+                _magicFormationPanel = GameObject.Find("Game Canvas/Panels/Magic Formation Panel");
+            }
+
+            return _magicFormationPanel;
         }
     }
 
@@ -109,15 +124,15 @@ public class GameCanvasManager : MonoBehaviour
                 this.PlayerPanel.GetComponent<PlayerPanelManager>().PanelPage = PlayerPanelContent.Inventory;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Escape))
+        else if ((Input.GetKeyDown(KeyCode.Escape)) && (!this.MagicFormationPanel.activeInHierarchy))
         {
-            if (!this.GeneralPanel.activeInHierarchy)
+            if (!this.InspectionPanel.activeInHierarchy)
             {
-                this.SetActiveGeneralPanel(true);
+                this.SetActiveInspectionPanel(true);
             }
             else 
             { 
-                this.SetActiveGeneralPanel(false);
+                this.SetActiveInspectionPanel(false);
             }
         }
     }

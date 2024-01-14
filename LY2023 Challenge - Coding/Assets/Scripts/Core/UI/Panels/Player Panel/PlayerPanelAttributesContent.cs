@@ -385,28 +385,28 @@ public class PlayerPanelAttributesContent : MonoBehaviour
         this.AttackSpeedValue.text = _playerAttributes.AttackSpeed.ToString();
 
         this.PhysicalDefenseValues[0].text = _playerAttributes.BasePhysicalDefense.ToString();
-        this.PhysicalDefenseValues[1].text = _playerAttributes.EquippedPhysicalDefense.ToString();
+        this.PhysicalDefenseValues[1].text = _playerAttributes.EquipPhysicalDefense.ToString();
 
         this.MagicDefenseValues[0].text = _playerAttributes.BaseMagicDefense.ToString();
-        this.MagicDefenseValues[1].text = _playerAttributes.EquippedMagicDefense.ToString();
+        this.MagicDefenseValues[1].text = _playerAttributes.EquipMagicDefense.ToString();
 
         this.PhysicalDamageValues[0].text = _playerAttributes.BasePhysicalDamage.ToString();
-        this.PhysicalDamageValues[1].text = _playerAttributes.EquippedPhysicalDamage.ToString();
+        this.PhysicalDamageValues[1].text = _playerAttributes.EquipPhysicalDamage.ToString();
 
         this.PhysicalPierceValues[0].text = _playerAttributes.BasePhysicalPierce.ToString();
-        this.PhysicalPierceValues[1].text = _playerAttributes.EquippedPhysicalPierce.ToString();
+        this.PhysicalPierceValues[1].text = _playerAttributes.EquipPhysicalPierce.ToString();
 
         this.PhysicalLifeStealValues[0].text = _playerAttributes.BasePhysicalLifeSteal.ToString();
-        this.PhysicalLifeStealValues[1].text = _playerAttributes.EquippedPhysicalLifeSteal.ToString();
+        this.PhysicalLifeStealValues[1].text = _playerAttributes.EquipPhysicalLifeSteal.ToString();
 
         this.MagicDamageValues[0].text = _playerAttributes.BaseMagicDamage.ToString();
-        this.MagicDamageValues[1].text = _playerAttributes.EquippedMagicDamage.ToString();
+        this.MagicDamageValues[1].text = _playerAttributes.EquipMagicDamage.ToString();
 
         this.MagicPierceValues[0].text = _playerAttributes.BaseMagicPierce.ToString();
-        this.MagicPierceValues[1].text = _playerAttributes.EquippedMagicPierce.ToString();
+        this.MagicPierceValues[1].text = _playerAttributes.EquipMagicPierce.ToString();
 
         this.MagicLifeStealValues[0].text = _playerAttributes.BaseMagicLifeSteal.ToString();
-        this.MagicLifeStealValues[1].text = _playerAttributes.EquippedMagicLifeSteal.ToString();
+        this.MagicLifeStealValues[1].text = _playerAttributes.EquipMagicLifeSteal.ToString();
         #endregion
 
         #region Set All Level Values Display

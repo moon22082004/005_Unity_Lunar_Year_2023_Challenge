@@ -19,36 +19,50 @@ public class MagicFormationPanelAttributesUpgradePageGeneralSection : MonoBehavi
         }
     }
 
+    [SerializeField] MagicFormationPanelAttributesUpgradePageDetailedSection _detailedSection;
+    public MagicFormationPanelAttributesUpgradePageDetailedSection DetailedSection
+    {
+        get
+        {
+            if (_detailedSection == null)
+            {
+                _detailedSection = this.transform.parent.GetChild(2).GetComponent<MagicFormationPanelAttributesUpgradePageDetailedSection>();
+            }
+
+            return _detailedSection;
+        }
+    }
+
     [SerializeField] private int _vigorTemporaryLevelOffset;
-    private int VigorTemporaryLevel => this.PlayerAttributes.Vigor + _vigorTemporaryLevelOffset;
+    public int VigorTemporaryLevel => this.PlayerAttributes.Vigor + _vigorTemporaryLevelOffset;
     private Button VigorUpgradeButton => this.GeneralAttributes.VigorUIGameObject.transform.GetChild(4).GetComponent<Button>();
 
     [SerializeField] private int _mindTemporaryLevelOffset;
-    private int MindTemporaryLevel => this.PlayerAttributes.Mind + _mindTemporaryLevelOffset;
+    public int MindTemporaryLevel => this.PlayerAttributes.Mind + _mindTemporaryLevelOffset;
     private Button MindUpgradeButton => this.GeneralAttributes.MindUIGameObject.transform.GetChild(4).GetComponent<Button>();
 
     [SerializeField] private int _enduranceTemporaryLevelOffset;
-    private int EnduranceTemporaryLevel => this.PlayerAttributes.Endurance + _enduranceTemporaryLevelOffset;
+    public int EnduranceTemporaryLevel => this.PlayerAttributes.Endurance + _enduranceTemporaryLevelOffset;
     private Button EnduranceUpgradeButton => this.GeneralAttributes.EnduranceUIGameObject.transform.GetChild(4).GetComponent<Button>();
 
     [SerializeField] private int _arcaneTemporaryLevelOffset;
-    private int ArcaneTemporaryLevel => this.PlayerAttributes.Arcane + _arcaneTemporaryLevelOffset;
+    public int ArcaneTemporaryLevel => this.PlayerAttributes.Arcane + _arcaneTemporaryLevelOffset;
     private Button ArcaneUpgradeButton => this.GeneralAttributes.ArcaneUIGameObject.transform.GetChild(4).GetComponent<Button>();
 
     [SerializeField] private int _strengthTemporaryLevelOffset;
-    private int StrengthTemporaryLevel => this.PlayerAttributes.Strength + _strengthTemporaryLevelOffset;
+    public int StrengthTemporaryLevel => this.PlayerAttributes.Strength + _strengthTemporaryLevelOffset;
     private Button StrengthUpgradeButton => this.GeneralAttributes.StrengthUIGameObject.transform.GetChild(4).GetComponent<Button>();
 
     [SerializeField] private int _dexterityTemporaryLevelOffset;
-    private int DexterityTemporaryLevel => this.PlayerAttributes.Dexterity + _dexterityTemporaryLevelOffset;
+    public int DexterityTemporaryLevel => this.PlayerAttributes.Dexterity + _dexterityTemporaryLevelOffset;
     private Button DexterityUpgradeButton => this.GeneralAttributes.DexterityUIGameObject.transform.GetChild(4).GetComponent<Button>();
 
     [SerializeField] private int _intelligenceTemporaryLevelOffset;
-    private int IntelligenceTemporaryLevel => this.PlayerAttributes.Intelligence + _intelligenceTemporaryLevelOffset;
+    public int IntelligenceTemporaryLevel => this.PlayerAttributes.Intelligence + _intelligenceTemporaryLevelOffset;
     private Button IntelligenceUpgradeButton => this.GeneralAttributes.IntelligenceUIGameObject.transform.GetChild(4).GetComponent<Button>();
 
     [SerializeField] private int _faithTemporaryLevelOffset;
-    private int FaithTemporaryLevel => this.PlayerAttributes.Faith + _faithTemporaryLevelOffset;
+    public int FaithTemporaryLevel => this.PlayerAttributes.Faith + _faithTemporaryLevelOffset;
     private Button FaithUpgradeButton => this.GeneralAttributes.FaithUIGameObject.transform.GetChild(4).GetComponent<Button>();
 
     [SerializeField] private int _elixirTemporaryValueOffset;
@@ -104,14 +118,16 @@ public class MagicFormationPanelAttributesUpgradePageGeneralSection : MonoBehavi
 
     private void CheckIfAttributesCanUpgrade()
     {
-        this.VigorUpgradeButton.interactable = (this.NeededElixir(this.VigorTemporaryLevel) <= this.PlayerAttributes.Elixir);
-        this.MindUpgradeButton.interactable = (this.NeededElixir(this.MindTemporaryLevel) <= this.PlayerAttributes.Elixir);
-        this.EnduranceUpgradeButton.interactable = (this.NeededElixir(this.EnduranceTemporaryLevel) <= this.PlayerAttributes.Elixir);
-        this.ArcaneUpgradeButton.interactable = (this.NeededElixir(this.ArcaneTemporaryLevel) <= this.PlayerAttributes.Elixir);
-        this.StrengthUpgradeButton.interactable = (this.NeededElixir(this.StrengthTemporaryLevel) <= this.PlayerAttributes.Elixir);
-        this.DexterityUpgradeButton.interactable = (this.NeededElixir(this.DexterityTemporaryLevel) <= this.PlayerAttributes.Elixir);
-        this.IntelligenceUpgradeButton.interactable = (this.NeededElixir(this.IntelligenceTemporaryLevel) <= this.PlayerAttributes.Elixir);
-        this.FaithUpgradeButton.interactable = (this.NeededElixir(this.FaithTemporaryLevel) <= this.PlayerAttributes.Elixir);
+        this.VigorUpgradeButton.interactable = (this.NeededElixir(this.VigorTemporaryLevel) <= this.ElixirTemporaryValue);
+        this.MindUpgradeButton.interactable = (this.NeededElixir(this.MindTemporaryLevel) <= this.ElixirTemporaryValue);
+        this.EnduranceUpgradeButton.interactable = (this.NeededElixir(this.EnduranceTemporaryLevel) <= this.ElixirTemporaryValue);
+        this.ArcaneUpgradeButton.interactable = (this.NeededElixir(this.ArcaneTemporaryLevel) <= this.ElixirTemporaryValue);
+        this.StrengthUpgradeButton.interactable = (this.NeededElixir(this.StrengthTemporaryLevel) <= this.ElixirTemporaryValue);
+        this.DexterityUpgradeButton.interactable = (this.NeededElixir(this.DexterityTemporaryLevel) <= this.ElixirTemporaryValue);
+        this.IntelligenceUpgradeButton.interactable = (this.NeededElixir(this.IntelligenceTemporaryLevel) <= this.ElixirTemporaryValue);
+        this.FaithUpgradeButton.interactable = (this.NeededElixir(this.FaithTemporaryLevel) <= this.ElixirTemporaryValue);
+
+        this.DetailedSection.UpdateDetailedAttributesDisplays();
     }
 
     private void OnEnable()
@@ -127,7 +143,77 @@ public class MagicFormationPanelAttributesUpgradePageGeneralSection : MonoBehavi
     {
         _elixirTemporaryValueOffset -= this.NeededElixir(this.VigorTemporaryLevel);
         _vigorTemporaryLevelOffset +=1;
-        this.GeneralAttributes.UpdateTemporaryVigorAttributes(this.VigorTemporaryLevel);
+        this.GeneralAttributes.UpdateTemporaryGeneralAttribute(this.GeneralAttributes.VigorUIGameObject, this.VigorTemporaryLevel);
+        this.GeneralAttributes.UpdateTemporaryElixirValue(this.ElixirTemporaryValue);
+
+        this.CheckIfAttributesCanUpgrade();
+    }
+
+    public void PrepareToUpgradeMind()
+    {
+        _elixirTemporaryValueOffset -= this.NeededElixir(this.MindTemporaryLevel);
+        _mindTemporaryLevelOffset += 1;
+        this.GeneralAttributes.UpdateTemporaryGeneralAttribute(this.GeneralAttributes.MindUIGameObject, this.MindTemporaryLevel);
+        this.GeneralAttributes.UpdateTemporaryElixirValue(this.ElixirTemporaryValue);
+
+        this.CheckIfAttributesCanUpgrade();
+    }
+
+    public void PrepareToUpgradeEndurance()
+    {
+        _elixirTemporaryValueOffset -= this.NeededElixir(this.EnduranceTemporaryLevel);
+        _enduranceTemporaryLevelOffset += 1;
+        this.GeneralAttributes.UpdateTemporaryGeneralAttribute(this.GeneralAttributes.EnduranceUIGameObject, this.EnduranceTemporaryLevel);
+        this.GeneralAttributes.UpdateTemporaryElixirValue(this.ElixirTemporaryValue);
+
+        this.CheckIfAttributesCanUpgrade();
+    }
+
+    public void PrepareToUpgradeArcane()
+    {
+        _elixirTemporaryValueOffset -= this.NeededElixir(this.ArcaneTemporaryLevel);
+        _arcaneTemporaryLevelOffset += 1;
+        this.GeneralAttributes.UpdateTemporaryGeneralAttribute(this.GeneralAttributes.ArcaneUIGameObject, this.ArcaneTemporaryLevel);
+        this.GeneralAttributes.UpdateTemporaryElixirValue(this.ElixirTemporaryValue);
+
+        this.CheckIfAttributesCanUpgrade();
+    }
+
+    public void PrepareToUpgradeStrength()
+    {
+        _elixirTemporaryValueOffset -= this.NeededElixir(this.StrengthTemporaryLevel);
+        _strengthTemporaryLevelOffset += 1;
+        this.GeneralAttributes.UpdateTemporaryGeneralAttribute(this.GeneralAttributes.StrengthUIGameObject, this.StrengthTemporaryLevel);
+        this.GeneralAttributes.UpdateTemporaryElixirValue(this.ElixirTemporaryValue);
+
+        this.CheckIfAttributesCanUpgrade();
+    }
+
+    public void PrepareToUpgradeDexterity()
+    {
+        _elixirTemporaryValueOffset -= this.NeededElixir(this.DexterityTemporaryLevel);
+        _dexterityTemporaryLevelOffset += 1;
+        this.GeneralAttributes.UpdateTemporaryGeneralAttribute(this.GeneralAttributes.DexterityUIGameObject, this.DexterityTemporaryLevel);
+        this.GeneralAttributes.UpdateTemporaryElixirValue(this.ElixirTemporaryValue);
+
+        this.CheckIfAttributesCanUpgrade();
+    }
+
+    public void PrepareToUpgradeIntelligence()
+    {
+        _elixirTemporaryValueOffset -= this.NeededElixir(this.IntelligenceTemporaryLevel);
+        _intelligenceTemporaryLevelOffset += 1;
+        this.GeneralAttributes.UpdateTemporaryGeneralAttribute(this.GeneralAttributes.IntelligenceUIGameObject, this.IntelligenceTemporaryLevel);
+        this.GeneralAttributes.UpdateTemporaryElixirValue(this.ElixirTemporaryValue);
+
+        this.CheckIfAttributesCanUpgrade();
+    }
+
+    public void PrepareToUpgradeFaith()
+    {
+        _elixirTemporaryValueOffset -= this.NeededElixir(this.FaithTemporaryLevel);
+        _faithTemporaryLevelOffset += 1;
+        this.GeneralAttributes.UpdateTemporaryGeneralAttribute(this.GeneralAttributes.FaithUIGameObject, this.FaithTemporaryLevel);
         this.GeneralAttributes.UpdateTemporaryElixirValue(this.ElixirTemporaryValue);
 
         this.CheckIfAttributesCanUpgrade();
@@ -163,6 +249,8 @@ public class MagicFormationPanelAttributesUpgradePageGeneralSection : MonoBehavi
         this.ResetOffsetValues();
 
         this.GeneralAttributes.UpdateGeneralAttributes();
+
+        this.CheckIfAttributesCanUpgrade();
     }
 
     private void Update()
