@@ -16,7 +16,7 @@ public class MagicFormationBehaviour : InteractableObjectBehaviour
         }
     }
 
-    public void SetActiveMainPanel(bool value)
+    public void SetActiveMagicFormationPanel(bool value)
     {
         this.MainPanel.SetActive(value);
 
@@ -48,11 +48,7 @@ public class MagicFormationBehaviour : InteractableObjectBehaviour
             {
                 if (!this.MainPanel.activeInHierarchy)
                 {
-                    this.SetActiveMainPanel(true);
-                }
-                else
-                {
-                    this.SetActiveMainPanel(false);
+                    this.SetActiveMagicFormationPanel(true);
                 }
             }
         }

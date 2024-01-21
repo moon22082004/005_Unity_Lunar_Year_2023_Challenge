@@ -111,4 +111,19 @@ public class MagicFormationPanel : MonoBehaviour
 
         Time.timeScale = 1;
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!this.InitialPage.activeInHierarchy) 
+            {
+                this.SetUpInitialPage();
+            }
+            else
+            {
+                this.Leave();
+            }
+        }
+    }
 }
