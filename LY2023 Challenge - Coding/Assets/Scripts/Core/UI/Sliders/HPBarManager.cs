@@ -7,4 +7,4 @@ public class HPBarManager : BarManager
         this.Slider.value = this.AttributesManager.CurrentHP / this.AttributesManager.MaxHP;
         base.Update();
     }
-}
+    }

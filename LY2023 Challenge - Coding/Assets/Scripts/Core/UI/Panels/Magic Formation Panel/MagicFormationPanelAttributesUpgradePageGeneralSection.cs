@@ -244,6 +244,8 @@ public class MagicFormationPanelAttributesUpgradePageGeneralSection : MonoBehavi
         this.PlayerAttributes.Intelligence = this.IntelligenceTemporaryLevel;
         this.PlayerAttributes.Faith = this.FaithTemporaryLevel;
 
+        this.PlayerAttributes.Respawn();
+
         this.PlayerAttributes.Elixir = this.ElixirTemporaryValue;
 
         this.ResetOffsetValues();
