@@ -1,4 +1,4 @@
-enum ItemType
+public enum ItemType
 {
     EQUIPMENT,
     UPGRADE_MATERIAL,

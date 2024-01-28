@@ -95,7 +95,7 @@ public class InventoryManager : MonoBehaviour
             case "Helm":
                 desireItemType = typeof(Helm);
                 break;
-            case "ChestArmor":
+            case "Armor":
                 desireItemType = typeof(Armor);
                 break;
             case "Main Weapon":

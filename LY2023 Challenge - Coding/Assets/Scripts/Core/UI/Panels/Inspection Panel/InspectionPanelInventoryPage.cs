@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,7 +32,7 @@ public class InspectionPanelInventoryPage : MonoBehaviour
         {
             if (_nextPageButton == null)
             {
-                _nextPageButton = this.transform.GetChild(1).GetComponent<Button>();
+                _nextPageButton = this.transform.GetChild(2).GetComponent<Button>();
             }
 
             return _nextPageButton;
@@ -137,5 +138,40 @@ public class InspectionPanelInventoryPage : MonoBehaviour
                     break;
             }    
         }
+    }
+
+    public void DisplayOtherInventoryPage(int offsetValue)
+    {
+        _currentPage = (int)Mathf.Clamp(_currentPage + offsetValue, 0, this.NumberOfPages - 1);
+    }
+
+    public void SortItemsType(string itemDisplayTypeName)
+    {
+        itemDisplayTypeName = itemDisplayTypeName.ToUpper();
+
+        ItemType itemDisplayType = ItemType.UPGRADE_MATERIAL;
+        if (Enum.TryParse<ItemType>(itemDisplayTypeName, out ItemType itemType))
+        {
+            itemDisplayType = itemType;
+        }
+        else
+        {
+            // Handle the case when the string doesn't match any ItemType
+            throw new ArgumentException("Invalid item type", nameof(itemDisplayTypeName));
+        }
+
+        _isNotSpawnItemsPages = true;
+        _itemDisplayType = itemDisplayType;
+
+        if (this.transform.GetChild(4).childCount > 0)
+        {
+            int numOfPreviousItemsPage = this.transform.GetChild(4).childCount;
+            for (int i = numOfPreviousItemsPage - 1; i >= 0; i--)
+            {
+                Destroy(this.transform.GetChild(4).GetChild(i).gameObject);
+            }
+        }
+
+        _isNotSpawnItemsPages = false;
     }
 }

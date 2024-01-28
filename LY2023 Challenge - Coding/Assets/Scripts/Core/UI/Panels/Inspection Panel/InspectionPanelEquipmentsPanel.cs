@@ -13,7 +13,7 @@ public class InspectionPanelEquipmentsPanel : MonoBehaviour
         {
             if (_helmSlotUIImage == null)
             {
-                _helmSlotUIImage = this.transform.GetChild(1).GetChild(0).GetComponent<Image>();
+                _helmSlotUIImage = this.transform.GetChild(2).GetChild(0).GetComponent<Image>();
             }
 
             return _helmSlotUIImage;
@@ -27,7 +27,7 @@ public class InspectionPanelEquipmentsPanel : MonoBehaviour
         {
             if (_armorSlotUIImage == null)
             {
-                _armorSlotUIImage = this.transform.GetChild(2).GetChild(0).GetComponent<Image>();
+                _armorSlotUIImage = this.transform.GetChild(3).GetChild(0).GetComponent<Image>();
             }
 
             return _armorSlotUIImage;
@@ -41,7 +41,7 @@ public class InspectionPanelEquipmentsPanel : MonoBehaviour
         {
             if (_mainWeaponSlotUIImage == null)
             {
-                _mainWeaponSlotUIImage = this.transform.GetChild(3).GetChild(0).GetComponent<Image>();
+                _mainWeaponSlotUIImage = this.transform.GetChild(4).GetChild(0).GetComponent<Image>();
             }
 
             return _mainWeaponSlotUIImage;
@@ -55,7 +55,7 @@ public class InspectionPanelEquipmentsPanel : MonoBehaviour
         {
             if (_sideWeaponSlotUIImage == null)
             {
-                _sideWeaponSlotUIImage = this.transform.GetChild(4).GetChild(0).GetComponent<Image>();
+                _sideWeaponSlotUIImage = this.transform.GetChild(5).GetChild(0).GetComponent<Image>();
             }
 
             return _sideWeaponSlotUIImage;
@@ -71,8 +71,8 @@ public class InspectionPanelEquipmentsPanel : MonoBehaviour
             {
                 _previewUIImages = new List<Image>();
 
-                _previewUIImages.Add(this.transform.GetChild(5).GetChild(0).GetComponent<Image>());
-                _previewUIImages.Add(this.transform.GetChild(5).GetChild(1).GetComponent<Image>());
+                _previewUIImages.Add(this.transform.GetChild(1).GetChild(0).GetComponent<Image>());
+                _previewUIImages.Add(this.transform.GetChild(1).GetChild(1).GetComponent<Image>());
             }
 
             return _previewUIImages;
