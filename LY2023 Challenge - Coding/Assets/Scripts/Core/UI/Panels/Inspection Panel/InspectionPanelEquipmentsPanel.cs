@@ -81,6 +81,11 @@ public class InspectionPanelEquipmentsPanel : MonoBehaviour
 
     private void OnEnable()
     {
+        this.UpdateEquipmentsDisplay();
+    }
+
+    public void UpdateEquipmentsDisplay()
+    {
         this.HelmSlotUIImage.sprite = this.PlayerEquipments.Helm.ItemIcon;
         this.ArmorSlotUIImage.sprite = this.PlayerEquipments.Armor.ItemIcon;
         this.MainWeaponSlotUIImage.sprite = this.PlayerEquipments.MainWeapon.ItemIcon;

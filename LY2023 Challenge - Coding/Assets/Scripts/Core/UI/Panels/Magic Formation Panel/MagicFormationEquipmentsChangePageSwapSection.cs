@@ -7,7 +7,7 @@ public class MagicFormationEquipmentsChangePageSwapSection : MonoBehaviour
     private InventoryManager PlayerInventory => LunarMonoBehaviour.Instance.Player.GetComponent<InventoryManager>();
 
     [SerializeField] private string _itemDisplayType;
-    public string ItemDisplayType
+    private string ItemDisplayType
     {
         get
         {
@@ -83,9 +83,9 @@ public class MagicFormationEquipmentsChangePageSwapSection : MonoBehaviour
         get
         {
             int value;
-            if (_itemDisplayType == "")
+            if (this.ItemDisplayType != "")
             {
-                value = 1 + (int)(this.PlayerInventory.EquipmentItems(_itemDisplayType).Count / 16);
+                value = 1 + (int)(this.PlayerInventory.EquipmentItems(this.ItemDisplayType).Count / 16);
             }
             else
             {
@@ -98,51 +98,74 @@ public class MagicFormationEquipmentsChangePageSwapSection : MonoBehaviour
 
     private void OnEnable()
     {
-        _itemDisplayType = "";
+        this.ItemDisplayType = "";
         _currentPage = 0;
     }
 
     private void Update()
     {
-        this.ItemPages.SetActive(_itemDisplayType != "");
-        this.PreviousPageButton.gameObject.SetActive(_itemDisplayType != "");
-        this.NextPageButton.gameObject.SetActive(_itemDisplayType != ""); 
+        this.ItemPages.SetActive(this.ItemDisplayType != "");
+        this.PreviousPageButton.gameObject.SetActive(this.ItemDisplayType != "");
+        this.NextPageButton.gameObject.SetActive(this.ItemDisplayType != ""); 
+    }
 
-        if (_itemDisplayType != "")
+    public void CallSwapEquipmentsPage(string itemDisplayType)
+    {
+        this.ItemDisplayType = itemDisplayType;
+        _currentPage = 0;
+
+        this.PreviousPageButton.interactable = !(_currentPage == 0);
+        this.NextPageButton.interactable = !(_currentPage == this.NumberOfPages);
+
+        while (this.ItemPages.transform.childCount < this.NumberOfPages)
         {
-            this.PreviousPageButton.interactable = !(_currentPage == 0);
-            this.NextPageButton.interactable = !(_currentPage == this.NumberOfPages);
+            GameObject page = Instantiate(this.ItemPage);
+            page.name = $"{this.ItemPage.name} {this.transform.childCount - 1}";
+            page.transform.SetParent(this.ItemPages.transform, false);
+        }
 
-            while (this.transform.GetChild(3).childCount < this.NumberOfPages)
+        for (int i = 0; i < this.NumberOfPages; i++)
+        {
+            if (i != _currentPage)
             {
-                GameObject page = Instantiate(this.ItemPage);
-                page.name = $"{this.ItemPage.name} {this.transform.childCount - 1}";
-                page.transform.SetParent(this.transform.GetChild(4), false);
+                this.ItemPages.transform.GetChild(i).gameObject.SetActive(false);
+            }
+            else
+            {
+                this.ItemPages.transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+
+        List<Item> items = this.PlayerInventory.EquipmentItems(this.ItemDisplayType);
+        for (int i = 1; i <= this.NumberOfPages; i++)
+        {
+            List<ItemAndNumber> itemsInAPage = new List<ItemAndNumber>();
+            for (int j = ((i - 1) * 16); j < Mathf.Min(i * 16, items.Count); j++)
+            {
+                itemsInAPage.Add(new ItemAndNumber() { Item = items[j], NumberOfItem = 1 });
             }
 
-            for (int i = 0; i < this.NumberOfPages; i++)
-            {
-                if (i != _currentPage)
-                {
-                    this.transform.GetChild(3).GetChild(i).gameObject.SetActive(false);
-                }
-                else
-                {
-                    this.transform.GetChild(3).GetChild(i).gameObject.SetActive(true);
-                }
-            }
+            this.ItemPages.transform.GetChild(i - 1).GetComponent<InspectionPanelInventoryPageItemPage>().Items = itemsInAPage;
+        }
 
-            List<Item> items = this.PlayerInventory.EquipmentItems(_itemDisplayType);
-            for (int i = 1; i <= this.NumberOfPages; i++)
+        for (int i = 0; i < this.NumberOfPages; i++)
+        {
+            foreach (Button button in this.ItemPages.transform.GetChild(i).GetComponent<InspectionPanelInventoryPageItemPage>().Buttons)
             {
-                List<ItemAndNumber> itemsInAPage = new List<ItemAndNumber>();
-                for (int j = ((i - 1) * 16); j < Mathf.Min(i * 16, items.Count); j++)
-                {
-                    itemsInAPage.Add(new ItemAndNumber() { Item = items[j], NumberOfItem = 1 });
-                }
-
-                this.transform.GetChild(3).GetChild(i - 1).GetComponent<InspectionPanelInventoryPageItemPage>().Items = itemsInAPage;
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(() => this.ChangeEquipment(this.ItemDisplayType, button.GetComponent<InspectionPanelInventoryPageItemPageItemSlot>().Item));
             }
+        }
+    }
+
+    public void ChangeEquipment(string itemTypeName, Item choosenItem)
+    {
+        if (choosenItem != null)
+        {
+            this.PlayerInventory.SwapItemsFromCharacter(itemTypeName, choosenItem, LunarMonoBehaviour.Instance.Player.GetComponent<EquipmentsManager>());
+            _itemDisplayType = "";
+
+            this.transform.parent.GetChild(0).GetComponent<InspectionPanelEquipmentsPanel>().UpdateEquipmentsDisplay();
         }
     }
 }

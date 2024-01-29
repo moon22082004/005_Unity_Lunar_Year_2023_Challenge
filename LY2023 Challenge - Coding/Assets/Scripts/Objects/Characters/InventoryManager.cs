@@ -65,7 +65,7 @@ public class InventoryManager : MonoBehaviour
                 exchangeItem = equipmentsManager.Helm;
                 equipmentsManager.Helm = (Helm)initialItem;
                 break;
-            case "ChestArmor":
+            case "Armor":
                 exchangeItem = equipmentsManager.Armor;
                 equipmentsManager.Armor = (Armor)initialItem;
                 break;

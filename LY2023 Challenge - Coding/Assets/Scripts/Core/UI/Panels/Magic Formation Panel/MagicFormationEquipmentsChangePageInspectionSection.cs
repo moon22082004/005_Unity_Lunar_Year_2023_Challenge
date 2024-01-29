@@ -85,7 +85,7 @@ public class MagicFormationEquipmentsChangePageInspectionSection : MonoBehaviour
     {
         this.HelmSlotUIButton.interactable = false;
 
-        this.SwapSection.ItemDisplayType = "Helm";
+        this.SwapSection.CallSwapEquipmentsPage("Helm");
 
         this.ArmorSlotUIButton.interactable = true;
         this.MainWeaponSlotUIButton.interactable = true;
@@ -96,7 +96,7 @@ public class MagicFormationEquipmentsChangePageInspectionSection : MonoBehaviour
     {
         this.ArmorSlotUIButton.interactable = false;
 
-        this.SwapSection.ItemDisplayType = "Armor";
+        this.SwapSection.CallSwapEquipmentsPage("Armor");
 
         this.HelmSlotUIButton.interactable = true;
         this.MainWeaponSlotUIButton.interactable = true;
@@ -107,7 +107,7 @@ public class MagicFormationEquipmentsChangePageInspectionSection : MonoBehaviour
     {
         this.MainWeaponSlotUIButton.interactable = false;
 
-        this.SwapSection.ItemDisplayType = "Main Weapon";
+        this.SwapSection.CallSwapEquipmentsPage("Main Weapon");
 
         this.HelmSlotUIButton.interactable = true;
         this.ArmorSlotUIButton.interactable = true;
@@ -118,7 +118,7 @@ public class MagicFormationEquipmentsChangePageInspectionSection : MonoBehaviour
     {
         this.SideWeaponSlotUIButton.interactable = false;
 
-        this.SwapSection.ItemDisplayType = "Side Weapon";
+        this.SwapSection.CallSwapEquipmentsPage("Side Weapon");
 
         this.ArmorSlotUIButton.interactable = true;
         this.HelmSlotUIButton.interactable = true;
