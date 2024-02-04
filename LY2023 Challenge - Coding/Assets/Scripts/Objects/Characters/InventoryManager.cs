@@ -189,10 +189,10 @@ public class InventoryManager : MonoBehaviour
 
         switch (skillTypeName)
         {
-            case "MainSkill":
+            case "Main Skill":
                 desireSkillType = typeof(MainSkill);
                 break;
-            case "SideSkill":
+            case "Side Skill":
                 desireSkillType = typeof(SideSkill);
                 break;
             default:
@@ -223,11 +223,11 @@ public class InventoryManager : MonoBehaviour
         Skill exchangeSkill;
         switch (skillTypeName)
         {
-            case "SideSkill":
+            case "Side Skill":
                 exchangeSkill = playerSkills.SideSkill;
                 playerSkills.SideSkill = (SideSkill)initialSkill;
                 break;
-            case "MainSkill":
+            case "Main Skill":
                 exchangeSkill = playerSkills.MainSkills[index];
                 playerSkills.MainSkills[index] = (MainSkill)initialSkill;
                 break;

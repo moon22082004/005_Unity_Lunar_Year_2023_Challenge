@@ -40,7 +40,7 @@ public class InspectionPanelInventoryPageItemPage : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < Mathf.Min(16, this.Items.Count); i++)
+        for (int i = 0; i < Mathf.Min(this.transform.childCount / 2, this.Items.Count); i++)
         {
             this.transform.GetChild(i).GetComponent<InspectionPanelInventoryPageItemPageItemSlot>().Item = this.Items[i].Item;
             this.transform.GetChild(i).GetComponent<InspectionPanelInventoryPageItemPageItemSlot>().Number = this.Items[i].NumberOfItem;

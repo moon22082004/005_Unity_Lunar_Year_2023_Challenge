@@ -27,13 +27,17 @@ public class LunarMonoBehaviour : MonoBehaviour
         get 
         {
             Transform panels = GameObject.Find("Game Canvas/Panels").transform;
-            for (int i = 0; i < panels.childCount; i++) 
+
+            if (panels.GetChild(1).gameObject.activeInHierarchy)
             {
-                if (panels.GetChild(i).gameObject.activeInHierarchy)
-                {
-                    return true;
-                }
+                return true;
             }
+
+            if (panels.GetChild(2).gameObject.activeInHierarchy)
+            {
+                return true;
+            }
+
             return false;
         }
     }

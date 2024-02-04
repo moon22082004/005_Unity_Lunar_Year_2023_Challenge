@@ -76,9 +76,12 @@ public class SkillsManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Hello 1");
         foreach (MainSkill mainSkill in this.MainSkills)
         {
             mainSkill.Update();
+
+            Debug.Log("Hello 2");
         }
 
         for (int i = 0; i < this.MainSkills.Count; i++)
@@ -88,6 +91,8 @@ public class SkillsManager : MonoBehaviour
                 if ((Input.GetKeyDown(this.SkillKeys[i])) && (!LunarMonoBehaviour.Instance.IsPausedGame))
                 {
                     StartCoroutine(this.MainSkills[i].Execute(this, i));
+
+                    Debug.Log("Hello 3");
                 }
             }
             else if (_timers[i] < this.CooldownTimers[i])
@@ -101,6 +106,8 @@ public class SkillsManager : MonoBehaviour
             if ((Input.GetKeyDown(this.SkillKeys[this.SkillKeys.Count - 1])) && (!LunarMonoBehaviour.Instance.IsPausedGame))
             {
                 StartCoroutine(this.SideSkill.Execute(this, _timers.Count - 1));
+
+                Debug.Log("Hello 4");
             }
         }
         else
