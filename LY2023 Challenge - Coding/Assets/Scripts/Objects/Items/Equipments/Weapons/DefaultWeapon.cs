@@ -1,61 +1,73 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DefaultWeapon", menuName = "Items/Equipments/Weapons/Default Weapon")]
-public class DefaultWeapon : Weapon
+namespace LY2023Challenge
 {
-    public override string Name
+    [CreateAssetMenu(fileName = "DefaultWeapon", menuName = "Items/Equipments/Weapons/Default Weapon")]
+    public class DefaultWeapon : Weapon
     {
-        get => "DefaultWeapon";
-    }
-
-    public override Sprite ItemIcon
-    {
-        get => Resources.Load<Sprite>("Item Icons/default");
-    }
-
-    public override WeaponType Type
-    {
-        get => WeaponType.None;
-    }
-
-    public override float Weight
-    {
-        get => 0f;
-    }
-
-    public override float PhysicalDamage
-    {
-        get => 0f;
-    }
-    public override float PhysicalPierce
-    {
-        get => 0f;
-    }
-    public override float PhysicalLifeSteal
-    {
-        get
+        public override string Name
         {
-            float value = 0f;
-
-            return value;
+            get => "DefaultWeapon";
         }
-    }
 
-    public override float MagicDamage
-    {
-        get => 0f;
-    }
-    public override float MagicPierce
-    {
-        get => 0f;
-    }
-    public override float MagicLifeSteal
-    {
-        get
+        public override int BuyingPrice
         {
-            float value = 0f;
+            get => 0;
+        }
+        public override int SellingPrice
+        {
+            get => 0;
+        }
 
-            return value;
+        public override Sprite ItemIcon
+        {
+            get => Resources.Load<Sprite>("Item Icons/default");
+        }
+
+        public override WeaponType Type
+        {
+            get => WeaponType.None;
+        }
+
+        public override float Weight
+        {
+            get => 0f;
+        }
+
+        public override float PhysicalDamage
+        {
+            get => 0f;
+        }
+        public override float PhysicalPierce
+        {
+            get => 0f;
+        }
+        public override float PhysicalLifeSteal
+        {
+            get
+            {
+                float value = 0f;
+
+                return value;
+            }
+        }
+
+        public override float MagicDamage
+        {
+            get => 0f;
+        }
+        public override float MagicPierce
+        {
+            get => 0f;
+        }
+        public override float MagicLifeSteal
+        {
+            get
+            {
+                float value = 0f;
+
+                return value;
+            }
         }
     }
 }

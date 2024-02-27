@@ -1,10 +1,11 @@
-using UnityEngine;
-
-public class HPBarManager : BarManager
+namespace LY2023Challenge
 {
-    protected override void Update() 
+    public class HPBarManager : BarManager
     {
-        this.Slider.value = this.AttributesManager.CurrentHP / this.AttributesManager.MaxHP;
-        base.Update();
+        protected override void Update()
+        {
+            this.Slider.value = this.AttributesManager.CurrentHP / this.AttributesManager.MaxHP;
+            base.Update();
+        }
     }
-    }
+}

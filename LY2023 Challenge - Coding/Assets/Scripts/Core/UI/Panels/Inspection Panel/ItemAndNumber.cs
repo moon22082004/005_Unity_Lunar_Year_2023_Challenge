@@ -1,5 +1,8 @@
-public struct ItemAndNumber
+namespace LY2023Challenge
 {
-    public Item Item;
-    public int NumberOfItem;
+    public struct ItemAndNumber
+    {
+        public Item Item;
+        public int NumberOfItem;
+    }
 }

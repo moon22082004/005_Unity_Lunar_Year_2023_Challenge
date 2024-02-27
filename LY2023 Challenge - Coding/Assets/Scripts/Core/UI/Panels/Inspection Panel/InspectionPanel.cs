@@ -1,146 +1,149 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InspectionPanel : MonoBehaviour
+namespace LY2023Challenge
 {
-    [Header("Panels")]
-    [SerializeField] private GameObject _attributesAndEquipmentsUIGameObject;
-    private GameObject AttributesAndEquipmentsUIGameObject
+    public class InspectionPanel : MonoBehaviour
     {
-        get 
+        [Header("Panels")]
+        [SerializeField] private GameObject _attributesAndEquipmentsUIGameObject;
+        private GameObject AttributesAndEquipmentsUIGameObject
         {
-            if (_attributesAndEquipmentsUIGameObject == null)
+            get
             {
-                _attributesAndEquipmentsUIGameObject = this.transform.GetChild(1).gameObject;
+                if (_attributesAndEquipmentsUIGameObject == null)
+                {
+                    _attributesAndEquipmentsUIGameObject = this.transform.GetChild(1).gameObject;
+                }
+
+                return _attributesAndEquipmentsUIGameObject;
             }
-
-            return _attributesAndEquipmentsUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _inventoryUIGameObject;
-    private GameObject InventoryUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _inventoryUIGameObject;
+        private GameObject InventoryUIGameObject
         {
-            if (_inventoryUIGameObject == null)
+            get
             {
-                _inventoryUIGameObject = this.transform.GetChild(2).gameObject;
+                if (_inventoryUIGameObject == null)
+                {
+                    _inventoryUIGameObject = this.transform.GetChild(2).gameObject;
+                }
+
+                return _inventoryUIGameObject;
             }
-
-            return _inventoryUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _mapUIGameObject;
-    private GameObject MapUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _mapUIGameObject;
+        private GameObject MapUIGameObject
         {
-            if (_mapUIGameObject == null)
+            get
             {
-                _mapUIGameObject = this.transform.GetChild(3).gameObject;
+                if (_mapUIGameObject == null)
+                {
+                    _mapUIGameObject = this.transform.GetChild(3).gameObject;
+                }
+
+                return _mapUIGameObject;
             }
-
-            return _mapUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _databankUIGameObject;
-    private GameObject DatabankUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _databankUIGameObject;
+        private GameObject DatabankUIGameObject
         {
-            if (_databankUIGameObject == null)
+            get
             {
-                _databankUIGameObject = this.transform.GetChild(4).gameObject;
+                if (_databankUIGameObject == null)
+                {
+                    _databankUIGameObject = this.transform.GetChild(4).gameObject;
+                }
+
+                return _databankUIGameObject;
             }
-
-            return _databankUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _settingsUIGameObject;
-    private GameObject SettingsUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _settingsUIGameObject;
+        private GameObject SettingsUIGameObject
         {
-            if (_settingsUIGameObject == null)
+            get
             {
-                _settingsUIGameObject = this.transform.GetChild(5).gameObject;
+                if (_settingsUIGameObject == null)
+                {
+                    _settingsUIGameObject = this.transform.GetChild(5).gameObject;
+                }
+
+                return _settingsUIGameObject;
             }
-
-            return _settingsUIGameObject;
         }
-    }
 
-    [Header("Navbar's Buttons")]
-    [SerializeField] private Button _aAEButton;
-    public Button AAEButton
-    {
-        get
+        [Header("Navbar's Buttons")]
+        [SerializeField] private Button _aAEButton;
+        public Button AAEButton
         {
-            if (_aAEButton == null)
+            get
             {
-                _aAEButton = this.transform.GetChild(0).GetComponent<Button>();
+                if (_aAEButton == null)
+                {
+                    _aAEButton = this.transform.GetChild(0).GetComponent<Button>();
+                }
+
+                return _aAEButton;
             }
-
-            return _aAEButton;
         }
-    }
 
-    public void SetUpAAEPanels()
-    {
-        this.AttributesAndEquipmentsUIGameObject.SetActive(true);
+        public void SetUpAAEPanels()
+        {
+            this.AttributesAndEquipmentsUIGameObject.SetActive(true);
 
-        this.InventoryUIGameObject.SetActive(false);
-        this.MapUIGameObject.SetActive(false);
-        this.DatabankUIGameObject.SetActive(false);
-        this.SettingsUIGameObject.SetActive(false);
-    }
+            this.InventoryUIGameObject.SetActive(false);
+            this.MapUIGameObject.SetActive(false);
+            this.DatabankUIGameObject.SetActive(false);
+            this.SettingsUIGameObject.SetActive(false);
+        }
 
-    public void SetUpInventoryPanel()
-    {
-        this.InventoryUIGameObject.SetActive(true);
+        public void SetUpInventoryPanel()
+        {
+            this.InventoryUIGameObject.SetActive(true);
 
-        this.AttributesAndEquipmentsUIGameObject.SetActive(false);
-        this.MapUIGameObject.SetActive(false);
-        this.DatabankUIGameObject.SetActive(false);
-        this.SettingsUIGameObject.SetActive(false);
-    }
+            this.AttributesAndEquipmentsUIGameObject.SetActive(false);
+            this.MapUIGameObject.SetActive(false);
+            this.DatabankUIGameObject.SetActive(false);
+            this.SettingsUIGameObject.SetActive(false);
+        }
 
-    public void SetUpMapPanel()
-    {
-        this.MapUIGameObject.SetActive(true);
+        public void SetUpMapPanel()
+        {
+            this.MapUIGameObject.SetActive(true);
 
-        this.AttributesAndEquipmentsUIGameObject.SetActive(false);
-        this.InventoryUIGameObject.SetActive(false);
-        this.DatabankUIGameObject.SetActive(false);
-        this.SettingsUIGameObject.SetActive(false);
-    }
+            this.AttributesAndEquipmentsUIGameObject.SetActive(false);
+            this.InventoryUIGameObject.SetActive(false);
+            this.DatabankUIGameObject.SetActive(false);
+            this.SettingsUIGameObject.SetActive(false);
+        }
 
-    public void SetUpDatabankPanel()
-    {
-        this.DatabankUIGameObject.SetActive(true);
+        public void SetUpDatabankPanel()
+        {
+            this.DatabankUIGameObject.SetActive(true);
 
-        this.AttributesAndEquipmentsUIGameObject.SetActive(false);
-        this.InventoryUIGameObject.SetActive(false);
-        this.MapUIGameObject.SetActive(false);
-        this.SettingsUIGameObject.SetActive(false);
-    }
+            this.AttributesAndEquipmentsUIGameObject.SetActive(false);
+            this.InventoryUIGameObject.SetActive(false);
+            this.MapUIGameObject.SetActive(false);
+            this.SettingsUIGameObject.SetActive(false);
+        }
 
-    public void SetUpSettingsPanel()
-    {
-        this.SettingsUIGameObject.SetActive(true);
+        public void SetUpSettingsPanel()
+        {
+            this.SettingsUIGameObject.SetActive(true);
 
-        this.AttributesAndEquipmentsUIGameObject.SetActive(false);
-        this.InventoryUIGameObject.SetActive(false);
-        this.MapUIGameObject.SetActive(false);
-        this.DatabankUIGameObject.SetActive(false);
-    }
+            this.AttributesAndEquipmentsUIGameObject.SetActive(false);
+            this.InventoryUIGameObject.SetActive(false);
+            this.MapUIGameObject.SetActive(false);
+            this.DatabankUIGameObject.SetActive(false);
+        }
 
-    private void OnEnable()
-    {
-        this.SetUpAAEPanels();
+        private void OnEnable()
+        {
+            this.SetUpAAEPanels();
+        }
     }
 }

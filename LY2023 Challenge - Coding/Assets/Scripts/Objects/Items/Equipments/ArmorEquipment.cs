@@ -1,11 +1,14 @@
-public abstract class ArmorEquipment : Equipment
+namespace LY2023Challenge
 {
-    public abstract float PhysicalDefense
+    public abstract class ArmorEquipment : Equipment
     {
-        get;
-    }
-    public abstract float MagicDefense
-    {
-        get;
+        public abstract float PhysicalDefense
+        {
+            get;
+        }
+        public abstract float MagicDefense
+        {
+            get;
+        }
     }
 }

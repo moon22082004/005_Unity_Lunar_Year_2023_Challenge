@@ -1,5 +1,8 @@
-enum SceneEnumerator
+namespace LY2023Challenge
 {
-    TrainingRoom = 3,
-    FirstRoom = 4,
+    enum SceneEnumerator
+    {
+        TrainingRoom = 3,
+        FirstRoom = 4,
+    }
 }

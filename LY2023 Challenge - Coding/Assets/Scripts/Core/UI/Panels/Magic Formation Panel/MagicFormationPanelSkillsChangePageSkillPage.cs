@@ -2,47 +2,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MagicFormationPanelSkillsChangePageSkillPage : MonoBehaviour
+namespace LY2023Challenge
 {
-    [SerializeField] private List<Skill> _skills;
-    public List<Skill> Skills
+    public class MagicFormationPanelSkillsChangePageSkillPage : MonoBehaviour
     {
-        get
+        [SerializeField] private List<Skill> _skills;
+        public List<Skill> Skills
         {
-            if (_skills == null)
+            get
             {
-                _skills = new List<Skill>();
-            }
-
-            return _skills;
-        }
-        set => _skills = value;
-    }
-
-    [SerializeField] private List<Button> _buttons;
-    public List<Button> Buttons
-    {
-        get
-        {
-            if (_buttons.Count == 0)
-            {
-                _buttons = new List<Button>();
-
-                for (int i = 0; i < (this.transform.childCount / 2); i++)
+                if (_skills == null)
                 {
-                    _buttons.Add(this.transform.GetChild(i).GetComponent<Button>());
+                    _skills = new List<Skill>();
                 }
+
+                return _skills;
             }
-
-            return _buttons;
+            set => _skills = value;
         }
-    }
 
-    private void Update()
-    {
-        for (int i = 0; i < Mathf.Min(20, this.Skills.Count); i++)
+        [SerializeField] private List<Button> _buttons;
+        public List<Button> Buttons
         {
-            this.transform.GetChild(i).GetComponent<MagicFormationPanelSkillsChangePageSkillPageSkillSlot>().Skill = this.Skills[i];
+            get
+            {
+                if (_buttons.Count == 0)
+                {
+                    _buttons = new List<Button>();
+
+                    for (int i = 0; i < (this.transform.childCount / 2); i++)
+                    {
+                        _buttons.Add(this.transform.GetChild(i).GetComponent<Button>());
+                    }
+                }
+
+                return _buttons;
+            }
+        }
+
+        private void Update()
+        {
+            for (int i = 0; i < Mathf.Min(20, this.Skills.Count); i++)
+            {
+                this.transform.GetChild(i).GetComponent<MagicFormationPanelSkillsChangePageSkillPageSkillSlot>().Skill = this.Skills[i];
+            }
         }
     }
 }

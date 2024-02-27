@@ -1,132 +1,135 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MagicFormationPanelEquipmentsChangePageInspectionSection : MonoBehaviour
+namespace LY2023Challenge
 {
-    private MagicFormationPanelEquipmentsChangePageSwapSection _swapSectionManager;
-    private MagicFormationPanelEquipmentsChangePageSwapSection SwapSectionManager
+    public class MagicFormationPanelEquipmentsChangePageInspectionSection : MonoBehaviour
     {
-        get
+        private MagicFormationPanelEquipmentsChangePageSwapSection _swapSectionManager;
+        private MagicFormationPanelEquipmentsChangePageSwapSection SwapSectionManager
         {
-            if (_swapSectionManager == null)
+            get
             {
-                _swapSectionManager = this.transform.parent.GetChild(1).GetComponent<MagicFormationPanelEquipmentsChangePageSwapSection>();
+                if (_swapSectionManager == null)
+                {
+                    _swapSectionManager = this.transform.parent.GetChild(1).GetComponent<MagicFormationPanelEquipmentsChangePageSwapSection>();
+                }
+
+                return _swapSectionManager;
             }
-
-            return _swapSectionManager;
         }
-    }
 
-    [SerializeField] private Button _helmSlotUIButton;
-    private Button HelmSlotUIButton
-    {
-        get
+        [SerializeField] private Button _helmSlotUIButton;
+        private Button HelmSlotUIButton
         {
-            if (_helmSlotUIButton == null)
+            get
             {
-                _helmSlotUIButton = this.transform.GetChild(2).GetComponent<Button>();
+                if (_helmSlotUIButton == null)
+                {
+                    _helmSlotUIButton = this.transform.GetChild(2).GetComponent<Button>();
+                }
+
+                return _helmSlotUIButton;
             }
-
-            return _helmSlotUIButton;
         }
-    }
 
-    [SerializeField] private Button _armorSlotUIButton;
-    private Button ArmorSlotUIButton
-    {
-        get
+        [SerializeField] private Button _armorSlotUIButton;
+        private Button ArmorSlotUIButton
         {
-            if (_armorSlotUIButton == null)
+            get
             {
-                _armorSlotUIButton = this.transform.GetChild(3).GetComponent<Button>();
+                if (_armorSlotUIButton == null)
+                {
+                    _armorSlotUIButton = this.transform.GetChild(3).GetComponent<Button>();
+                }
+
+                return _armorSlotUIButton;
             }
-
-            return _armorSlotUIButton;
         }
-    }
 
-    [SerializeField] private Button _mainWeaponSlotUIButton;
-    private Button MainWeaponSlotUIButton
-    {
-        get
+        [SerializeField] private Button _mainWeaponSlotUIButton;
+        private Button MainWeaponSlotUIButton
         {
-            if (_mainWeaponSlotUIButton == null)
+            get
             {
-                _mainWeaponSlotUIButton = this.transform.GetChild(4).GetComponent<Button>();
+                if (_mainWeaponSlotUIButton == null)
+                {
+                    _mainWeaponSlotUIButton = this.transform.GetChild(4).GetComponent<Button>();
+                }
+
+                return _mainWeaponSlotUIButton;
             }
-
-            return _mainWeaponSlotUIButton;
         }
-    }
 
-    [SerializeField] private Button _sideWeaponSlotUIButton;
-    private Button SideWeaponSlotUIButton
-    {
-        get
+        [SerializeField] private Button _sideWeaponSlotUIButton;
+        private Button SideWeaponSlotUIButton
         {
-            if (_sideWeaponSlotUIButton == null)
+            get
             {
-                _sideWeaponSlotUIButton = this.transform.GetChild(5).GetComponent<Button>();
+                if (_sideWeaponSlotUIButton == null)
+                {
+                    _sideWeaponSlotUIButton = this.transform.GetChild(5).GetComponent<Button>();
+                }
+
+                return _sideWeaponSlotUIButton;
             }
-
-            return _sideWeaponSlotUIButton;
         }
-    }
 
-    private void OnEnable()
-    {
-        this.RefreshEquipmentsSwapButtons();
-    }
+        private void OnEnable()
+        {
+            this.RefreshEquipmentsSwapButtons();
+        }
 
-    public void RefreshEquipmentsSwapButtons()
-    {
-        this.HelmSlotUIButton.interactable = true;
-        this.ArmorSlotUIButton.interactable = true;
-        this.MainWeaponSlotUIButton.interactable = true;
-        this.SideWeaponSlotUIButton.interactable = true;
-    }
+        public void RefreshEquipmentsSwapButtons()
+        {
+            this.HelmSlotUIButton.interactable = true;
+            this.ArmorSlotUIButton.interactable = true;
+            this.MainWeaponSlotUIButton.interactable = true;
+            this.SideWeaponSlotUIButton.interactable = true;
+        }
 
-    public void PrepareToSwapHelm()
-    {
-        this.HelmSlotUIButton.interactable = false;
+        public void PrepareToSwapHelm()
+        {
+            this.HelmSlotUIButton.interactable = false;
 
-        this.SwapSectionManager.CallSwapEquipmentsPage("Helm");
+            this.SwapSectionManager.CallSwapEquipmentsPage("Helm");
 
-        this.ArmorSlotUIButton.interactable = true;
-        this.MainWeaponSlotUIButton.interactable = true;
-        this.SideWeaponSlotUIButton.interactable = true;
-    }
+            this.ArmorSlotUIButton.interactable = true;
+            this.MainWeaponSlotUIButton.interactable = true;
+            this.SideWeaponSlotUIButton.interactable = true;
+        }
 
-    public void PrepareToSwapArmor()
-    {
-        this.ArmorSlotUIButton.interactable = false;
+        public void PrepareToSwapArmor()
+        {
+            this.ArmorSlotUIButton.interactable = false;
 
-        this.SwapSectionManager.CallSwapEquipmentsPage("Armor");
+            this.SwapSectionManager.CallSwapEquipmentsPage("Armor");
 
-        this.HelmSlotUIButton.interactable = true;
-        this.MainWeaponSlotUIButton.interactable = true;
-        this.SideWeaponSlotUIButton.interactable = true;
-    }
+            this.HelmSlotUIButton.interactable = true;
+            this.MainWeaponSlotUIButton.interactable = true;
+            this.SideWeaponSlotUIButton.interactable = true;
+        }
 
-    public void PrepareToSwapMainWeapon()
-    {
-        this.MainWeaponSlotUIButton.interactable = false;
+        public void PrepareToSwapMainWeapon()
+        {
+            this.MainWeaponSlotUIButton.interactable = false;
 
-        this.SwapSectionManager.CallSwapEquipmentsPage("Main Weapon");
+            this.SwapSectionManager.CallSwapEquipmentsPage("Main Weapon");
 
-        this.HelmSlotUIButton.interactable = true;
-        this.ArmorSlotUIButton.interactable = true;
-        this.SideWeaponSlotUIButton.interactable = true;
-    }
+            this.HelmSlotUIButton.interactable = true;
+            this.ArmorSlotUIButton.interactable = true;
+            this.SideWeaponSlotUIButton.interactable = true;
+        }
 
-    public void PrepareToSwapSideWeapon()
-    {
-        this.SideWeaponSlotUIButton.interactable = false;
+        public void PrepareToSwapSideWeapon()
+        {
+            this.SideWeaponSlotUIButton.interactable = false;
 
-        this.SwapSectionManager.CallSwapEquipmentsPage("Side Weapon");
+            this.SwapSectionManager.CallSwapEquipmentsPage("Side Weapon");
 
-        this.ArmorSlotUIButton.interactable = true;
-        this.HelmSlotUIButton.interactable = true;
-        this.MainWeaponSlotUIButton.interactable = true;
+            this.ArmorSlotUIButton.interactable = true;
+            this.HelmSlotUIButton.interactable = true;
+            this.MainWeaponSlotUIButton.interactable = true;
+        }
     }
 }

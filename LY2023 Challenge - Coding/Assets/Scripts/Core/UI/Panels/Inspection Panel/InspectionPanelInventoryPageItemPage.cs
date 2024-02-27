@@ -2,48 +2,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InspectionPanelInventoryPageItemPage : MonoBehaviour
+namespace LY2023Challenge
 {
-    [SerializeField] private List<ItemAndNumber> _items;
-    public List<ItemAndNumber> Items
+    public class InspectionPanelInventoryPageItemPage : MonoBehaviour
     {
-        get
+        [SerializeField] private List<ItemAndNumber> _items;
+        public List<ItemAndNumber> Items
         {
-            if (_items == null)
+            get
             {
-                _items = new List<ItemAndNumber>();
-            }
-
-            return _items;
-        }
-        set => _items = value;
-    }
-
-    [SerializeField] private List<Button> _buttons;
-    public List<Button> Buttons
-    {
-        get
-        {
-            if (_buttons.Count == 0)
-            {
-                _buttons = new List<Button>();
-
-                for (int i = 0; i < (this.transform.childCount / 2); i++)
+                if (_items == null)
                 {
-                    _buttons.Add(this.transform.GetChild(i).GetComponent<Button>());
+                    _items = new List<ItemAndNumber>();
                 }
+
+                return _items;
             }
-
-            return _buttons;
+            set => _items = value;
         }
-    }
 
-    private void Update()
-    {
-        for (int i = 0; i < Mathf.Min(this.transform.childCount / 2, this.Items.Count); i++)
+        [SerializeField] private List<Button> _buttons;
+        public List<Button> Buttons
         {
-            this.transform.GetChild(i).GetComponent<InspectionPanelInventoryPageItemPageItemSlot>().Item = this.Items[i].Item;
-            this.transform.GetChild(i).GetComponent<InspectionPanelInventoryPageItemPageItemSlot>().Number = this.Items[i].NumberOfItem;
+            get
+            {
+                if (_buttons.Count == 0)
+                {
+                    _buttons = new List<Button>();
+
+                    for (int i = 0; i < (this.transform.childCount / 2); i++)
+                    {
+                        _buttons.Add(this.transform.GetChild(i).GetComponent<Button>());
+                    }
+                }
+
+                return _buttons;
+            }
+        }
+
+        private void Update()
+        {
+            for (int i = 0; i < Mathf.Min(this.transform.childCount / 2, this.Items.Count); i++)
+            {
+                this.transform.GetChild(i).GetComponent<InspectionPanelInventoryPageItemPageItemSlot>().Item = this.Items[i].Item;
+                this.transform.GetChild(i).GetComponent<InspectionPanelInventoryPageItemPageItemSlot>().Number = this.Items[i].NumberOfItem;
+            }
         }
     }
 }

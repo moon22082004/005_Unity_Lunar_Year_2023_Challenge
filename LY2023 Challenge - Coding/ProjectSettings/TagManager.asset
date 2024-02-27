@@ -4,20 +4,25 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Terrain
+  - Lowground
+  - Highground
   - Enemy
+  - NPC
+  - Ally
+  - Cell
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Lowground
   - Water
   - UI
-  - Terrain
+  - Highground
   - Enemy
   - Player
   - Player Projectile
   - 
+  - NPC
   - 
   - 
   - 
@@ -26,10 +31,9 @@ TagManager:
   - 
   - 
   - 
+  - Cell
   - 
-  - Layer 1
-  - Layer 2
-  - Layer 3
+  - 
   - 
   - 
   - 

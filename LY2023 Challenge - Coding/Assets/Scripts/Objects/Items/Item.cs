@@ -1,42 +1,55 @@
 using UnityEngine;
 
-public abstract class Item : ScriptableObject
+namespace LY2023Challenge
 {
-    public abstract string Name
+    public abstract class Item : ScriptableObject
     {
-        get;
-    }
-    public virtual string ShortDescription 
-    {
-        get => this.Name + " " + this.Level.ToString(); 
-    }
-    public abstract Sprite ItemIcon 
-    { 
-        get; 
-    }
-
-    [SerializeField] private int _level = 1;
-    public int Level
-    {
-        get
+        public abstract string Name
         {
-            if (_level <= 0)
-            {
-                _level = 1;
-            }
-            else if (_level > this.MaxLevel) 
-            {
-                _level = this.MaxLevel;
-            }
-
-            return _level;
+            get;
         }
-        set => _level = value;
+        public virtual string ShortDescription
+        {
+            get => this.Name + " " + this.Level.ToString();
+        }
 
+        public abstract int BuyingPrice
+        {
+            get;
+        }
+        public abstract int SellingPrice
+        {
+            get;
+        }
+
+        public abstract Sprite ItemIcon
+        {
+            get;
+        }
+
+        [SerializeField] private int _level = 1;
+        public int Level
+        {
+            get
+            {
+                if (_level <= 0)
+                {
+                    _level = 1;
+                }
+                else if (_level > this.MaxLevel)
+                {
+                    _level = this.MaxLevel;
+                }
+
+                return _level;
+            }
+            set => _level = value;
+
+        }
+
+        public virtual int MaxLevel
+        {
+            get => 12;
+        }
     }
-
-    public virtual int MaxLevel
-    {
-        get => 12;
-    }    
 }

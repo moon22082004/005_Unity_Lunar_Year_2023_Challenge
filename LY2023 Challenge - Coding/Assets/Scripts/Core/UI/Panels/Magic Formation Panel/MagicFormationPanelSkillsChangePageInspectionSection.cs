@@ -1,178 +1,181 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MagicFormationPanelSkillsChangePageInspectionSection : MonoBehaviour
+namespace LY2023Challenge
 {
-    private SkillsManager PlayerSkills => LunarMonoBehaviour.Instance.Player.GetComponent<SkillsManager>();
-
-    private MagicFormationPanelSkillsChangePageSwapSection _swapSectionManager;
-    private MagicFormationPanelSkillsChangePageSwapSection SwapSectionManager
+    public class MagicFormationPanelSkillsChangePageInspectionSection : MonoBehaviour
     {
-        get
+        private SkillsManager PlayerSkills => PlayerManager.Instance.Player.GetComponent<SkillsManager>();
+
+        private MagicFormationPanelSkillsChangePageSwapSection _swapSectionManager;
+        private MagicFormationPanelSkillsChangePageSwapSection SwapSectionManager
         {
-            if (_swapSectionManager == null)
+            get
             {
-                _swapSectionManager = this.transform.parent.GetChild(1).GetComponent<MagicFormationPanelSkillsChangePageSwapSection>();
+                if (_swapSectionManager == null)
+                {
+                    _swapSectionManager = this.transform.parent.GetChild(1).GetComponent<MagicFormationPanelSkillsChangePageSwapSection>();
+                }
+
+                return _swapSectionManager;
             }
-
-            return _swapSectionManager;
         }
-    }
 
-    [SerializeField] private GameObject _normalAttackSlotUIGameObject;
-    private GameObject NormalAttackSlotUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _normalAttackSlotUIGameObject;
+        private GameObject NormalAttackSlotUIGameObject
         {
-            if (_normalAttackSlotUIGameObject == null)
+            get
             {
-                _normalAttackSlotUIGameObject = this.transform.GetChild(1).gameObject;
+                if (_normalAttackSlotUIGameObject == null)
+                {
+                    _normalAttackSlotUIGameObject = this.transform.GetChild(1).gameObject;
+                }
+
+                return _normalAttackSlotUIGameObject;
             }
-
-            return _normalAttackSlotUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _firstMainSkillSlotUIGameObject;
-    private GameObject FirstMainSkillSlotUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _firstMainSkillSlotUIGameObject;
+        private GameObject FirstMainSkillSlotUIGameObject
         {
-            if (_firstMainSkillSlotUIGameObject == null)
+            get
             {
-                _firstMainSkillSlotUIGameObject = this.transform.GetChild(2).gameObject;
+                if (_firstMainSkillSlotUIGameObject == null)
+                {
+                    _firstMainSkillSlotUIGameObject = this.transform.GetChild(2).gameObject;
+                }
+
+                return _firstMainSkillSlotUIGameObject;
             }
-
-            return _firstMainSkillSlotUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _secondMainSkillSlotUIGameObject;
-    private GameObject SecondMainSkillSlotUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _secondMainSkillSlotUIGameObject;
+        private GameObject SecondMainSkillSlotUIGameObject
         {
-            if (_secondMainSkillSlotUIGameObject == null)
+            get
             {
-                _secondMainSkillSlotUIGameObject = this.transform.GetChild(3).gameObject;
+                if (_secondMainSkillSlotUIGameObject == null)
+                {
+                    _secondMainSkillSlotUIGameObject = this.transform.GetChild(3).gameObject;
+                }
+
+                return _secondMainSkillSlotUIGameObject;
             }
-
-            return _secondMainSkillSlotUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _thirdMainSkillSlotUIGameObject;
-    private GameObject ThirdMainSkillSlotUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _thirdMainSkillSlotUIGameObject;
+        private GameObject ThirdMainSkillSlotUIGameObject
         {
-            if (_thirdMainSkillSlotUIGameObject == null)
+            get
             {
-                _thirdMainSkillSlotUIGameObject = this.transform.GetChild(4).gameObject;
+                if (_thirdMainSkillSlotUIGameObject == null)
+                {
+                    _thirdMainSkillSlotUIGameObject = this.transform.GetChild(4).gameObject;
+                }
+
+                return _thirdMainSkillSlotUIGameObject;
             }
-
-            return _thirdMainSkillSlotUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _sideSkillSlotUIGameObject;
-    private GameObject SideSkillSlotUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _sideSkillSlotUIGameObject;
+        private GameObject SideSkillSlotUIGameObject
         {
-            if (_sideSkillSlotUIGameObject == null)
+            get
             {
-                _sideSkillSlotUIGameObject = this.transform.GetChild(5).gameObject;
+                if (_sideSkillSlotUIGameObject == null)
+                {
+                    _sideSkillSlotUIGameObject = this.transform.GetChild(5).gameObject;
+                }
+
+                return _sideSkillSlotUIGameObject;
             }
-
-            return _sideSkillSlotUIGameObject;
         }
-    }
 
-    private void OnEnable()
-    {
-        this.UpdateSkillDisplays();
+        private void OnEnable()
+        {
+            this.UpdateSkillDisplays();
 
-        this.RefreshSkillsSwapButtons();
-    }
+            this.RefreshSkillsSwapButtons();
+        }
 
-    public void RefreshSkillsSwapButtons()
-    {
-        this.NormalAttackSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.FirstMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.SecondMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.ThirdMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.SideSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-    }
+        public void RefreshSkillsSwapButtons()
+        {
+            this.NormalAttackSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.FirstMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.SecondMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.ThirdMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.SideSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+        }
 
-    public void PrepareToSwapNormalAttackSkill()
-    {
-        this.NormalAttackSlotUIGameObject.GetComponent<Button>().interactable = false;
+        public void PrepareToSwapNormalAttackSkill()
+        {
+            this.NormalAttackSlotUIGameObject.GetComponent<Button>().interactable = false;
 
-        this.SwapSectionManager.CallSwapSkillsPage("Main Skill", 0);
+            this.SwapSectionManager.CallSwapSkillsPage("Main Skill", 0);
 
-        this.FirstMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.SecondMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.ThirdMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.SideSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-    }
+            this.FirstMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.SecondMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.ThirdMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.SideSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+        }
 
-    public void PrepareToSwapFirstMainSkill()
-    {
-        this.FirstMainSkillSlotUIGameObject.GetComponent<Button>().interactable = false;
+        public void PrepareToSwapFirstMainSkill()
+        {
+            this.FirstMainSkillSlotUIGameObject.GetComponent<Button>().interactable = false;
 
-        this.SwapSectionManager.CallSwapSkillsPage("Main Skill", 1);
+            this.SwapSectionManager.CallSwapSkillsPage("Main Skill", 1);
 
-        this.NormalAttackSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.SecondMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.ThirdMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.SideSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-    }
+            this.NormalAttackSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.SecondMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.ThirdMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.SideSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+        }
 
-    public void PrepareToSwapSecondMainSkill()
-    {
-        this.SecondMainSkillSlotUIGameObject.GetComponent<Button>().interactable = false;
+        public void PrepareToSwapSecondMainSkill()
+        {
+            this.SecondMainSkillSlotUIGameObject.GetComponent<Button>().interactable = false;
 
-        this.SwapSectionManager.CallSwapSkillsPage("Main Skill", 2);
+            this.SwapSectionManager.CallSwapSkillsPage("Main Skill", 2);
 
-        this.NormalAttackSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.FirstMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.ThirdMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.SideSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-    }
+            this.NormalAttackSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.FirstMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.ThirdMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.SideSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+        }
 
-    public void PrepareToSwapThirdMainSkill()
-    {
-        this.ThirdMainSkillSlotUIGameObject.GetComponent<Button>().interactable = false;
+        public void PrepareToSwapThirdMainSkill()
+        {
+            this.ThirdMainSkillSlotUIGameObject.GetComponent<Button>().interactable = false;
 
-        this.SwapSectionManager.CallSwapSkillsPage("Main Skill", 3);
+            this.SwapSectionManager.CallSwapSkillsPage("Main Skill", 3);
 
-        this.NormalAttackSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.FirstMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.SecondMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.SideSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-    }
+            this.NormalAttackSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.FirstMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.SecondMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.SideSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+        }
 
-    public void PrepareToSwapSideSkill()
-    {
-        this.SideSkillSlotUIGameObject.GetComponent<Button>().interactable = false;
+        public void PrepareToSwapSideSkill()
+        {
+            this.SideSkillSlotUIGameObject.GetComponent<Button>().interactable = false;
 
-        this.SwapSectionManager.CallSwapSkillsPage("Side Skill", 0);
+            this.SwapSectionManager.CallSwapSkillsPage("Side Skill", 0);
 
-        this.NormalAttackSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.FirstMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.SecondMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-        this.ThirdMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
-    }
+            this.NormalAttackSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.FirstMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.SecondMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+            this.ThirdMainSkillSlotUIGameObject.GetComponent<Button>().interactable = true;
+        }
 
-    public void UpdateSkillDisplays()
-    {
-        this.NormalAttackSlotUIGameObject.transform.GetChild(0).GetComponent<Image>().sprite = this.PlayerSkills.MainSkills[0].SkillIcon;
+        public void UpdateSkillDisplays()
+        {
+            this.NormalAttackSlotUIGameObject.transform.GetChild(0).GetComponent<Image>().sprite = this.PlayerSkills.MainSkills[0].SkillIcon;
 
-        this.FirstMainSkillSlotUIGameObject.transform.GetChild(0).GetComponent<Image>().sprite = this.PlayerSkills.MainSkills[1].SkillIcon;
-        this.SecondMainSkillSlotUIGameObject.transform.GetChild(0).GetComponent<Image>().sprite = this.PlayerSkills.MainSkills[2].SkillIcon;
-        this.ThirdMainSkillSlotUIGameObject.transform.GetChild(0).GetComponent<Image>().sprite = this.PlayerSkills.MainSkills[3].SkillIcon;
+            this.FirstMainSkillSlotUIGameObject.transform.GetChild(0).GetComponent<Image>().sprite = this.PlayerSkills.MainSkills[1].SkillIcon;
+            this.SecondMainSkillSlotUIGameObject.transform.GetChild(0).GetComponent<Image>().sprite = this.PlayerSkills.MainSkills[2].SkillIcon;
+            this.ThirdMainSkillSlotUIGameObject.transform.GetChild(0).GetComponent<Image>().sprite = this.PlayerSkills.MainSkills[3].SkillIcon;
 
-        this.SideSkillSlotUIGameObject.transform.GetChild(0).GetComponent<Image>().sprite = this.PlayerSkills.SideSkill.SkillIcon;
+            this.SideSkillSlotUIGameObject.transform.GetChild(0).GetComponent<Image>().sprite = this.PlayerSkills.SideSkill.SkillIcon;
+        }
     }
 }

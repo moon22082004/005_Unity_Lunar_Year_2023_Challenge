@@ -1,45 +1,48 @@
 using UnityEngine;
 
-public abstract class Weapon : Equipment
+namespace LY2023Challenge
 {
-    public abstract WeaponType Type
+    public abstract class Weapon : Equipment
     {
-        get;
-    }
+        public abstract WeaponType Type
+        {
+            get;
+        }
 
 
-    public override Sprite ItemIcon
-    {
-        get => Resources.Load<Sprite>("Item Icons/Equipments/Weapons/" + this.Name);
-    }
+        public override Sprite ItemIcon
+        {
+            get => Resources.Load<Sprite>("Item Icons/Equipments/Weapons/" + this.Name);
+        }
 
-    #region Physical Damage
-    public virtual float PhysicalDamage
-    {
-        get;
-    }
-    public virtual float PhysicalPierce
-    {
-        get;
-    }
-    public abstract float PhysicalLifeSteal
-    {
-        get;
-    }
-    #endregion
+        #region Physical Damage
+        public virtual float PhysicalDamage
+        {
+            get;
+        }
+        public virtual float PhysicalPierce
+        {
+            get;
+        }
+        public abstract float PhysicalLifeSteal
+        {
+            get;
+        }
+        #endregion
 
-    #region Magic Damage
-    public virtual float MagicDamage
-    {
-        get;
+        #region Magic Damage
+        public virtual float MagicDamage
+        {
+            get;
+        }
+        public virtual float MagicPierce
+        {
+            get;
+        }
+        public abstract float MagicLifeSteal
+        {
+            get;
+        }
+        #endregion
     }
-    public virtual float MagicPierce
-    {
-        get;
-    }
-    public abstract float MagicLifeSteal
-    {
-        get;
-    }
-    #endregion
 }

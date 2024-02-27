@@ -1,6 +1,9 @@
-public enum ItemType
+namespace LY2023Challenge
 {
-    EQUIPMENT,
-    UPGRADE_MATERIAL,
-    KEY_ITEM
+    public enum ItemType
+    {
+        EQUIPMENT,
+        UPGRADE_MATERIAL,
+        KEY_ITEM
+    }
 }

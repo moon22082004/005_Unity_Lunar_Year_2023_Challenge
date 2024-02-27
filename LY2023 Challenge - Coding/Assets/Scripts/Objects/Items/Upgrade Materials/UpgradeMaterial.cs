@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public abstract class UpgradeMaterial : Item
+namespace LY2023Challenge
 {
-    public override Sprite ItemIcon
+    public abstract class UpgradeMaterial : Item
     {
-        get => Resources.Load<Sprite>("Item Icons/Upgrade Materials/" + this.ShortDescription);
+        public override Sprite ItemIcon
+        {
+            get => Resources.Load<Sprite>("Item Icons/Upgrade Materials/" + this.ShortDescription);
+        }
     }
 }

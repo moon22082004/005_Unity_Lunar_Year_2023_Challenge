@@ -1,50 +1,62 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DefaultArmor", menuName = "Items/Equipments/Armors/Default Armor")]
-public class DefaultArmor : Armor
+namespace LY2023Challenge
 {
-    public override string Name
+    [CreateAssetMenu(fileName = "DefaultArmor", menuName = "Items/Equipments/Armors/Default Armor")]
+    public class DefaultArmor : Armor
     {
-        get => "Default Armor";
-    }
-
-    public override Sprite ItemIcon
-    {
-        get => Resources.Load<Sprite>("Item Icons/default");
-    }
-
-    public override float Weight
-    {
-        get => 0f;
-    }
-
-    public override float PhysicalDefense
-    {
-        get
+        public override string Name
         {
-            float value = 0f;
-
-            return value;
+            get => "Default Armor";
         }
-    }
 
-    public override float MagicDefense
-    {
-        get
+        public override int BuyingPrice
         {
-            float value = 0f;
-
-            return value;
+            get => 0;
         }
-    }
-
-    public override float MoveSpeed
-    {
-        get
+        public override int SellingPrice
         {
-            float value = 0f;
+            get => 0;
+        }
 
-            return value;
+        public override Sprite ItemIcon
+        {
+            get => Resources.Load<Sprite>("Item Icons/default");
+        }
+
+        public override float Weight
+        {
+            get => 0f;
+        }
+
+        public override float PhysicalDefense
+        {
+            get
+            {
+                float value = 0f;
+
+                return value;
+            }
+        }
+
+        public override float MagicDefense
+        {
+            get
+            {
+                float value = 0f;
+
+                return value;
+            }
+        }
+
+        public override float MoveSpeed
+        {
+            get
+            {
+                float value = 0f;
+
+                return value;
+            }
         }
     }
 }

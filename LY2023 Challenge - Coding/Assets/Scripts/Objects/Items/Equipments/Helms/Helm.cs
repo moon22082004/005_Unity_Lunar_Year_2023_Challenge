@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public abstract class Helm : ArmorEquipment
+namespace LY2023Challenge
 {
-
-    public override Sprite ItemIcon
+    public abstract class Helm : ArmorEquipment
     {
-        get => Resources.Load<Sprite>("Item Icons/Equipments/Helms/" + this.Name);
+
+        public override Sprite ItemIcon
+        {
+            get => Resources.Load<Sprite>("Item Icons/Equipments/Helms/" + this.Name);
+        }
     }
 }

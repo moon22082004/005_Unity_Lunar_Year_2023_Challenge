@@ -2,60 +2,63 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TopLeftPanel : MonoBehaviour
+namespace LY2023Challenge
 {
-    private AttributesManager PlayerAttributes => LunarMonoBehaviour.Instance.Player.GetComponent<AttributesManager>();
-
-    [SerializeField] private Image _hPBar;
-    private Image HPBar
+    public class TopLeftPanel : MonoBehaviour
     {
-        get 
+        private AttributesManager PlayerAttributes => PlayerManager.Instance.Player.GetComponent<AttributesManager>();
+
+        [SerializeField] private Image _hPBar;
+        private Image HPBar
         {
-            if (_hPBar == null)
+            get
             {
-                _hPBar = this.transform.GetChild(1).GetComponent<Image>();
+                if (_hPBar == null)
+                {
+                    _hPBar = this.transform.GetChild(1).GetComponent<Image>();
+                }
+
+                return _hPBar;
             }
-
-            return _hPBar;
         }
-    }
 
-    [SerializeField] private TextMeshProUGUI _hPDisplay;
-    private TextMeshProUGUI HPDisplay
-    {
-        get
+        [SerializeField] private TextMeshProUGUI _hPDisplay;
+        private TextMeshProUGUI HPDisplay
         {
-            if (_hPDisplay == null)
+            get
             {
-                _hPDisplay = this.HPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+                if (_hPDisplay == null)
+                {
+                    _hPDisplay = this.HPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+                }
+
+                return _hPDisplay;
             }
-
-            return _hPDisplay;
         }
-    }
 
-    [SerializeField] private Image _fPBar;
-    private Image FPBar
-    {
-        get
+        [SerializeField] private Image _fPBar;
+        private Image FPBar
         {
-            if (_fPBar == null)
+            get
             {
-                _fPBar = this.transform.GetChild(3).GetComponent<Image>();
+                if (_fPBar == null)
+                {
+                    _fPBar = this.transform.GetChild(3).GetComponent<Image>();
+                }
+
+                return _fPBar;
             }
-
-            return _fPBar;
         }
-    }
 
 
-    private void Update()
-    {
-        // HP
-        this.HPBar.fillAmount = this.PlayerAttributes.CurrentHP / this.PlayerAttributes.MaxHP;
-        this.HPDisplay.text = this.PlayerAttributes.CurrentHP.ToString() + "/" + this.PlayerAttributes.MaxHP;
+        private void Update()
+        {
+            // HP
+            this.HPBar.fillAmount = this.PlayerAttributes.CurrentHP / this.PlayerAttributes.MaxHP;
+            this.HPDisplay.text = this.PlayerAttributes.CurrentHP.ToString() + "/" + this.PlayerAttributes.MaxHP;
 
-        // FP
-        this.FPBar.fillAmount = this.PlayerAttributes.CurrentFP / this.PlayerAttributes.MaxFP;
+            // FP
+            this.FPBar.fillAmount = this.PlayerAttributes.CurrentFP / this.PlayerAttributes.MaxFP;
+        }
     }
 }

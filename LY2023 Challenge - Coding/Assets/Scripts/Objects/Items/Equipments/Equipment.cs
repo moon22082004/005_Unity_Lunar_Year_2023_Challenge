@@ -1,7 +1,10 @@
-public abstract class Equipment : Item
+namespace LY2023Challenge
 {
-    public abstract float Weight
+    public abstract class Equipment : Item
     {
-        get;
+        public abstract float Weight
+        {
+            get;
+        }
     }
 }

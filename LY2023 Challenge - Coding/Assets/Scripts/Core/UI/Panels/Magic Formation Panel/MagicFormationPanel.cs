@@ -1,128 +1,131 @@
 using UnityEngine;
 
-public class MagicFormationPanel : MonoBehaviour
+namespace LY2023Challenge
 {
-    [SerializeField] private GameObject _initialPage;
-    private GameObject InitialPage
-    { 
-        get 
-        { 
-            if (_initialPage == null)
-            {
-                _initialPage = this.transform.GetChild(0).gameObject;
-            }
-
-            return _initialPage;
-        }
-    }
-
-    [SerializeField] private GameObject _attributesUpgradePage;
-    private GameObject AttributesUpgradePage
+    public class MagicFormationPanel : MonoBehaviour
     {
-        get
+        [SerializeField] private GameObject _initialPage;
+        private GameObject InitialPage
         {
-            if (_attributesUpgradePage == null)
+            get
             {
-                _attributesUpgradePage = this.transform.GetChild(1).gameObject;
-            }
+                if (_initialPage == null)
+                {
+                    _initialPage = this.transform.GetChild(0).gameObject;
+                }
 
-            return _attributesUpgradePage;
+                return _initialPage;
+            }
         }
-    }
 
-    [SerializeField] private GameObject _equipmentsChangePage;
-    private GameObject EquipmentsChangePage
-    {
-        get
+        [SerializeField] private GameObject _attributesUpgradePage;
+        private GameObject AttributesUpgradePage
         {
-            if (_equipmentsChangePage == null)
+            get
             {
-                _equipmentsChangePage = this.transform.GetChild(2).gameObject;
-            }
+                if (_attributesUpgradePage == null)
+                {
+                    _attributesUpgradePage = this.transform.GetChild(1).gameObject;
+                }
 
-            return _equipmentsChangePage;
+                return _attributesUpgradePage;
+            }
         }
-    }
 
-    [SerializeField] private GameObject _skillsChangePage;
-    private GameObject SkillsChangePage
-    {
-        get
+        [SerializeField] private GameObject _equipmentsChangePage;
+        private GameObject EquipmentsChangePage
         {
-            if (_skillsChangePage == null)
+            get
             {
-                _skillsChangePage = this.transform.GetChild(3).gameObject;
-            }
+                if (_equipmentsChangePage == null)
+                {
+                    _equipmentsChangePage = this.transform.GetChild(2).gameObject;
+                }
 
-            return _skillsChangePage;
+                return _equipmentsChangePage;
+            }
         }
-    }
 
-    private void OnEnable()
-    {
-        this.SetUpInitialPage();
-    }
-
-    public void SetUpInitialPage()
-    {
-        this.InitialPage.SetActive(true);
-
-        this.AttributesUpgradePage.SetActive(false);
-        this.EquipmentsChangePage.SetActive(false);
-        this.SkillsChangePage.SetActive(false);
-    }
-
-    public void SetUpAttributesUpgradePage()
-    {
-        this.AttributesUpgradePage.SetActive(true);
-
-        this.InitialPage.SetActive(false);
-        this.EquipmentsChangePage.SetActive(false);
-        this.SkillsChangePage.SetActive(false);
-    }
-
-    public void SetUpEquipmentsChangePage()
-    {
-        this.EquipmentsChangePage.SetActive(true);
-
-        this.InitialPage.SetActive(false);
-        this.AttributesUpgradePage.SetActive(false);
-        this.SkillsChangePage.SetActive(false);
-    }
-
-    public void SetUpSkillsChangePage()
-    {
-        this.SkillsChangePage.SetActive(true);
-
-        this.InitialPage.SetActive(false);
-        this.AttributesUpgradePage.SetActive(false);
-        this.EquipmentsChangePage.SetActive(false);
-    }
-
-    public void SaveAndQuit()
-    {
-        Debug.Log("Saved game");
-        Debug.Log("Quiting....");
-    }
-
-    public void Leave()
-    {
-        this.gameObject.SetActive(false);
-
-        Time.timeScale = 1;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        [SerializeField] private GameObject _skillsChangePage;
+        private GameObject SkillsChangePage
         {
-            if (!this.InitialPage.activeInHierarchy) 
+            get
             {
-                this.SetUpInitialPage();
+                if (_skillsChangePage == null)
+                {
+                    _skillsChangePage = this.transform.GetChild(3).gameObject;
+                }
+
+                return _skillsChangePage;
             }
-            else
+        }
+
+        private void OnEnable()
+        {
+            this.SetUpInitialPage();
+        }
+
+        public void SetUpInitialPage()
+        {
+            this.InitialPage.SetActive(true);
+
+            this.AttributesUpgradePage.SetActive(false);
+            this.EquipmentsChangePage.SetActive(false);
+            this.SkillsChangePage.SetActive(false);
+        }
+
+        public void SetUpAttributesUpgradePage()
+        {
+            this.AttributesUpgradePage.SetActive(true);
+
+            this.InitialPage.SetActive(false);
+            this.EquipmentsChangePage.SetActive(false);
+            this.SkillsChangePage.SetActive(false);
+        }
+
+        public void SetUpEquipmentsChangePage()
+        {
+            this.EquipmentsChangePage.SetActive(true);
+
+            this.InitialPage.SetActive(false);
+            this.AttributesUpgradePage.SetActive(false);
+            this.SkillsChangePage.SetActive(false);
+        }
+
+        public void SetUpSkillsChangePage()
+        {
+            this.SkillsChangePage.SetActive(true);
+
+            this.InitialPage.SetActive(false);
+            this.AttributesUpgradePage.SetActive(false);
+            this.EquipmentsChangePage.SetActive(false);
+        }
+
+        public void SaveAndQuit()
+        {
+            Debug.Log("Saved game");
+            Debug.Log("Quiting....");
+        }
+
+        public void Leave()
+        {
+            this.gameObject.SetActive(false);
+
+            Time.timeScale = 1;
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                this.Leave();
+                if (!this.InitialPage.activeInHierarchy)
+                {
+                    this.SetUpInitialPage();
+                }
+                else
+                {
+                    this.Leave();
+                }
             }
         }
     }

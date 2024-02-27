@@ -1,36 +1,39 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ScenesController : MonoBehaviour
+namespace LY2023Challenge
 {
-    private static ScenesController _instance;
-    public static ScenesController Instance
+    public class ScenesController : MonoBehaviour
     {
-        get => _instance;
-    }
+        private static ScenesController _instance;
+        public static ScenesController Instance
+        {
+            get => _instance;
+        }
 
-    public void RestartScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+        public void RestartScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 
-    public void LoadNextScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
+        public void LoadNextScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
 
-    public void LoadOptionalScene(int index)
-    {
-        SceneManager.LoadScene(index);
-    }
+        public void LoadOptionalScene(int index)
+        {
+            SceneManager.LoadScene(index);
+        }
 
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
+        public void ExitGame()
+        {
+            Application.Quit();
+        }
 
-    public void LoadFirstRoom()
-    {
-        SceneManager.LoadScene(4);
+        public void LoadFirstRoom()
+        {
+            SceneManager.LoadScene(4);
+        }
     }
 }

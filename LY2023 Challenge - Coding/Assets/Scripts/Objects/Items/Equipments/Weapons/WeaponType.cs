@@ -1,6 +1,9 @@
-public enum WeaponType
+namespace LY2023Challenge
 {
-    None,
-    Bow,
-    Sword
+    public enum WeaponType
+    {
+        None,
+        Bow,
+        Sword
+    }
 }

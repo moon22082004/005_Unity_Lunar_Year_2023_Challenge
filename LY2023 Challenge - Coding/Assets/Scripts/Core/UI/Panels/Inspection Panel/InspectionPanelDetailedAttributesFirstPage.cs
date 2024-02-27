@@ -2,101 +2,104 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class InspectionPanelDetailedAttributesFirstPage : MonoBehaviour
+namespace LY2023Challenge
 {
-    private AttributesManager PlayerAttributes => LunarMonoBehaviour.Instance.Player.GetComponent<AttributesManager>();
-
-    [SerializeField] private List<TextMeshProUGUI> _hPValues;
-    private List<TextMeshProUGUI> HPValues
+    public class InspectionPanelDetailedAttributesFirstPage : MonoBehaviour
     {
-        get
+        private AttributesManager PlayerAttributes => PlayerManager.Instance.Player.GetComponent<AttributesManager>();
+
+        [SerializeField] private List<TextMeshProUGUI> _hPValues;
+        private List<TextMeshProUGUI> HPValues
         {
-            if (_hPValues.Count < 2)
+            get
             {
-                _hPValues = new List<TextMeshProUGUI>();
+                if (_hPValues.Count < 2)
+                {
+                    _hPValues = new List<TextMeshProUGUI>();
 
-                _hPValues.Add(this.transform.GetChild(0).GetChild(3).GetComponent<TextMeshProUGUI>());
-                _hPValues.Add(this.transform.GetChild(0).GetChild(4).GetComponent<TextMeshProUGUI>());
+                    _hPValues.Add(this.transform.GetChild(0).GetChild(3).GetComponent<TextMeshProUGUI>());
+                    _hPValues.Add(this.transform.GetChild(0).GetChild(4).GetComponent<TextMeshProUGUI>());
+                }
+
+                return _hPValues;
             }
-
-            return _hPValues;
         }
-    }
 
-    [SerializeField] private List<TextMeshProUGUI> _fPValues;
-    private List<TextMeshProUGUI> FPValues
-    {
-        get
+        [SerializeField] private List<TextMeshProUGUI> _fPValues;
+        private List<TextMeshProUGUI> FPValues
         {
-            if (_fPValues.Count < 2)
+            get
             {
-                _fPValues = new List<TextMeshProUGUI>();
+                if (_fPValues.Count < 2)
+                {
+                    _fPValues = new List<TextMeshProUGUI>();
 
-                _fPValues.Add(this.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>());
-                _fPValues.Add(this.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>());
+                    _fPValues.Add(this.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>());
+                    _fPValues.Add(this.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>());
+                }
+
+                return _fPValues;
             }
-
-            return _fPValues;
         }
-    }
 
-    [SerializeField] private List<TextMeshProUGUI> _equipedLoadValues;
-    private List<TextMeshProUGUI> EquipedLoadValues
-    {
-        get
+        [SerializeField] private List<TextMeshProUGUI> _equipedLoadValues;
+        private List<TextMeshProUGUI> EquipedLoadValues
         {
-            if (_equipedLoadValues.Count < 2)
+            get
             {
-                _equipedLoadValues = new List<TextMeshProUGUI>();
+                if (_equipedLoadValues.Count < 2)
+                {
+                    _equipedLoadValues = new List<TextMeshProUGUI>();
 
-                _equipedLoadValues.Add(this.transform.GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>());
-                _equipedLoadValues.Add(this.transform.GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>());
+                    _equipedLoadValues.Add(this.transform.GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>());
+                    _equipedLoadValues.Add(this.transform.GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>());
+                }
+
+                return _equipedLoadValues;
             }
-
-            return _equipedLoadValues;
         }
-    }
 
-    [SerializeField] private TextMeshProUGUI _moveSpeedValue;
-    private TextMeshProUGUI MoveSpeedValue
-    {
-        get
+        [SerializeField] private TextMeshProUGUI _moveSpeedValue;
+        private TextMeshProUGUI MoveSpeedValue
         {
-            if (_moveSpeedValue == null)
+            get
             {
-                _moveSpeedValue = this.transform.GetChild(3).GetChild(3).GetComponent<TextMeshProUGUI>();
-            }
+                if (_moveSpeedValue == null)
+                {
+                    _moveSpeedValue = this.transform.GetChild(3).GetChild(3).GetComponent<TextMeshProUGUI>();
+                }
 
-            return _moveSpeedValue;
+                return _moveSpeedValue;
+            }
         }
-    }
-    [SerializeField] private TextMeshProUGUI _attackSpeedValue;
-    private TextMeshProUGUI AttackSpeedValue
-    {
-        get
+        [SerializeField] private TextMeshProUGUI _attackSpeedValue;
+        private TextMeshProUGUI AttackSpeedValue
         {
-            if (_attackSpeedValue == null)
+            get
             {
-                _attackSpeedValue = this.transform.GetChild(4).GetChild(3).GetComponent<TextMeshProUGUI>();
+                if (_attackSpeedValue == null)
+                {
+                    _attackSpeedValue = this.transform.GetChild(4).GetChild(3).GetComponent<TextMeshProUGUI>();
+                }
+
+                return _attackSpeedValue;
             }
-
-            return _attackSpeedValue;
         }
-    }
 
-    private void OnEnable()
-    {
-        this.HPValues[0].text = this.PlayerAttributes.CurrentHP.ToString();
-        this.HPValues[1].text = this.PlayerAttributes.MaxHP.ToString();
+        private void OnEnable()
+        {
+            this.HPValues[0].text = this.PlayerAttributes.CurrentHP.ToString();
+            this.HPValues[1].text = this.PlayerAttributes.MaxHP.ToString();
 
-        this.FPValues[0].text = this.PlayerAttributes.CurrentFP.ToString();
-        this.FPValues[1].text = this.PlayerAttributes.MaxFP.ToString();
+            this.FPValues[0].text = this.PlayerAttributes.CurrentFP.ToString();
+            this.FPValues[1].text = this.PlayerAttributes.MaxFP.ToString();
 
-        this.EquipedLoadValues[0].text = this.PlayerAttributes.CurrentEquipLoad.ToString();
-        this.EquipedLoadValues[1].text = this.PlayerAttributes.MaxEquipLoad.ToString();
+            this.EquipedLoadValues[0].text = this.PlayerAttributes.CurrentEquipLoad.ToString();
+            this.EquipedLoadValues[1].text = this.PlayerAttributes.MaxEquipLoad.ToString();
 
-        this.MoveSpeedValue.text = this.PlayerAttributes.MoveSpeed.ToString();
+            this.MoveSpeedValue.text = this.PlayerAttributes.MoveSpeed.ToString();
 
-        this.AttackSpeedValue.text = this.PlayerAttributes.AttackSpeed.ToString();
+            this.AttackSpeedValue.text = this.PlayerAttributes.AttackSpeed.ToString();
+        }
     }
 }

@@ -1,85 +1,88 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InspectionPanelDetailedAttributesPages : MonoBehaviour
+namespace LY2023Challenge
 {
-    [SerializeField] private GameObject _firstPageUIGameObject;
-    private GameObject FirstPageUIGameObject
+    public class InspectionPanelDetailedAttributesPages : MonoBehaviour
     {
-        get
+        [SerializeField] private GameObject _firstPageUIGameObject;
+        private GameObject FirstPageUIGameObject
         {
-            if (_firstPageUIGameObject == null)
+            get
             {
-                _firstPageUIGameObject = this.transform.GetChild(0).gameObject;
+                if (_firstPageUIGameObject == null)
+                {
+                    _firstPageUIGameObject = this.transform.GetChild(0).gameObject;
+                }
+
+                return _firstPageUIGameObject;
             }
-
-            return _firstPageUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _secondPageUIGameObject;
-    private GameObject SecondPageUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _secondPageUIGameObject;
+        private GameObject SecondPageUIGameObject
         {
-            if (_secondPageUIGameObject == null)
+            get
             {
-                _secondPageUIGameObject = this.transform.GetChild(1).gameObject;
+                if (_secondPageUIGameObject == null)
+                {
+                    _secondPageUIGameObject = this.transform.GetChild(1).gameObject;
+                }
+
+                return _secondPageUIGameObject;
             }
-
-            return _secondPageUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _previousPageButtonUIGameObject;
-    private GameObject PreviousPageButtonUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _previousPageButtonUIGameObject;
+        private GameObject PreviousPageButtonUIGameObject
         {
-            if (_previousPageButtonUIGameObject == null)
+            get
             {
-                _previousPageButtonUIGameObject = this.transform.GetChild(2).gameObject;
+                if (_previousPageButtonUIGameObject == null)
+                {
+                    _previousPageButtonUIGameObject = this.transform.GetChild(2).gameObject;
+                }
+
+                return _previousPageButtonUIGameObject;
             }
-
-            return _previousPageButtonUIGameObject;
         }
-    }
 
-    public void ChangeToNextPage()
-    {
-        this.NextPageButtonUIGameObject.GetComponent<Button>().interactable = false;
-        this.PreviousPageButtonUIGameObject.GetComponent<Button>().interactable = true;
-
-        this.FirstPageUIGameObject.SetActive(false);
-        this.SecondPageUIGameObject.SetActive(true);
-    }
-
-    public void ChangeToPreviousPage()
-    {
-        this.NextPageButtonUIGameObject.GetComponent<Button>().interactable = true;
-        this.PreviousPageButtonUIGameObject.GetComponent<Button>().interactable = false;
-
-        this.FirstPageUIGameObject.SetActive(true);
-        this.SecondPageUIGameObject.SetActive(false);
-    }
-
-    [SerializeField] private GameObject _nextPageButtonUIGameObject;
-    private GameObject NextPageButtonUIGameObject
-    {
-        get
+        public void ChangeToNextPage()
         {
-            if (_nextPageButtonUIGameObject == null)
-            {
-                _nextPageButtonUIGameObject = this.transform.GetChild(3).gameObject;
-            }
+            this.NextPageButtonUIGameObject.GetComponent<Button>().interactable = false;
+            this.PreviousPageButtonUIGameObject.GetComponent<Button>().interactable = true;
 
-            return _nextPageButtonUIGameObject;
+            this.FirstPageUIGameObject.SetActive(false);
+            this.SecondPageUIGameObject.SetActive(true);
         }
-    }
 
-    private void OnEnable()
-    {
-        // Set up Pages
-        this.ChangeToPreviousPage();
+        public void ChangeToPreviousPage()
+        {
+            this.NextPageButtonUIGameObject.GetComponent<Button>().interactable = true;
+            this.PreviousPageButtonUIGameObject.GetComponent<Button>().interactable = false;
+
+            this.FirstPageUIGameObject.SetActive(true);
+            this.SecondPageUIGameObject.SetActive(false);
+        }
+
+        [SerializeField] private GameObject _nextPageButtonUIGameObject;
+        private GameObject NextPageButtonUIGameObject
+        {
+            get
+            {
+                if (_nextPageButtonUIGameObject == null)
+                {
+                    _nextPageButtonUIGameObject = this.transform.GetChild(3).gameObject;
+                }
+
+                return _nextPageButtonUIGameObject;
+            }
+        }
+
+        private void OnEnable()
+        {
+            // Set up Pages
+            this.ChangeToPreviousPage();
+        }
     }
 }

@@ -2,180 +2,183 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InspectionPanelGeneralAttributesPage : MonoBehaviour
+namespace LY2023Challenge
 {
-    private AttributesManager PlayerAttributes => LunarMonoBehaviour.Instance.Player.GetComponent<AttributesManager>();
-
-    [SerializeField] private GameObject _vigorUIGameObject;
-    public GameObject VigorUIGameObject
+    public class InspectionPanelGeneralAttributesPage : MonoBehaviour
     {
-        get 
+        private AttributesManager PlayerAttributes => PlayerManager.Instance.Player.GetComponent<AttributesManager>();
+
+        [SerializeField] private GameObject _vigorUIGameObject;
+        public GameObject VigorUIGameObject
         {
-            if (_vigorUIGameObject == null)
+            get
             {
-                _vigorUIGameObject = this.transform.GetChild(0).GetChild(0).gameObject;
-            }
- 
-            return _vigorUIGameObject; 
-        }
-    }
+                if (_vigorUIGameObject == null)
+                {
+                    _vigorUIGameObject = this.transform.GetChild(0).GetChild(0).gameObject;
+                }
 
-    [SerializeField] private GameObject _mindUIGameObject;
-    public GameObject MindUIGameObject
-    {
-        get
+                return _vigorUIGameObject;
+            }
+        }
+
+        [SerializeField] private GameObject _mindUIGameObject;
+        public GameObject MindUIGameObject
         {
-            if (_mindUIGameObject == null)
+            get
             {
-                _mindUIGameObject = this.transform.GetChild(0).GetChild(1).gameObject;
+                if (_mindUIGameObject == null)
+                {
+                    _mindUIGameObject = this.transform.GetChild(0).GetChild(1).gameObject;
+                }
+                return _mindUIGameObject;
             }
-            return _mindUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _enduranceUIGameObject;
-    public GameObject EnduranceUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _enduranceUIGameObject;
+        public GameObject EnduranceUIGameObject
         {
-            if (_enduranceUIGameObject == null)
+            get
             {
-                _enduranceUIGameObject = this.transform.GetChild(0).GetChild(2).gameObject;
+                if (_enduranceUIGameObject == null)
+                {
+                    _enduranceUIGameObject = this.transform.GetChild(0).GetChild(2).gameObject;
+                }
+                return _enduranceUIGameObject;
             }
-            return _enduranceUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _arcaneUIGameObject;
-    public GameObject ArcaneUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _arcaneUIGameObject;
+        public GameObject ArcaneUIGameObject
         {
-            if (_arcaneUIGameObject == null)
+            get
             {
-                _arcaneUIGameObject = this.transform.GetChild(0).GetChild(3).gameObject;
+                if (_arcaneUIGameObject == null)
+                {
+                    _arcaneUIGameObject = this.transform.GetChild(0).GetChild(3).gameObject;
+                }
+                return _arcaneUIGameObject;
             }
-            return _arcaneUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _strengthUIGameObject;
-    public GameObject StrengthUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _strengthUIGameObject;
+        public GameObject StrengthUIGameObject
         {
-            if (_strengthUIGameObject == null)
+            get
             {
-                _strengthUIGameObject = this.transform.GetChild(0).GetChild(4).gameObject;
+                if (_strengthUIGameObject == null)
+                {
+                    _strengthUIGameObject = this.transform.GetChild(0).GetChild(4).gameObject;
+                }
+                return _strengthUIGameObject;
             }
-            return _strengthUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _dexterityUIGameObject;
-    public GameObject DexterityUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _dexterityUIGameObject;
+        public GameObject DexterityUIGameObject
         {
-            if (_dexterityUIGameObject == null)
+            get
             {
-                _dexterityUIGameObject = this.transform.GetChild(0).GetChild(5).gameObject;
+                if (_dexterityUIGameObject == null)
+                {
+                    _dexterityUIGameObject = this.transform.GetChild(0).GetChild(5).gameObject;
+                }
+                return _dexterityUIGameObject;
             }
-            return _dexterityUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _intelligenceUIGameObject;
-    public GameObject IntelligenceUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _intelligenceUIGameObject;
+        public GameObject IntelligenceUIGameObject
         {
-            if (_intelligenceUIGameObject == null)
+            get
             {
-                _intelligenceUIGameObject = this.transform.GetChild(0).GetChild(6).gameObject;
+                if (_intelligenceUIGameObject == null)
+                {
+                    _intelligenceUIGameObject = this.transform.GetChild(0).GetChild(6).gameObject;
+                }
+                return _intelligenceUIGameObject;
             }
-            return _intelligenceUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _faithUIGameObject;
-    public GameObject FaithUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _faithUIGameObject;
+        public GameObject FaithUIGameObject
         {
-            if (_faithUIGameObject == null)
+            get
             {
-                _faithUIGameObject = this.transform.GetChild(0).GetChild(7).gameObject;
+                if (_faithUIGameObject == null)
+                {
+                    _faithUIGameObject = this.transform.GetChild(0).GetChild(7).gameObject;
+                }
+                return _faithUIGameObject;
             }
-            return _faithUIGameObject;
         }
-    }
 
-    [SerializeField] private GameObject _elixirUIGameObject;
-    public GameObject ElixirUIGameObject
-    {
-        get
+        [SerializeField] private GameObject _elixirUIGameObject;
+        public GameObject ElixirUIGameObject
         {
-            if (_elixirUIGameObject == null)
+            get
             {
-                _elixirUIGameObject = this.transform.GetChild(1).gameObject;
+                if (_elixirUIGameObject == null)
+                {
+                    _elixirUIGameObject = this.transform.GetChild(1).gameObject;
+                }
+                return _elixirUIGameObject;
             }
-            return _elixirUIGameObject;
         }
-    }
 
-    private void GetGeneralAttribute(GameObject attributeUIGameObject, int levelValue)
-    {
-        TextMeshProUGUI attributeLevelText = attributeUIGameObject.transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
-        attributeLevelText.text = levelValue.ToString();
-        attributeLevelText.color = Color.white;
-        attributeLevelText.fontSize = 14;
+        private void GetGeneralAttribute(GameObject attributeUIGameObject, int levelValue)
+        {
+            TextMeshProUGUI attributeLevelText = attributeUIGameObject.transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
+            attributeLevelText.text = levelValue.ToString();
+            attributeLevelText.color = Color.white;
+            attributeLevelText.fontSize = 14;
 
-        Image attributeDisplay = attributeUIGameObject.transform.GetChild(0).GetComponent<Image>();
-        attributeDisplay.fillAmount = (float)levelValue / 99;
-    }
+            Image attributeDisplay = attributeUIGameObject.transform.GetChild(0).GetComponent<Image>();
+            attributeDisplay.fillAmount = (float)levelValue / 99;
+        }
 
-    private void GetElixirValue()
-    {
-        TextMeshProUGUI elixirValueText = this.ElixirUIGameObject.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
-        elixirValueText.text = this.PlayerAttributes.Elixir.ToString();
-        elixirValueText.color = Color.white;
-        elixirValueText.fontSize = 8;
-    }    
+        private void GetElixirValue()
+        {
+            TextMeshProUGUI elixirValueText = this.ElixirUIGameObject.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+            elixirValueText.text = this.PlayerAttributes.Elixir.ToString();
+            elixirValueText.color = Color.white;
+            elixirValueText.fontSize = 8;
+        }
 
-    private void OnEnable()
-    {
-        this.UpdateGeneralAttributes();
-    }
+        private void OnEnable()
+        {
+            this.UpdateGeneralAttributes();
+        }
 
-    public void UpdateGeneralAttributes()
-    {
-        this.GetGeneralAttribute(this.VigorUIGameObject, this.PlayerAttributes.Vigor);
-        this.GetGeneralAttribute(this.MindUIGameObject, this.PlayerAttributes.Mind);
-        this.GetGeneralAttribute(this.EnduranceUIGameObject, this.PlayerAttributes.Endurance);
-        this.GetGeneralAttribute(this.ArcaneUIGameObject, this.PlayerAttributes.Arcane);
-        this.GetGeneralAttribute(this.StrengthUIGameObject, this.PlayerAttributes.Strength);
-        this.GetGeneralAttribute(this.DexterityUIGameObject, this.PlayerAttributes.Dexterity);
-        this.GetGeneralAttribute(this.IntelligenceUIGameObject, this.PlayerAttributes.Intelligence);
-        this.GetGeneralAttribute(this.FaithUIGameObject, this.PlayerAttributes.Faith);
+        public void UpdateGeneralAttributes()
+        {
+            this.GetGeneralAttribute(this.VigorUIGameObject, this.PlayerAttributes.Vigor);
+            this.GetGeneralAttribute(this.MindUIGameObject, this.PlayerAttributes.Mind);
+            this.GetGeneralAttribute(this.EnduranceUIGameObject, this.PlayerAttributes.Endurance);
+            this.GetGeneralAttribute(this.ArcaneUIGameObject, this.PlayerAttributes.Arcane);
+            this.GetGeneralAttribute(this.StrengthUIGameObject, this.PlayerAttributes.Strength);
+            this.GetGeneralAttribute(this.DexterityUIGameObject, this.PlayerAttributes.Dexterity);
+            this.GetGeneralAttribute(this.IntelligenceUIGameObject, this.PlayerAttributes.Intelligence);
+            this.GetGeneralAttribute(this.FaithUIGameObject, this.PlayerAttributes.Faith);
 
-        this.GetElixirValue();
-    }
+            this.GetElixirValue();
+        }
 
-    public void UpdateTemporaryGeneralAttribute(GameObject attributeUIGameObject, int levelValue)
-    {
-        this.GetGeneralAttribute(attributeUIGameObject, levelValue);
+        public void UpdateTemporaryGeneralAttribute(GameObject attributeUIGameObject, int levelValue)
+        {
+            this.GetGeneralAttribute(attributeUIGameObject, levelValue);
 
-        TextMeshProUGUI attributeLevelText = attributeUIGameObject.transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
-        attributeLevelText.color = Color.green;
-        attributeLevelText.fontSize = 16;
-    }    
+            TextMeshProUGUI attributeLevelText = attributeUIGameObject.transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
+            attributeLevelText.color = Color.green;
+            attributeLevelText.fontSize = 16;
+        }
 
-    public void UpdateTemporaryElixirValue(int temporaryElixirValue)
-    {
-        TextMeshProUGUI elixirValueText = this.ElixirUIGameObject.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
-        elixirValueText.text = temporaryElixirValue.ToString();
-        elixirValueText.color = Color.red;
-        elixirValueText.fontSize = 9;
+        public void UpdateTemporaryElixirValue(int temporaryElixirValue)
+        {
+            TextMeshProUGUI elixirValueText = this.ElixirUIGameObject.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+            elixirValueText.text = temporaryElixirValue.ToString();
+            elixirValueText.color = Color.red;
+            elixirValueText.fontSize = 9;
+        }
     }
 }

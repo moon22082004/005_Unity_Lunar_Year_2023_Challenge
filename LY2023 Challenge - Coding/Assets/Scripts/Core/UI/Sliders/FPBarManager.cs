@@ -1,8 +1,11 @@
-public class FPBarManager : BarManager
+namespace LY2023Challenge
 {
-    protected override void Update()
+    public class FPBarManager : BarManager
     {
-        this.Slider.value = this.AttributesManager.CurrentFP / this.AttributesManager.MaxFP;
-        base.Update();
+        protected override void Update()
+        {
+            this.Slider.value = this.AttributesManager.CurrentFP / this.AttributesManager.MaxFP;
+            base.Update();
+        }
     }
 }

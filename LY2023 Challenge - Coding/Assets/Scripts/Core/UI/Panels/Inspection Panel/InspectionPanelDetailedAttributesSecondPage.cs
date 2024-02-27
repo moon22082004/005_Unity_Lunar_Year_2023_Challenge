@@ -2,170 +2,173 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class InspectionPanelDetailedAttributesSecondPage : MonoBehaviour
+namespace LY2023Challenge
 {
-    private AttributesManager PlayerAttributes => LunarMonoBehaviour.Instance.Player.GetComponent<AttributesManager>();
-
-    [SerializeField] private List<TextMeshProUGUI> _physicalDefenseValues;
-    private List<TextMeshProUGUI> PhysicalDefenseValues
+    public class InspectionPanelDetailedAttributesSecondPage : MonoBehaviour
     {
-        get
+        private AttributesManager PlayerAttributes => PlayerManager.Instance.Player.GetComponent<AttributesManager>();
+
+        [SerializeField] private List<TextMeshProUGUI> _physicalDefenseValues;
+        private List<TextMeshProUGUI> PhysicalDefenseValues
         {
-            if (_physicalDefenseValues.Count < 2)
+            get
             {
-                _physicalDefenseValues = new List<TextMeshProUGUI>();
+                if (_physicalDefenseValues.Count < 2)
+                {
+                    _physicalDefenseValues = new List<TextMeshProUGUI>();
 
-                _physicalDefenseValues.Add(this.transform.GetChild(0).GetChild(3).GetComponent<TextMeshProUGUI>());
-                _physicalDefenseValues.Add(this.transform.GetChild(0).GetChild(4).GetComponent<TextMeshProUGUI>());
+                    _physicalDefenseValues.Add(this.transform.GetChild(0).GetChild(3).GetComponent<TextMeshProUGUI>());
+                    _physicalDefenseValues.Add(this.transform.GetChild(0).GetChild(4).GetComponent<TextMeshProUGUI>());
+                }
+
+                return _physicalDefenseValues;
             }
-
-            return _physicalDefenseValues;
         }
-    }
 
-    [SerializeField] private List<TextMeshProUGUI> _magicDefenseValues;
-    private List<TextMeshProUGUI> MagicDefenseValues
-    {
-        get
+        [SerializeField] private List<TextMeshProUGUI> _magicDefenseValues;
+        private List<TextMeshProUGUI> MagicDefenseValues
         {
-            if (_magicDefenseValues.Count < 2)
+            get
             {
-                _magicDefenseValues = new List<TextMeshProUGUI>();
+                if (_magicDefenseValues.Count < 2)
+                {
+                    _magicDefenseValues = new List<TextMeshProUGUI>();
 
-                _magicDefenseValues.Add(this.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>());
-                _magicDefenseValues.Add(this.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>());
+                    _magicDefenseValues.Add(this.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>());
+                    _magicDefenseValues.Add(this.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>());
+                }
+
+                return _magicDefenseValues;
             }
-
-            return _magicDefenseValues;
         }
-    }
 
-    [SerializeField] private List<TextMeshProUGUI> _physicalDamageValues;
-    private List<TextMeshProUGUI> PhysicalDamageValues
-    {
-        get
+        [SerializeField] private List<TextMeshProUGUI> _physicalDamageValues;
+        private List<TextMeshProUGUI> PhysicalDamageValues
         {
-            if (_physicalDamageValues.Count < 2)
+            get
             {
-                _physicalDamageValues = new List<TextMeshProUGUI>();
+                if (_physicalDamageValues.Count < 2)
+                {
+                    _physicalDamageValues = new List<TextMeshProUGUI>();
 
-                _physicalDamageValues.Add(this.transform.GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>());
-                _physicalDamageValues.Add(this.transform.GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>());
+                    _physicalDamageValues.Add(this.transform.GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>());
+                    _physicalDamageValues.Add(this.transform.GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>());
+                }
+
+                return _physicalDamageValues;
             }
-
-            return _physicalDamageValues;
         }
-    }
 
-    [SerializeField] private List<TextMeshProUGUI> _physicalPierceValues;
-    private List<TextMeshProUGUI> PhysicalPierceValues
-    {
-        get
+        [SerializeField] private List<TextMeshProUGUI> _physicalPierceValues;
+        private List<TextMeshProUGUI> PhysicalPierceValues
         {
-            if (_physicalPierceValues.Count < 2)
+            get
             {
-                _physicalPierceValues = new List<TextMeshProUGUI>();
+                if (_physicalPierceValues.Count < 2)
+                {
+                    _physicalPierceValues = new List<TextMeshProUGUI>();
 
-                _physicalPierceValues.Add(this.transform.GetChild(3).GetChild(3).GetComponent<TextMeshProUGUI>());
-                _physicalPierceValues.Add(this.transform.GetChild(3).GetChild(4).GetComponent<TextMeshProUGUI>());
+                    _physicalPierceValues.Add(this.transform.GetChild(3).GetChild(3).GetComponent<TextMeshProUGUI>());
+                    _physicalPierceValues.Add(this.transform.GetChild(3).GetChild(4).GetComponent<TextMeshProUGUI>());
+                }
+
+                return _physicalPierceValues;
             }
-
-            return _physicalPierceValues;
         }
-    }
 
-    [SerializeField] private List<TextMeshProUGUI> _physicalLifeStealValues;
-    private List<TextMeshProUGUI> PhysicalLifeStealValues
-    {
-        get
+        [SerializeField] private List<TextMeshProUGUI> _physicalLifeStealValues;
+        private List<TextMeshProUGUI> PhysicalLifeStealValues
         {
-            if (_physicalLifeStealValues.Count < 2)
+            get
             {
-                _physicalLifeStealValues = new List<TextMeshProUGUI>();
+                if (_physicalLifeStealValues.Count < 2)
+                {
+                    _physicalLifeStealValues = new List<TextMeshProUGUI>();
 
-                _physicalLifeStealValues.Add(this.transform.GetChild(4).GetChild(3).GetComponent<TextMeshProUGUI>());
-                _physicalLifeStealValues.Add(this.transform.GetChild(4).GetChild(4).GetComponent<TextMeshProUGUI>());
+                    _physicalLifeStealValues.Add(this.transform.GetChild(4).GetChild(3).GetComponent<TextMeshProUGUI>());
+                    _physicalLifeStealValues.Add(this.transform.GetChild(4).GetChild(4).GetComponent<TextMeshProUGUI>());
+                }
+
+                return _physicalLifeStealValues;
             }
-
-            return _physicalLifeStealValues;
         }
-    }
 
-    [SerializeField] private List<TextMeshProUGUI> _magicDamageValues;
-    private List<TextMeshProUGUI> MagicDamageValues
-    {
-        get
+        [SerializeField] private List<TextMeshProUGUI> _magicDamageValues;
+        private List<TextMeshProUGUI> MagicDamageValues
         {
-            if (_magicDamageValues.Count < 2)
+            get
             {
-                _magicDamageValues = new List<TextMeshProUGUI>();
+                if (_magicDamageValues.Count < 2)
+                {
+                    _magicDamageValues = new List<TextMeshProUGUI>();
 
-                _magicDamageValues.Add(this.transform.GetChild(5).GetChild(3).GetComponent<TextMeshProUGUI>());
-                _magicDamageValues.Add(this.transform.GetChild(5).GetChild(4).GetComponent<TextMeshProUGUI>());
+                    _magicDamageValues.Add(this.transform.GetChild(5).GetChild(3).GetComponent<TextMeshProUGUI>());
+                    _magicDamageValues.Add(this.transform.GetChild(5).GetChild(4).GetComponent<TextMeshProUGUI>());
+                }
+
+                return _magicDamageValues;
             }
-
-            return _magicDamageValues;
         }
-    }
 
-    [SerializeField] private List<TextMeshProUGUI> _magicPierceValues;
-    private List<TextMeshProUGUI> MagicPierceValues
-    {
-        get
+        [SerializeField] private List<TextMeshProUGUI> _magicPierceValues;
+        private List<TextMeshProUGUI> MagicPierceValues
         {
-            if (_magicPierceValues.Count < 2)
+            get
             {
-                _magicPierceValues = new List<TextMeshProUGUI>();
+                if (_magicPierceValues.Count < 2)
+                {
+                    _magicPierceValues = new List<TextMeshProUGUI>();
 
-                _magicPierceValues.Add(this.transform.GetChild(6).GetChild(3).GetComponent<TextMeshProUGUI>());
-                _magicPierceValues.Add(this.transform.GetChild(6).GetChild(4).GetComponent<TextMeshProUGUI>());
+                    _magicPierceValues.Add(this.transform.GetChild(6).GetChild(3).GetComponent<TextMeshProUGUI>());
+                    _magicPierceValues.Add(this.transform.GetChild(6).GetChild(4).GetComponent<TextMeshProUGUI>());
+                }
+
+                return _magicPierceValues;
             }
-
-            return _magicPierceValues;
         }
-    }
 
-    [SerializeField] private List<TextMeshProUGUI> _magicLifeStealValues;
-    private List<TextMeshProUGUI> MagicLifeStealValues
-    {
-        get
+        [SerializeField] private List<TextMeshProUGUI> _magicLifeStealValues;
+        private List<TextMeshProUGUI> MagicLifeStealValues
         {
-            if (_magicLifeStealValues.Count < 2)
+            get
             {
-                _magicLifeStealValues = new List<TextMeshProUGUI>();
+                if (_magicLifeStealValues.Count < 2)
+                {
+                    _magicLifeStealValues = new List<TextMeshProUGUI>();
 
-                _magicLifeStealValues.Add(this.transform.GetChild(7).GetChild(3).GetComponent<TextMeshProUGUI>());
-                _magicLifeStealValues.Add(this.transform.GetChild(7).GetChild(4).GetComponent<TextMeshProUGUI>());
+                    _magicLifeStealValues.Add(this.transform.GetChild(7).GetChild(3).GetComponent<TextMeshProUGUI>());
+                    _magicLifeStealValues.Add(this.transform.GetChild(7).GetChild(4).GetComponent<TextMeshProUGUI>());
+                }
+
+                return _magicLifeStealValues;
             }
-
-            return _magicLifeStealValues;
         }
-    }
 
-    private void OnEnable()
-    {
-        this.PhysicalDefenseValues[0].text = this.PlayerAttributes.BasePhysicalDefense.ToString();
-        this.PhysicalDefenseValues[1].text = this.PlayerAttributes.EquipPhysicalDefense.ToString();
+        private void OnEnable()
+        {
+            this.PhysicalDefenseValues[0].text = this.PlayerAttributes.BasePhysicalDefense.ToString();
+            this.PhysicalDefenseValues[1].text = this.PlayerAttributes.EquipPhysicalDefense.ToString();
 
-        this.MagicDefenseValues[0].text = this.PlayerAttributes.BaseMagicDefense.ToString();
-        this.MagicDefenseValues[1].text = this.PlayerAttributes.EquipMagicDefense.ToString();
+            this.MagicDefenseValues[0].text = this.PlayerAttributes.BaseMagicDefense.ToString();
+            this.MagicDefenseValues[1].text = this.PlayerAttributes.EquipMagicDefense.ToString();
 
-        this.PhysicalDamageValues[0].text = this.PlayerAttributes.BasePhysicalDamage.ToString();
-        this.PhysicalDamageValues[1].text = this.PlayerAttributes.EquipPhysicalDamage.ToString();
+            this.PhysicalDamageValues[0].text = this.PlayerAttributes.BasePhysicalDamage.ToString();
+            this.PhysicalDamageValues[1].text = this.PlayerAttributes.EquipPhysicalDamage.ToString();
 
-        this.PhysicalPierceValues[0].text = this.PlayerAttributes.BasePhysicalPierce.ToString();
-        this.PhysicalPierceValues[1].text = this.PlayerAttributes.EquipPhysicalPierce.ToString();
+            this.PhysicalPierceValues[0].text = this.PlayerAttributes.BasePhysicalPierce.ToString();
+            this.PhysicalPierceValues[1].text = this.PlayerAttributes.EquipPhysicalPierce.ToString();
 
-        this.PhysicalLifeStealValues[0].text = this.PlayerAttributes.BasePhysicalLifeSteal.ToString();
-        this.PhysicalLifeStealValues[1].text = this.PlayerAttributes.EquipPhysicalLifeSteal.ToString();
+            this.PhysicalLifeStealValues[0].text = this.PlayerAttributes.BasePhysicalLifeSteal.ToString();
+            this.PhysicalLifeStealValues[1].text = this.PlayerAttributes.EquipPhysicalLifeSteal.ToString();
 
-        this.MagicDamageValues[0].text = this.PlayerAttributes.BaseMagicDamage.ToString();
-        this.MagicDamageValues[1].text = this.PlayerAttributes.EquipMagicDamage.ToString();
+            this.MagicDamageValues[0].text = this.PlayerAttributes.BaseMagicDamage.ToString();
+            this.MagicDamageValues[1].text = this.PlayerAttributes.EquipMagicDamage.ToString();
 
-        this.MagicPierceValues[0].text = this.PlayerAttributes.BaseMagicPierce.ToString();
-        this.MagicPierceValues[1].text = this.PlayerAttributes.EquipMagicPierce.ToString();
+            this.MagicPierceValues[0].text = this.PlayerAttributes.BaseMagicPierce.ToString();
+            this.MagicPierceValues[1].text = this.PlayerAttributes.EquipMagicPierce.ToString();
 
-        this.MagicLifeStealValues[0].text = this.PlayerAttributes.BaseMagicLifeSteal.ToString();
-        this.MagicLifeStealValues[1].text = this.PlayerAttributes.EquipMagicLifeSteal.ToString();
+            this.MagicLifeStealValues[0].text = this.PlayerAttributes.BaseMagicLifeSteal.ToString();
+            this.MagicLifeStealValues[1].text = this.PlayerAttributes.EquipMagicLifeSteal.ToString();
+        }
     }
 }

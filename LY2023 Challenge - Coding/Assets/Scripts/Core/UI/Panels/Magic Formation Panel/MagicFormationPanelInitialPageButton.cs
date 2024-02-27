@@ -1,34 +1,37 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MagicFormationPanelInitialPageButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+namespace LY2023Challenge
 {
-    [SerializeField] private GameObject _hoverEffect;
-    private GameObject HoverEffect
+    public class MagicFormationPanelInitialPageButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        get 
+        [SerializeField] private GameObject _hoverEffect;
+        private GameObject HoverEffect
         {
-            if (_hoverEffect == null)
+            get
             {
-                _hoverEffect = this.transform.GetChild(0).gameObject;
+                if (_hoverEffect == null)
+                {
+                    _hoverEffect = this.transform.GetChild(0).gameObject;
+                }
+
+                return _hoverEffect;
             }
-
-            return _hoverEffect;
         }
-    }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        this.HoverEffect.SetActive(true);
-    }
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            this.HoverEffect.SetActive(true);
+        }
 
-    public void OnPointerExit(PointerEventData eventData) 
-    {
-        this.HoverEffect.SetActive(false);
-    }
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            this.HoverEffect.SetActive(false);
+        }
 
-    private void OnEnable()
-    {
-        this.HoverEffect.SetActive(false);
+        private void OnEnable()
+        {
+            this.HoverEffect.SetActive(false);
+        }
     }
 }

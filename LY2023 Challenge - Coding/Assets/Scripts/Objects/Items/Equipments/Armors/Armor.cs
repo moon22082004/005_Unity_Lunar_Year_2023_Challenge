@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public abstract class Armor : ArmorEquipment
+namespace LY2023Challenge
 {
-    public override Sprite ItemIcon
+    public abstract class Armor : ArmorEquipment
     {
-        get => Resources.Load<Sprite>("Item Icons/Equipments/Armors/" + this.Name);
-    }
+        public override Sprite ItemIcon
+        {
+            get => Resources.Load<Sprite>("Item Icons/Equipments/Armors/" + this.Name);
+        }
 
-    public abstract float MoveSpeed
-    {
-        get;
+        public abstract float MoveSpeed
+        {
+            get;
+        }
     }
 }
